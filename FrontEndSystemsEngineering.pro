@@ -16,14 +16,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ipblock.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mainwindowblock.cpp \
+    shine.cpp
 
 HEADERS += \
-    mainwindow.h
+    ipblock.h \
+    mainwindow.h \
+    mainwindowblock.h \
+    shine.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    mainwindowblock.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

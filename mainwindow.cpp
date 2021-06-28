@@ -13,3 +13,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    WindowBlock = new MainWindowBlock();
+    connect(WindowBlock, &MainWindowBlock::firstWindow, this, &MainWindow::show);
+    WindowBlock->show();
+    this->close();
+}
