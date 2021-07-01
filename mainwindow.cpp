@@ -6,16 +6,20 @@
 #include <QMessageBox>
 #include <QDebug>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
 
     ui->tableWidget_BusInBlock->setColumnCount(3);
     QStringList name_table;
     name_table << "Название" << "Тип" << "Разрядность";
     ui->tableWidget_BusInBlock->setHorizontalHeaderLabels(name_table);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -59,5 +63,6 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
 void MainWindow::on_pushButton_AddBlock_clicked()
 {
-
+    BusInBlock.clear();
+    qDebug()<<BusInBlock.size();
 }

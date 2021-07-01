@@ -5,6 +5,7 @@
 
 #include "shine.h"
 #include "ipblock.h"
+#include "system.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,5 +27,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QVector <Shine> BusInBlock;
+    System System;
 };
 #endif // MAINWINDOW_H

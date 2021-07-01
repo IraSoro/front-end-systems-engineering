@@ -19,12 +19,14 @@ SOURCES += \
     ipblock.cpp \
     main.cpp \
     mainwindow.cpp \
-    shine.cpp
+    shine.cpp \
+    system.cpp
 
 HEADERS += \
     ipblock.h \
     mainwindow.h \
-    shine.h
+    shine.h \
+    system.h
 
 FORMS += \
     mainwindow.ui
