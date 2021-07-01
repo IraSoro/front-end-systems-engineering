@@ -38,12 +38,12 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="lineEdit_Block"/>
            </item>
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidget">
+          <widget class="QTableWidget" name="tableWidget_BusInBlock">
            <property name="minimumSize">
             <size>
              <width>300</width>
@@ -113,10 +113,10 @@
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_2">
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_2"/>
+                  <widget class="QLineEdit" name="lineEdit_NameBus"/>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox">
+                  <widget class="QComboBox" name="comboBox_Type">
                    <item>
                     <property name="text">
                      <string>Type1</string>
@@ -135,7 +135,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_2">
+                  <widget class="QComboBox" name="comboBox_Bitness">
                    <item>
                     <property name="text">
                      <string>1</string>
@@ -178,7 +178,7 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="pushButton_AddBus">
                <property name="text">
                 <string>Добавить</string>
                </property>
