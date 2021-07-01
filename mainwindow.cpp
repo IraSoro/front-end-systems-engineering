@@ -63,6 +63,27 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
 void MainWindow::on_pushButton_AddBlock_clicked()
 {
+    if (ui->lineEdit_Block->text() == ""){
+            QMessageBox msgBox;
+            msgBox.setText("Вы не ввели название шины.");
+            msgBox.exec();
+            return;
+    }
+
+    while (ui->tableWidget_BusInBlock->rowCount() > 0){
+        ui->tableWidget_BusInBlock->removeRow(0);
+    }
+
+    while (ui->tableWidget_BusInBlock->rowCount() > 0){
+        ui->tableWidget_BusInBlock->removeRow(0);
+    }
+
+    IpBlock block;
+    block.NameBlock = ui->lineEdit_Block->text();
+    block.ListShines = BusInBlock;
+
+    System.Blocks.push_back(block);
+
+
     BusInBlock.clear();
-    qDebug()<<BusInBlock.size();
 }
