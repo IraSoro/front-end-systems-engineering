@@ -19,18 +19,15 @@ SOURCES += \
     ipblock.cpp \
     main.cpp \
     mainwindow.cpp \
-    mainwindowblock.cpp \
     shine.cpp
 
 HEADERS += \
     ipblock.h \
     mainwindow.h \
-    mainwindowblock.h \
     shine.h
 
 FORMS += \
-    mainwindow.ui \
-    mainwindowblock.ui
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

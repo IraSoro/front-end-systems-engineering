@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 
-#include "mainwindowblock.h"
+#include "shine.h"
+#include "ipblock.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,10 +19,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_pushButton_AddBlock_clicked();
+
+    void on_pushButton_AddBus_clicked();
 
 private:
     Ui::MainWindow *ui;
-    MainWindowBlock *WindowBlock = nullptr;
+    QVector <Shine> BusInBlock;
 };
 #endif // MAINWINDOW_H
