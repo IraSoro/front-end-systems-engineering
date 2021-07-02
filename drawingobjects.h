@@ -23,6 +23,7 @@ public:
     QVector <Shine> Bus;
     QString NameBlock = "";
     int CountBus = 0;
+    bool Color = 0;
 
     QRectF boundingRect() const{
         return QRectF (0,0,500,800);
@@ -52,7 +53,11 @@ public:
         path1.addRect(350, 0, 0, height);
         path1.addRect(500, 0, 0, height);
 
-        painter->setBrush(QBrush("#e6e6fa"));
+        if (Color){
+            painter->setBrush(QBrush("#e6e6fa"));
+        }else{
+            painter->setBrush(QBrush("#ffffff"));
+        }
         painter->drawPath(path1);
 
 //        painter->setBrush(QBrush("#c56c00"));

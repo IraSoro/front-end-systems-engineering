@@ -99,6 +99,12 @@ void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
     item->CountBus = BusInBlock.size();
+    if (System.Blocks.size()%2 == 0){
+        item->Color = 0;
+    }else{
+        item->Color = 1;
+    }
+
     scene->addItem(item);
 
 }
