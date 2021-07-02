@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include <QGraphicsTextItem>
 
 #include "shine.h"
 #include "ipblock.h"
@@ -28,5 +30,16 @@ private:
     Ui::MainWindow *ui;
     QVector <Shine> BusInBlock;
     System System;
+    QGraphicsScene *scene;
+
+    void DrawingBlock(int x, int y);
+    void DrawingSystem();
+
+    int WIDTH = 500;
+    int HEIGHT = 800;
+
+    int HeightDrawing = 20;
+    int Step = 20;
+
 };
 #endif // MAINWINDOW_H

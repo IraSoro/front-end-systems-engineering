@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QDebug>
 
+#include "drawingobjects.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     name_table << "Название" << "Тип" << "Разрядность";
     ui->tableWidget_BusInBlock->setHorizontalHeaderLabels(name_table);
 
-
+    DrawingSystem();
 }
 
 MainWindow::~MainWindow()
@@ -30,12 +31,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_AddBus_clicked()
 {
+    /*
     if (ui->lineEdit_NameBus->text() == ""){
             QMessageBox msgBox;
             msgBox.setText("Вы не ввели название шины.");
             msgBox.exec();
             return;
     }
+    */
 
     int CountRowInTable = ui->tableWidget_BusInBlock->rowCount();
     ui->tableWidget_BusInBlock->insertRow( CountRowInTable);
@@ -63,12 +66,14 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
 void MainWindow::on_pushButton_AddBlock_clicked()
 {
+    /*
     if (ui->lineEdit_Block->text() == ""){
             QMessageBox msgBox;
-            msgBox.setText("Вы не ввели название шины.");
+            msgBox.setText("Вы не ввели название блока.");
             msgBox.exec();
             return;
     }
+    */
 
     while (ui->tableWidget_BusInBlock->rowCount() > 0){
         ui->tableWidget_BusInBlock->removeRow(0);
@@ -84,6 +89,29 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 
     System.Blocks.push_back(block);
 
+    DrawingBlock(0, HeightDrawing);
+    HeightDrawing += Step * BusInBlock.size() + Step;
 
     BusInBlock.clear();
+}
+
+void MainWindow::DrawingBlock(int x, int y){
+    DrawingObjects* item = new DrawingObjects();
+    item->setPos(x,y);
+    item->CountBus = BusInBlock.size();
+    scene->addItem(item);
+
+}
+
+void MainWindow::DrawingSystem(){
+
+    scene = new QGraphicsScene(this);
+    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    ui->graphicsView->resize(WIDTH,HEIGHT);
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+    ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
+    ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    scene->setSceneRect(0,0,WIDTH,HEIGHT);
+
 }
