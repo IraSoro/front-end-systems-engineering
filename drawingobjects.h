@@ -9,6 +9,8 @@
 #include <QCursor>
 #include <QVector>
 #include <QString>
+#include <QFont>
+#include <QFontMetrics>
 
 #include "shine.h"
 
@@ -39,6 +41,7 @@ public:
 //        painter->setPen(qRgb(0,0,0));
 //        QFont font("Courier", 16, QFont::DemiBold);
 
+//        QString text = "1";
 //        QFontMetrics fm(font);
 //        int textWidth = fm.width(text);
 
@@ -47,11 +50,13 @@ public:
 
         QPainterPath path1;
         int height = 0;
+        int wight = 500;
         height = 20 + 20 * CountBus;
-        path1.addRect(0, 0, 500, height);
-        path1.addRect(200, 0, 0, height);
-        path1.addRect(350, 0, 0, height);
-        path1.addRect(500, 0, 0, height);
+        path1.addRect(0, 0, wight, height);
+        path1.addRect(wight*0.4, 0, 0, height);
+        path1.addRect(wight*0.7, 0, 0, height);
+        path1.addRect(wight, 0, 0, height);
+        height = 0;
 
         if (Color){
             painter->setBrush(QBrush("#e6e6fa"));
@@ -60,8 +65,19 @@ public:
         }
         painter->drawPath(path1);
 
-//        painter->setBrush(QBrush("#c56c00"));
-//        painter->drawRect(10, 15, 90, 60);
+        painter->drawText( QRectF(wight*0.4 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, NameBlock);
+        height += 20;
+        QString Type[3] = {"Type1", "Type2", "Type3"}; //!!!!!!!!!!!!!!!!
+        for (Shine VarBus: Bus) {
+            painter->drawText( QRectF(wight*0.4 + 15, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, VarBus.NameShine);
+            painter->drawText( QRectF(wight*0.7 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, Type[VarBus.TypeShine]);
+            height += 20;
+        }
+
+
+
+        //painter->drawText( QRectF(210, 0, 1000, 20), Qt::TextWordWrap | Qt::AlignVCenter, "label" );
+
 
         }
 };

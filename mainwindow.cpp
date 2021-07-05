@@ -99,6 +99,10 @@ void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
     item->CountBus = BusInBlock.size();
+    item->NameBlock = System.Blocks[System.Blocks.size()-1].NameBlock;
+    item->Bus = System.Blocks[System.Blocks.size()-1].ListShines;
+    //qDebug()<<System.Blocks[System.Blocks.size()-1].NameBlock;
+
     if (System.Blocks.size()%2 == 0){
         item->Color = 0;
     }else{
@@ -110,7 +114,6 @@ void MainWindow::DrawingBlock(int x, int y){
 }
 
 void MainWindow::DrawingSystem(){
-
     scene = new QGraphicsScene(this);
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
     ui->graphicsView->resize(WIDTH,HEIGHT);
