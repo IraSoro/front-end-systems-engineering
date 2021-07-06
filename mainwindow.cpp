@@ -63,9 +63,15 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
     int SizeBlock = System.Blocks.size();
     if (SizeBlock > 0){
-        for (IpBlock TempBlock: System.Blocks){
-            for (Shine TempBus: TempBlock.ListShines){
-                AddingBus.ConnectionOnID.push_back(TempBus.ID);
+        for (int i = 0; i < SizeBlock; i++){
+            int SizeListBus = System.Blocks[i].ListShines.size();
+            for (int j = 0; j < SizeListBus; j++){
+                ConnectionBus Connection;
+                Connection.IdBus = j;
+                Connection.IdBlock = i;
+                AddingBus.ConnectionOnID.push_back(Connection);
+//                qDebug()<<"ID Block = "<<Connection.IdBlock;
+//                qDebug()<<"ID Bis = "<<Connection.IdBus;
             }
         }
     }
@@ -110,6 +116,7 @@ void MainWindow::on_pushButton_AddBlock_clicked()
     }
 
     HeightDrawing += Step * BusInBlock.size() + Step;
+    counterIdBus = 0;
     BusInBlock.clear();
 }
 

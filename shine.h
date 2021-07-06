@@ -6,6 +6,12 @@
 
 enum class TypeBus {Type1 = 0, Type2, Type3};
 
+struct ConnectionBus{
+
+    int IdBlock = -1;
+    int IdBus = -1;
+};
+
 class Shine
 {
 public:    
@@ -15,7 +21,7 @@ public:
     int TypeShine = 0;
     int Bitness = 0;
     int ID = -1;
-    QVector <int> ConnectionOnID;
+    QVector <ConnectionBus> ConnectionOnID;
 
 };
 
