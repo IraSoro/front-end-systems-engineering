@@ -30,19 +30,19 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
         int Wight = 180;
         int Height = 50;
-        int xx= 0;
+
         for (int i = SystemBlocks.Blocks.size() - 2; i >= 0; i--){
             Height += 20;
             for (Shine TempBus: SystemBlocks.Blocks[i].ListShines){
                 Height += 20;
                 Wight -= 10;
-                xx++;
             }
         }
 
         Wight -= 10;
         for (Shine TempBus: SystemBlocks.Blocks.last().ListShines){
             painter->drawLine(Wight, 50, Wight, Height);
+            painter->drawLine(Wight, Height, 200, Height);
             Height += 20;
             Wight -= 10;
         }
