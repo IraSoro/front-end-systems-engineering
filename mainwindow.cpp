@@ -54,7 +54,8 @@ void MainWindow::on_pushButton_AddBus_clicked()
     ui->tableWidget_BusInBlock->update();
 
     Shine AddingBus;
-    AddingBus.NameShine = ui->lineEdit_NameBus->text();
+    //AddingBus.NameShine = ui->lineEdit_NameBus->text();
+    AddingBus.NameShine = "Name Bus";
     AddingBus.TypeShine = ui->comboBox_Type->currentIndex();
     AddingBus.Bitness = ui->comboBox_Bitness->currentText().toInt();
     AddingBus.ID = counterIdBus;
@@ -97,7 +98,8 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 
 
     IpBlock block;
-    block.NameBlock = ui->lineEdit_Block->text();
+    //block.NameBlock = ui->lineEdit_Block->text();
+    block.NameBlock = "Name Block";
     block.ListShines = BusInBlock;
 
     System.Blocks.push_back(block);

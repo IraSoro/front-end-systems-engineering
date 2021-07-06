@@ -37,17 +37,21 @@ public:
         int wight = 500;
         height = 20 + 20 * Bus.size();
         path1.addRect(0, 0, wight, height);
-        path1.addRect(wight*0.4, 0, 0, height);
-        path1.addRect(wight*0.7, 0, 0, height);
-        path1.addRect(wight, 0, 0, height);
-        height = 0;
 
         if (Color){
+            painter->setPen("#e6e6fa");
             painter->setBrush(QBrush("#e6e6fa"));
         }else{
+            painter->setPen("#ffffff");
             painter->setBrush(QBrush("#ffffff"));
         }
         painter->drawPath(path1);
+
+        painter->setPen("#000000");
+        painter->drawLine(int(wight*0.4), 0, int(wight*0.4), height);
+        painter->drawLine(int(wight*0.7), 0, int(wight*0.7), height);
+        height = 0;
+
 
         painter->drawText( QRectF(wight*0.4 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, NameBlock);
         height += 20;
@@ -58,32 +62,6 @@ public:
             height += 20;
         }
 
-//        int CounterBlocks = SystemBlocks.Blocks.size();
-//        height = 20*CounterBus + 20*CounterBlocks;
-//        if (CounterBlocks > 1){
-//            int tempWight = int(0.38 * wight);
-//            for (int i = CounterBlocks-1; i > 0; i--){
-//                height -= 20;
-//                for (Shine TempBus: SystemBlocks.Blocks[i].ListShines){
-//                    painter->drawLine(tempWight, 20, tempWight, - height);
-//                    tempWight -= 10;
-//                    height -= 20;
-//                }
-
-//            }
-//        }
-
-//        int CounterBlocks = SystemBlocks.Blocks.size();
-//        height = 20*CounterBus + 20*(CounterBlocks-1);
-//        if (CounterBlocks > 1){
-//             int tempWight = int(0.38 * wight) - CounterBus * 10;
-//             int StartHeight = 40;
-//             for (Shine TempBus: SystemBlocks.Blocks.last().ListShines){
-//                painter->drawLine(tempWight, StartHeight, tempWight, -height);
-//                tempWight -= 10;
-//                StartHeight += 20;
-//             }
-//        }
     }
 };
 
