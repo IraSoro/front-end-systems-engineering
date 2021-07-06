@@ -34,12 +34,15 @@ private:
 
     void DrawingBlock(int x, int y);
     void DrawingSystem();
+    void DrawingConnection();
 
     int WIDTH = 500;
     int HEIGHT = 800;
 
     int HeightDrawing = 20;
     int Step = 20;
+
+    int counterIdBus = 0;
 
 };
 #endif // MAINWINDOW_H

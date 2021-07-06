@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "drawingobjects.h"
+#include "drawingconnections.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -52,11 +53,22 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
     ui->tableWidget_BusInBlock->update();
 
-    Shine temp;
-    temp.NameShine = ui->lineEdit_NameBus->text();
-    temp.TypeShine = ui->comboBox_Type->currentIndex();
-    temp.Bitness = ui->comboBox_Bitness->currentText().toInt();
-    BusInBlock.push_back(temp);
+    Shine AddingBus;
+    AddingBus.NameShine = ui->lineEdit_NameBus->text();
+    AddingBus.TypeShine = ui->comboBox_Type->currentIndex();
+    AddingBus.Bitness = ui->comboBox_Bitness->currentText().toInt();
+    AddingBus.ID = counterIdBus;
+    counterIdBus++;
+
+    int SizeBlock = System.Blocks.size();
+    if (SizeBlock > 0){
+        for (IpBlock TempBlock: System.Blocks){
+            for (Shine TempBus: TempBlock.ListShines){
+                AddingBus.ConnectionOnID.push_back(TempBus.ID);
+            }
+        }
+    }
+    BusInBlock.push_back(AddingBus);
 
     ui->lineEdit_NameBus->clear();
     ui->comboBox_Type->update();
@@ -83,6 +95,7 @@ void MainWindow::on_pushButton_AddBlock_clicked()
         ui->tableWidget_BusInBlock->removeRow(0);
     }
 
+
     IpBlock block;
     block.NameBlock = ui->lineEdit_Block->text();
     block.ListShines = BusInBlock;
@@ -90,18 +103,19 @@ void MainWindow::on_pushButton_AddBlock_clicked()
     System.Blocks.push_back(block);
 
     DrawingBlock(0, HeightDrawing);
-    HeightDrawing += Step * BusInBlock.size() + Step;
+    if (System.Blocks.size() > 1){
+        DrawingConnection();
+    }
 
+    HeightDrawing += Step * BusInBlock.size() + Step;
     BusInBlock.clear();
 }
 
 void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
-    item->CountBus = BusInBlock.size();
     item->NameBlock = System.Blocks[System.Blocks.size()-1].NameBlock;
     item->Bus = System.Blocks[System.Blocks.size()-1].ListShines;
-    //qDebug()<<System.Blocks[System.Blocks.size()-1].NameBlock;
 
     if (System.Blocks.size()%2 == 0){
         item->Color = 0;
@@ -111,6 +125,14 @@ void MainWindow::DrawingBlock(int x, int y){
 
     scene->addItem(item);
 
+}
+
+void MainWindow::DrawingConnection(){
+    DrawingConnections* item = new DrawingConnections();
+    item->setPos(0,0);
+    item->SystemBlocks = System;
+
+    scene->addItem(item);
 }
 
 void MainWindow::DrawingSystem(){

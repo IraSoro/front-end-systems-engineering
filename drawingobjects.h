@@ -1,16 +1,15 @@
+//TODO: придумать что-то с типами шин, вывод связей сделать в другом классе
 #ifndef DRAWINGOBJECTS_H
 #define DRAWINGOBJECTS_H
 
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPainter>
-#include <QGraphicsSceneMouseEvent>
 #include <QDebug>
 #include <QCursor>
 #include <QVector>
 #include <QString>
 #include <QFont>
-#include <QFontMetrics>
 
 #include "shine.h"
 
@@ -24,34 +23,19 @@ public:
 
     QVector <Shine> Bus;
     QString NameBlock = "";
-    int CountBus = 0;
     bool Color = 0;
+
+//    System SystemBlocks;
 
     QRectF boundingRect() const{
         return QRectF (0,0,500,800);
     }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
-//        painter->setPen(Qt::black);
-
-//        QPainterPath path1;
-//        path1.addEllipse(boundingRect());
-//        painter->drawPath(path1);
-
-//        painter->setPen(qRgb(0,0,0));
-//        QFont font("Courier", 16, QFont::DemiBold);
-
-//        QString text = "1";
-//        QFontMetrics fm(font);
-//        int textWidth = fm.width(text);
-
-//        painter->translate(0, 0);
-//        painter->drawText(-textWidth/2, 0, text);
-
         QPainterPath path1;
         int height = 0;
         int wight = 500;
-        height = 20 + 20 * CountBus;
+        height = 20 + 20 * Bus.size();
         path1.addRect(0, 0, wight, height);
         path1.addRect(wight*0.4, 0, 0, height);
         path1.addRect(wight*0.7, 0, 0, height);
@@ -74,12 +58,33 @@ public:
             height += 20;
         }
 
+//        int CounterBlocks = SystemBlocks.Blocks.size();
+//        height = 20*CounterBus + 20*CounterBlocks;
+//        if (CounterBlocks > 1){
+//            int tempWight = int(0.38 * wight);
+//            for (int i = CounterBlocks-1; i > 0; i--){
+//                height -= 20;
+//                for (Shine TempBus: SystemBlocks.Blocks[i].ListShines){
+//                    painter->drawLine(tempWight, 20, tempWight, - height);
+//                    tempWight -= 10;
+//                    height -= 20;
+//                }
 
+//            }
+//        }
 
-        //painter->drawText( QRectF(210, 0, 1000, 20), Qt::TextWordWrap | Qt::AlignVCenter, "label" );
-
-
-        }
+//        int CounterBlocks = SystemBlocks.Blocks.size();
+//        height = 20*CounterBus + 20*(CounterBlocks-1);
+//        if (CounterBlocks > 1){
+//             int tempWight = int(0.38 * wight) - CounterBus * 10;
+//             int StartHeight = 40;
+//             for (Shine TempBus: SystemBlocks.Blocks.last().ListShines){
+//                painter->drawLine(tempWight, StartHeight, tempWight, -height);
+//                tempWight -= 10;
+//                StartHeight += 20;
+//             }
+//        }
+    }
 };
 
 
