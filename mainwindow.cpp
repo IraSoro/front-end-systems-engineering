@@ -141,8 +141,8 @@ void MainWindow::DrawingConnection(){
     item->setPos(0,0);
     scene->addItem(item);
 
-    for (Coordinate temp: item->getLastCoordinate()){
-        system.CoordinateConnection.push_back(temp);
+    for (Connection temp: item->getLastCoordinate()){
+        system.connection.push_back(temp);
     }
 }
 

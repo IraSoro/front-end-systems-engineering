@@ -10,6 +10,12 @@ struct Coordinate{
     int y = 0;
 };
 
+struct Connection{
+    Coordinate coordinates;
+    ConnectionBus connectionBusStart;
+    ConnectionBus connectionBusFinish;
+};
+
 class System
 {
 public:
@@ -18,6 +24,7 @@ public:
 
     QVector <IpBlock> Blocks;
     QVector <Coordinate> CoordinateConnection;
+    QVector <Connection> connection;
 
 private:
 

@@ -31,9 +31,10 @@ public:
 
     System systemBlocks;
     QVector <Coordinate> coordinate;
+    QVector <Connection> connections;
 
 
-    QVector <Coordinate> getLastCoordinate(){
+    QVector <Connection> getLastCoordinate(){
         coordinate.clear();
         int wight = 180;
         int height = stepHeight;
@@ -65,11 +66,18 @@ public:
                 tempCoord.y = height1+5;
                 coordinate.push_back(tempCoord);
 
+                Connection tempConn;
+                tempConn.coordinates = tempCoord;
+                tempConn.connectionBusStart.IdBlock = systemBlocks.Blocks.size()-1;
+                tempConn.connectionBusStart.IdBus = i;
+                tempConn.connectionBusFinish = TempConnection;
+                connections.push_back(tempConn);
+
                 height1 = stepHeight;
             }
         }
 
-        return coordinate;
+        return connections;
     }
 
     QRectF boundingRect() const{
@@ -118,13 +126,12 @@ public:
                 tempCoord.y = height1+5;
                 coordinate.push_back(tempCoord);
 
-                painter->drawEllipse(tempCoord.x, tempCoord.y, diameterConnectionEllipse, diameterConnectionEllipse);
                 height1 = stepHeight;
             }
         }
 
-        for (Coordinate tempCoordinate: systemBlocks.CoordinateConnection){
-            painter->drawEllipse(tempCoordinate.x, tempCoordinate.y, diameterConnectionEllipse, diameterConnectionEllipse);
+        for (Connection tempCoordinate: systemBlocks.connection){
+            painter->drawEllipse(tempCoordinate.coordinates.x, tempCoordinate.coordinates.y, diameterConnectionEllipse, diameterConnectionEllipse);
         }
         for (Coordinate tempCoordinate: coordinate){
             painter->drawEllipse(tempCoordinate.x, tempCoordinate.y, diameterConnectionEllipse, diameterConnectionEllipse);
