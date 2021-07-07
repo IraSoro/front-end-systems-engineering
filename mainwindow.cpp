@@ -123,13 +123,13 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
-    item->NameBlock = system.Blocks[system.Blocks.size()-1].NameBlock;
-    item->Bus = system.Blocks[system.Blocks.size()-1].ListShines;
+    item->nameBlock = system.Blocks[system.Blocks.size()-1].NameBlock;
+    item->bus = system.Blocks[system.Blocks.size()-1].ListShines;
 
     if (system.Blocks.size()%2 == 0){
-        item->Color = 0;
+        item->setColor(0);
     }else{
-        item->Color = 1;
+        item->setColor(1);
     }
 
     scene->addItem(item);
@@ -137,21 +137,13 @@ void MainWindow::DrawingBlock(int x, int y){
 }
 
 void MainWindow::DrawingConnection(){
-    //DrawingConnections* item = new DrawingConnections();
     DrawingConnections* item = new DrawingConnections(system);
     item->setPos(0,0);
-    //item->setSystem(system);
-
     scene->addItem(item);
 
-
-//    QVector <Coordinate> tempCoord = item->getCoordinate();
-//    qDebug()<<item->getCoordinate().size();
-//    for (Coordinate temp: tempCoord){
-//        system.CoordinateConnection.push_back(temp);
-//    }
-//    tempCoord.clear();
-
+    for (Coordinate temp: item->getLastCoordinate()){
+        system.CoordinateConnection.push_back(temp);
+    }
 }
 
 void MainWindow::DrawingSystem(){

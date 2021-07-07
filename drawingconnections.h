@@ -20,9 +20,8 @@ class DrawingConnections : public QObject, public QGraphicsItem
 private:
     int stepWight = 15;
     int stepHeight = 20;
-
     int diameterConnectionEllipse = 10;
-    bool flag = 0;
+
 public:
     //explicit DrawingConnections(){}
     explicit DrawingConnections(System systemBlock): systemBlocks(systemBlock){}
@@ -33,11 +32,43 @@ public:
     System systemBlocks;
     QVector <Coordinate> coordinate;
 
-    void setSystem(System system){
-        systemBlocks = system;
-    }
 
-    QVector <Coordinate> getCoordinate(){
+    QVector <Coordinate> getLastCoordinate(){
+        coordinate.clear();
+        int wight = 180;
+        int height = stepHeight;
+
+        for (int i = systemBlocks.Blocks.size() - 2; i >= 0; i--){
+            height += stepHeight;
+            for (Shine TempBus: systemBlocks.Blocks[i].ListShines){
+                height += stepHeight;
+                if (TempBus.ConnectionOnID.size() > 0){
+                    wight -= stepWight;
+                }
+            }
+        }
+
+        height += stepHeight/2;
+        int height1 = stepHeight;
+        int SizeBus = systemBlocks.Blocks.last().ListShines.size();
+
+        for (int i = 0; i < SizeBus; i++){
+            wight -= stepWight;
+            height += stepHeight;
+            for (ConnectionBus TempConnection: systemBlocks.Blocks.last().ListShines[i].ConnectionOnID){
+                height1 += (TempConnection.IdBus + 1)*stepHeight;
+                for (int j = 0; j < TempConnection.IdBlock; j++){
+                    height1 += stepHeight + systemBlocks.Blocks[j].ListShines.size() * stepHeight;
+                }
+                Coordinate tempCoord;
+                tempCoord.x = wight-5;
+                tempCoord.y = height1+5;
+                coordinate.push_back(tempCoord);
+
+                height1 = stepHeight;
+            }
+        }
+
         return coordinate;
     }
 
@@ -46,9 +77,7 @@ public:
     }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
-//        if (flag){
-//            return;
-//        }
+
         if (systemBlocks.Blocks.size() == 0){
             return;
         }
@@ -83,22 +112,23 @@ public:
                 painter->drawLine(wight, height, wight, height1+10);
                 painter->drawLine(wight, height, 200, height);
                 painter->drawLine(wight, height1+10, 200, height1+10);
+
                 Coordinate tempCoord;
                 tempCoord.x = wight-5;
                 tempCoord.y = height1+5;
                 coordinate.push_back(tempCoord);
+
                 painter->drawEllipse(tempCoord.x, tempCoord.y, diameterConnectionEllipse, diameterConnectionEllipse);
                 height1 = stepHeight;
             }
         }
-        qDebug()<<"size = "<<coordinate.size();
-        int xx = 0;
+
         for (Coordinate tempCoordinate: systemBlocks.CoordinateConnection){
-            xx++;
-            qDebug()<<"xx = "<<xx;
             painter->drawEllipse(tempCoordinate.x, tempCoordinate.y, diameterConnectionEllipse, diameterConnectionEllipse);
         }
-        flag = 1;
+        for (Coordinate tempCoordinate: coordinate){
+            painter->drawEllipse(tempCoordinate.x, tempCoordinate.y, diameterConnectionEllipse, diameterConnectionEllipse);
+        }
 
     }
 };

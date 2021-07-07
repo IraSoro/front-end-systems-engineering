@@ -43,7 +43,6 @@ private:
     int step = 20;
 
     int counterIdBus = 0;
-    QVector <DrawingConnections*> draw;
 
 };
 #endif // MAINWINDOW_H

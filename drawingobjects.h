@@ -13,7 +13,6 @@
 
 #include "shine.h"
 
-
 class DrawingObjects : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -21,11 +20,13 @@ public:
     explicit DrawingObjects(){}
     ~DrawingObjects(){}
 
-    QVector <Shine> Bus;
-    QString NameBlock = "";
-    bool Color = 0;
+    QVector <Shine> bus;
+    QString nameBlock = "";
+    bool color = 0;
 
-//    System SystemBlocks;
+    void setColor(bool color){
+        this->color = color;
+    }
 
     QRectF boundingRect() const{
         return QRectF (0,0,500,800);
@@ -35,10 +36,10 @@ public:
         QPainterPath path1;
         int height = 0;
         int wight = 500;
-        height = 20 + 20 * Bus.size();
+        height = 20 + 20 * bus.size();
         path1.addRect(0, 0, wight, height);
 
-        if (Color){
+        if (color){
             painter->setPen("#e6e6fa");
             painter->setBrush(QBrush("#e6e6fa"));
         }else{
@@ -53,10 +54,10 @@ public:
         height = 0;
 
 
-        painter->drawText( QRectF(wight*0.4 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, NameBlock);
+        painter->drawText( QRectF(wight*0.4 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, nameBlock);
         height += 20;
         QString Type[3] = {"Type1", "Type2", "Type3"}; //!!!!!!!!!!!!!!!!
-        for (Shine VarBus: Bus) {
+        for (Shine VarBus: bus) {
             painter->drawText( QRectF(wight*0.4 + 15, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, VarBus.NameShine);
             painter->drawText( QRectF(wight*0.7 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, Type[VarBus.TypeShine]);
             height += 20;
