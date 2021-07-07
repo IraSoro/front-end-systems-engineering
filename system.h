@@ -5,6 +5,11 @@
 
 #include "ipblock.h"
 
+struct Coordinate{
+    int x = 0;
+    int y = 0;
+};
+
 class System
 {
 public:
@@ -12,6 +17,7 @@ public:
     ~System();
 
     QVector <IpBlock> Blocks;
+    QVector <Coordinate> CoordinateConnection;
 
 private:
 

@@ -4,10 +4,10 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
+#include <QVector>
 
-#include "shine.h"
-#include "ipblock.h"
 #include "system.h"
+#include "drawingconnections.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,8 +28,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QVector <Shine> BusInBlock;
-    System System;
+    QVector <Shine> busInBlock;
+    System system;
     QGraphicsScene *scene;
 
     void DrawingBlock(int x, int y);
@@ -39,10 +39,11 @@ private:
     int WIDTH = 500;
     int HEIGHT = 800;
 
-    int HeightDrawing = 20;
-    int Step = 20;
+    int heightDrawing = 20;
+    int step = 20;
 
     int counterIdBus = 0;
+    QVector <DrawingConnections*> draw;
 
 };
 #endif // MAINWINDOW_H

@@ -1,4 +1,4 @@
-//TODO: придумать что-то с типами шин, вывод связей сделать в другом классе
+//TODO: придумать что-то с типами шин
 #ifndef DRAWINGOBJECTS_H
 #define DRAWINGOBJECTS_H
 

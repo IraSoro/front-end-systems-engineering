@@ -1,3 +1,4 @@
+//TODO: убрать три цикла
 #ifndef DRAWINGCONNECTIONS_H
 #define DRAWINGCONNECTIONS_H
 
@@ -16,68 +17,88 @@
 class DrawingConnections : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+private:
+    int stepWight = 15;
+    int stepHeight = 20;
+
+    int diameterConnectionEllipse = 10;
+    bool flag = 0;
 public:
-    explicit DrawingConnections(){}
-    ~DrawingConnections(){}
+    //explicit DrawingConnections(){}
+    explicit DrawingConnections(System systemBlock): systemBlocks(systemBlock){}
+    ~DrawingConnections(){
+        coordinate.clear();
+    }
 
-    System SystemBlocks;
+    System systemBlocks;
+    QVector <Coordinate> coordinate;
 
+    void setSystem(System system){
+        systemBlocks = system;
+    }
+
+    QVector <Coordinate> getCoordinate(){
+        return coordinate;
+    }
 
     QRectF boundingRect() const{
         return QRectF (0,0,200,800);
     }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
-//        int Wight = 180;
-//        int Height = 50;
-
-//        for (int i = SystemBlocks.Blocks.size() - 2; i >= 0; i--){
-//            Height += 20;
-//            for (Shine TempBus: SystemBlocks.Blocks[i].ListShines){
-//                Height += 20;
-//                Wight -= 10;
-//            }
+//        if (flag){
+//            return;
 //        }
+        if (systemBlocks.Blocks.size() == 0){
+            return;
+        }
 
-//        Wight -= 10;
-//        for (Shine TempBus: SystemBlocks.Blocks.last().ListShines){
-//            painter->drawLine(Wight, 50, Wight, Height);
-//            painter->drawLine(Wight, Height, 200, Height);
-//            Height += 20;
-//            Wight -= 10;
-//        }
+        coordinate.clear();
+        int wight = 180;
+        int height = stepHeight;
 
-        int Wight = 180;
-        int Height = 20;
-
-        for (int i = SystemBlocks.Blocks.size() - 2; i >= 0; i--){
-            Height += 20;
-            for (Shine TempBus: SystemBlocks.Blocks[i].ListShines){
-                Height += 20;
+        for (int i = systemBlocks.Blocks.size() - 2; i >= 0; i--){
+            height += stepHeight;
+            for (Shine TempBus: systemBlocks.Blocks[i].ListShines){
+                height += stepHeight;
                 if (TempBus.ConnectionOnID.size() > 0){
-                    Wight -= 10;
+                    wight -= stepWight;
                 }
             }
         }
-        Height += 10;
-        int Height1 = 20;
-        int SizeBus = SystemBlocks.Blocks.last().ListShines.size();
+
+        height += stepHeight/2;
+        int height1 = stepHeight;
+        int SizeBus = systemBlocks.Blocks.last().ListShines.size();
+
+        painter->setBrush(QBrush("#ffffff"));
         for (int i = 0; i < SizeBus; i++){
-            Wight -= 10;
-            Height += 20;
-            for (ConnectionBus TempConnection: SystemBlocks.Blocks.last().ListShines[i].ConnectionOnID){
-                Height1 += (TempConnection.IdBus + 1)*20;
+            wight -= stepWight;
+            height += stepHeight;
+            for (ConnectionBus TempConnection: systemBlocks.Blocks.last().ListShines[i].ConnectionOnID){
+                height1 += (TempConnection.IdBus + 1)*stepHeight;
                 for (int j = 0; j < TempConnection.IdBlock; j++){
-                    Height1 += 20 + SystemBlocks.Blocks[j].ListShines.size() * 20;
+                    height1 += stepHeight + systemBlocks.Blocks[j].ListShines.size() * stepHeight;
                 }
-                painter->drawLine(Wight, Height, Wight, Height1+10);
-                painter->drawLine(Wight, Height, 200, Height);
-                painter->drawLine(Wight, Height1+10, 200, Height1+10);
-                Height1 = 20;
+                painter->drawLine(wight, height, wight, height1+10);
+                painter->drawLine(wight, height, 200, height);
+                painter->drawLine(wight, height1+10, 200, height1+10);
+                Coordinate tempCoord;
+                tempCoord.x = wight-5;
+                tempCoord.y = height1+5;
+                coordinate.push_back(tempCoord);
+                painter->drawEllipse(tempCoord.x, tempCoord.y, diameterConnectionEllipse, diameterConnectionEllipse);
+                height1 = stepHeight;
             }
         }
-
-
+        qDebug()<<"size = "<<coordinate.size();
+        int xx = 0;
+        for (Coordinate tempCoordinate: systemBlocks.CoordinateConnection){
+            xx++;
+            qDebug()<<"xx = "<<xx;
+            painter->drawEllipse(tempCoordinate.x, tempCoordinate.y, diameterConnectionEllipse, diameterConnectionEllipse);
+        }
+        flag = 1;
 
     }
 };

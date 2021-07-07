@@ -7,7 +7,7 @@
 #include <QDebug>
 
 #include "drawingobjects.h"
-#include "drawingconnections.h"
+//#include "drawingconnections.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    BusInBlock.clear();
+    busInBlock.clear();
     delete ui;
 }
 
@@ -53,29 +53,29 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
     ui->tableWidget_BusInBlock->update();
 
-    Shine AddingBus;
+    Shine addingBus;
     //AddingBus.NameShine = ui->lineEdit_NameBus->text();
-    AddingBus.NameShine = "Name Bus";
-    AddingBus.TypeShine = ui->comboBox_Type->currentIndex();
-    AddingBus.Bitness = ui->comboBox_Bitness->currentText().toInt();
-    AddingBus.ID = counterIdBus;
+    addingBus.NameShine = "Name Bus";
+    addingBus.TypeShine = ui->comboBox_Type->currentIndex();
+    addingBus.Bitness = ui->comboBox_Bitness->currentText().toInt();
+    addingBus.ID = counterIdBus;
     counterIdBus++;
 
-    int SizeBlock = System.Blocks.size();
+    int SizeBlock = system.Blocks.size();
     if (SizeBlock > 0){
         for (int i = 0; i < SizeBlock; i++){
-            int SizeListBus = System.Blocks[i].ListShines.size();
-            for (int j = 0; j < SizeListBus; j++){
-                ConnectionBus Connection;
-                Connection.IdBus = j;
-                Connection.IdBlock = i;
-                AddingBus.ConnectionOnID.push_back(Connection);
+            int sizeListBus = system.Blocks[i].ListShines.size();
+            for (int j = 0; j < sizeListBus; j++){
+                ConnectionBus connection;
+                connection.IdBus = j;
+                connection.IdBlock = i;
+                addingBus.ConnectionOnID.push_back(connection);
 //                qDebug()<<"ID Block = "<<Connection.IdBlock;
 //                qDebug()<<"ID Bis = "<<Connection.IdBus;
             }
         }
     }
-    BusInBlock.push_back(AddingBus);
+    busInBlock.push_back(addingBus);
 
     ui->lineEdit_NameBus->clear();
     ui->comboBox_Type->update();
@@ -106,27 +106,27 @@ void MainWindow::on_pushButton_AddBlock_clicked()
     IpBlock block;
     //block.NameBlock = ui->lineEdit_Block->text();
     block.NameBlock = "Name Block";
-    block.ListShines = BusInBlock;
+    block.ListShines = busInBlock;
 
-    System.Blocks.push_back(block);
+    system.Blocks.push_back(block);
 
-    DrawingBlock(0, HeightDrawing);
-    if (System.Blocks.size() > 1){
+    DrawingBlock(0, heightDrawing);
+    if (system.Blocks.size() > 1){
         DrawingConnection();
     }
 
-    HeightDrawing += Step * BusInBlock.size() + Step;
+    heightDrawing += step * busInBlock.size() + step;
     counterIdBus = 0;
-    BusInBlock.clear();
+    busInBlock.clear();
 }
 
 void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
-    item->NameBlock = System.Blocks[System.Blocks.size()-1].NameBlock;
-    item->Bus = System.Blocks[System.Blocks.size()-1].ListShines;
+    item->NameBlock = system.Blocks[system.Blocks.size()-1].NameBlock;
+    item->Bus = system.Blocks[system.Blocks.size()-1].ListShines;
 
-    if (System.Blocks.size()%2 == 0){
+    if (system.Blocks.size()%2 == 0){
         item->Color = 0;
     }else{
         item->Color = 1;
@@ -137,11 +137,21 @@ void MainWindow::DrawingBlock(int x, int y){
 }
 
 void MainWindow::DrawingConnection(){
-    DrawingConnections* item = new DrawingConnections();
+    //DrawingConnections* item = new DrawingConnections();
+    DrawingConnections* item = new DrawingConnections(system);
     item->setPos(0,0);
-    item->SystemBlocks = System;
+    //item->setSystem(system);
 
     scene->addItem(item);
+
+
+//    QVector <Coordinate> tempCoord = item->getCoordinate();
+//    qDebug()<<item->getCoordinate().size();
+//    for (Coordinate temp: tempCoord){
+//        system.CoordinateConnection.push_back(temp);
+//    }
+//    tempCoord.clear();
+
 }
 
 void MainWindow::DrawingSystem(){
