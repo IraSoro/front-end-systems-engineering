@@ -18,14 +18,13 @@ public:
     explicit ClickConnection(QObject *parent = nullptr);
     ~ClickConnection();
 
-    void addConnection(Connection connect);
-
-    QVector <Connection> connection;
-
+    void setSystem(System system);
 
 private:
+    System system;
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
+    int getStartCoordinate(Connection connect);
 
 };
 

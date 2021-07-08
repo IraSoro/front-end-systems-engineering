@@ -109,7 +109,7 @@ public:
         int height1 = stepHeight;
         int SizeBus = systemBlocks.Blocks.last().ListShines.size();
 
-        painter->setBrush(QBrush("#ffffff"));
+        painter->setPen(Qt::gray);
         for (int i = 0; i < SizeBus; i++){
             wight -= stepWight;
             height += stepHeight;
@@ -133,7 +133,7 @@ public:
 
         for (Connection tempCoordinate: systemBlocks.connection){
             if (tempCoordinate.mark == 1){
-                painter->setBrush(Qt::red);
+                painter->setBrush(Qt::black);
                 painter->setPen(Qt::black);
             }
             else{

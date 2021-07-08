@@ -172,9 +172,7 @@ void MainWindow::slotFromPoint()
     }
     ClickConnection *temp = new ClickConnection();
     temp->setPos(0,0);
-    for (Connection con: system.connection){
-        temp->addConnection(con);
-    }
+    temp->setSystem(system);
     scene->addItem(temp);
 
     //QMessageBox::information(this,"Зафиксировано нажатие","Вы нажали на точку!!!");

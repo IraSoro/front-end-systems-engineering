@@ -19,7 +19,7 @@ QRectF ClickPoint::boundingRect() const
 void ClickPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setBrush(Qt::black);
-    painter->setPen(Qt::red);
+    painter->setPen(Qt::black);
     for (Connection temp:connection){
         if (temp.mark == 1){
             painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
