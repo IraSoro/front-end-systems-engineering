@@ -40,6 +40,7 @@ private:
     void DrawingBlock(int x, int y);
     void DrawingSystem();
     void DrawingConnection();
+    void displayTaggedLinks();
 
     int WIDTH = 500;
     int HEIGHT = 800;

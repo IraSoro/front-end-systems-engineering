@@ -138,13 +138,13 @@ public:
             }
             else{
                 painter->setBrush(Qt::white);
-                painter->setPen(Qt::black);
+                painter->setPen(Qt::gray);
             }
             painter->drawEllipse(tempCoordinate.coordinates.x, tempCoordinate.coordinates.y, diameterConnectionEllipse, diameterConnectionEllipse);
         }
 
         painter->setBrush(Qt::white);
-        painter->setPen(Qt::black);
+        painter->setPen(Qt::gray);
         for (Coordinate tempCoordinate: coordinate){
             painter->drawEllipse(tempCoordinate.x, tempCoordinate.y, diameterConnectionEllipse, diameterConnectionEllipse);
         }

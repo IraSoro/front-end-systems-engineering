@@ -1,3 +1,4 @@
+//TODO: вместо изменения методов класса изменять с помощью функции set
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -122,6 +123,8 @@ void MainWindow::on_pushButton_AddBlock_clicked()
     heightDrawing += step * busInBlock.size() + step;
     counterIdBus = 0;
     busInBlock.clear();
+
+    displayTaggedLinks();
 }
 
 void MainWindow::DrawingBlock(int x, int y){
@@ -170,11 +173,13 @@ void MainWindow::slotFromPoint()
     for (int temp: point->getMarkConnectons()){
         system.connection[temp].mark = 1;
     }
+    displayTaggedLinks();
+}
+
+void MainWindow::displayTaggedLinks(){
     ClickConnection *temp = new ClickConnection();
     temp->setPos(0,0);
     temp->setSystem(system);
     scene->addItem(temp);
-
-    //QMessageBox::information(this,"Зафиксировано нажатие","Вы нажали на точку!!!");
 }
 

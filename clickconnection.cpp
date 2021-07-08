@@ -30,11 +30,12 @@ void ClickConnection::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         }
     }
 
-    painter->setPen(Qt::black);
     for (int i = 0; i < system.connection.size(); i++){
         if (system.connection[i].mark == 1){
+            painter->setPen(Qt::black);
             painter->setBrush(Qt::black);
         }else{
+            painter->setPen(Qt::gray);
             painter->setBrush(Qt::white);
         }
         painter->drawEllipse(system.connection[i].coordinates.x, system.connection[i].coordinates.y, 10, 10);

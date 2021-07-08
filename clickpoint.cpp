@@ -50,7 +50,7 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 bool ClickPoint::click(Coordinate coordinate, QPointF currentPoint){
-    if (abs(coordinate.x - int(currentPoint.x())) <= 5 &&  abs(coordinate.y - int(currentPoint.y())) <= 5){
+    if (abs(coordinate.x + 5 - int(currentPoint.x())) <= 5 &&  abs(coordinate.y + 5 - int(currentPoint.y())) <= 5){
         return true;
     }else{
         return false;
@@ -59,10 +59,6 @@ bool ClickPoint::click(Coordinate coordinate, QPointF currentPoint){
 
 void ClickPoint::addConnection(Connection connect){
     this->connection.push_back(connect);
-}
-
-void ClickPoint::setConnection(Connection connect){
-    //this->connection = connect;
 }
 
 QVector <int> ClickPoint::getMarkConnectons(){
