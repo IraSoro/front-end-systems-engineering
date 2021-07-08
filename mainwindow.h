@@ -8,6 +8,7 @@
 
 #include "system.h"
 #include "drawingconnections.h"
+#include "clickpoint.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,14 +24,16 @@ public:
 
 private slots:
     void on_pushButton_AddBlock_clicked();
-
     void on_pushButton_AddBus_clicked();
+
+    void slotFromPoint();
 
 private:
     Ui::MainWindow *ui;
     QVector <Shine> busInBlock;
     System system;
     QGraphicsScene *scene;
+    ClickPoint *point;
 
     void DrawingBlock(int x, int y);
     void DrawingSystem();

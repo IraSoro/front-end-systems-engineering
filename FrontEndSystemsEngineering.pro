@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    clickpoint.cpp \
     drawingconnections.cpp \
     drawingobjects.cpp \
     ipblock.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
     system.cpp
 
 HEADERS += \
+    clickpoint.h \
     drawingconnections.h \
     drawingobjects.h \
     ipblock.h \

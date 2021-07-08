@@ -22,6 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget_BusInBlock->setHorizontalHeaderLabels(name_table);
 
     DrawingSystem();
+
+    point = new ClickPoint();
+    connect(point,SIGNAL(signal1()),this, SLOT(slotFromPoint()));
+    scene->addItem(point);
 }
 
 MainWindow::~MainWindow()
@@ -143,6 +147,7 @@ void MainWindow::DrawingConnection(){
 
     for (Connection temp: item->getLastCoordinate()){
         system.connection.push_back(temp);
+        point->addConnection(temp);
     }
 }
 
@@ -156,4 +161,9 @@ void MainWindow::DrawingSystem(){
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     scene->setSceneRect(0,0,WIDTH,HEIGHT);
 
+}
+
+void MainWindow::slotFromPoint()
+{
+    QMessageBox::information(this,"Зафиксировано нажатие","Вы нажали на точку!!!");
 }

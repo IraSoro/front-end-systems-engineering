@@ -17,6 +17,7 @@
 class DrawingConnections : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+
 private:
     int stepWight = 15;
     int stepHeight = 20;
@@ -138,6 +139,8 @@ public:
         }
 
     }
+
+
 };
 
 #endif // DRAWINGCONNECTIONS_H
