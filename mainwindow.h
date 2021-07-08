@@ -9,6 +9,7 @@
 #include "system.h"
 #include "drawingconnections.h"
 #include "clickpoint.h"
+#include "clickconnection.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +22,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 
 private slots:
     void on_pushButton_AddBlock_clicked();

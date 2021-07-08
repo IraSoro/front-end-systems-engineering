@@ -132,8 +132,19 @@ public:
         }
 
         for (Connection tempCoordinate: systemBlocks.connection){
+            if (tempCoordinate.mark == 1){
+                painter->setBrush(Qt::red);
+                painter->setPen(Qt::black);
+            }
+            else{
+                painter->setBrush(Qt::white);
+                painter->setPen(Qt::black);
+            }
             painter->drawEllipse(tempCoordinate.coordinates.x, tempCoordinate.coordinates.y, diameterConnectionEllipse, diameterConnectionEllipse);
         }
+
+        painter->setBrush(Qt::white);
+        painter->setPen(Qt::black);
         for (Coordinate tempCoordinate: coordinate){
             painter->drawEllipse(tempCoordinate.x, tempCoordinate.y, diameterConnectionEllipse, diameterConnectionEllipse);
         }

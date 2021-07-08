@@ -18,8 +18,10 @@ public:
     ~ClickPoint();
 
     void addConnection(Connection connect);
+    void setConnection(Connection connect);
+    QVector <int> getMarkConnectons();
     QVector <Connection> connection;
-    //System system;
+    QVector <int> markConnectons;
 
 signals:
     void signal1();

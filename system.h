@@ -14,6 +14,7 @@ struct Connection{
     Coordinate coordinates;
     ConnectionBus connectionBusStart;
     ConnectionBus connectionBusFinish;
+    bool mark = 0;
 };
 
 class System

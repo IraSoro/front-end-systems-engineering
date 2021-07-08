@@ -149,6 +149,8 @@ void MainWindow::DrawingConnection(){
         system.connection.push_back(temp);
         point->addConnection(temp);
     }
+
+
 }
 
 void MainWindow::DrawingSystem(){
@@ -165,5 +167,16 @@ void MainWindow::DrawingSystem(){
 
 void MainWindow::slotFromPoint()
 {
-    QMessageBox::information(this,"Зафиксировано нажатие","Вы нажали на точку!!!");
+    for (int temp: point->getMarkConnectons()){
+        system.connection[temp].mark = 1;
+    }
+    ClickConnection *temp = new ClickConnection();
+    temp->setPos(0,0);
+    for (Connection con: system.connection){
+        temp->addConnection(con);
+    }
+    scene->addItem(temp);
+
+    //QMessageBox::information(this,"Зафиксировано нажатие","Вы нажали на точку!!!");
 }
+
