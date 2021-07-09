@@ -183,3 +183,8 @@ void MainWindow::displayTaggedLinks(){
     scene->addItem(temp);
 }
 
+
+void MainWindow::on_action_triggered()
+{
+    system.WrittingToFile();
+}

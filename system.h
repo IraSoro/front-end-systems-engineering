@@ -2,6 +2,12 @@
 #define SYSTEM_H
 
 #include <QVector>
+#include <QDebug>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QFile>
+#include <QMessageBox>
 
 #include "ipblock.h"
 
@@ -22,6 +28,7 @@ class System
 public:
     System();
     ~System();
+    void WrittingToFile();
 
     QVector <IpBlock> Blocks;
     QVector <Coordinate> CoordinateConnection;

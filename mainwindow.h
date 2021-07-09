@@ -30,6 +30,8 @@ private slots:
 
     void slotFromPoint();
 
+    void on_action_triggered();
+
 private:
     Ui::MainWindow *ui;
     QVector <Shine> busInBlock;

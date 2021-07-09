@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1027</width>
-    <height>441</height>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -218,8 +218,20 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Меню</string>
+    </property>
+    <addaction name="action"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
