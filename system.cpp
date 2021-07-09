@@ -24,27 +24,29 @@ void System::WrittingToFile(){
             addressObjectBus.insert("Type bus", Blocks[i].ListShines[j].TypeShine);
             addressObjectBus.insert("Bitness", Blocks[i].ListShines[j].Bitness);
             addressObjectBus.insert("id bus", j);
+            QJsonArray arrayConnection;
+            for (Connection temp: connection){
+                if (temp.connectionBusStart.IdBus == j && temp.connectionBusStart.IdBlock == i && temp.mark == 1){
+                    QJsonObject connectObject;
+                    connectObject.insert("ID Block", temp.connectionBusFinish.IdBlock);
+                    connectObject.insert("ID Bus", temp.connectionBusFinish.IdBus);
+                    arrayConnection.push_back(connectObject);
+                }
+            }
+            for (Connection temp: connection){
+                if (temp.connectionBusFinish.IdBus == j && temp.connectionBusFinish.IdBlock == i && temp.mark == 1){
+                    QJsonObject connectObject;
+                    connectObject.insert("ID Block", temp.connectionBusStart.IdBlock);
+                    connectObject.insert("ID Bus", temp.connectionBusStart.IdBus);
+                    arrayConnection.push_back(connectObject);
+                }
+            }
+            addressObjectBus.insert("Connection", arrayConnection);
             phoneNumbersArray.push_back(addressObjectBus);
-            //addressObjectBlock.insert(QString::number(j), addressObjectBus);
         }
         addressObjectBlock.insert("Bus", phoneNumbersArray);
         recordObject.insert(QString::number(i), addressObjectBlock);
     }
-
-//    recordObject.insert("FirstName", QJsonValue::fromVariant("John"));
-//    recordObject.insert("LastName", QJsonValue::fromVariant("Doe"));
-//    recordObject.insert("Age", QJsonValue::fromVariant(43));
-
-//    QJsonObject addressObject;
-//    addressObject.insert("Street", "Downing Street 10");
-//    addressObject.insert("City", "London");
-//    addressObject.insert("Country", "Great Britain");
-//    recordObject.insert("Address", addressObject);
-
-//    QJsonArray phoneNumbersArray;
-//    phoneNumbersArray.push_back("+44 1234567");
-//    phoneNumbersArray.push_back("+44 2345678");
-//    recordObject.insert("Phone Numbers", phoneNumbersArray);
 
 
     QFile fileJson("C:/Users/User/Desktop/FrontEndSystemsEngineering/first.json");
@@ -57,3 +59,7 @@ void System::WrittingToFile(){
     msgBox.setText("Файл сохранен.");
     msgBox.exec();
 }
+
+//void System::FindConnectoun(){
+
+//}

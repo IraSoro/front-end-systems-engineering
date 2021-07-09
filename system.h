@@ -29,6 +29,7 @@ public:
     System();
     ~System();
     void WrittingToFile();
+    void FindConnectoun(int idBlock, int idBus);
 
     QVector <IpBlock> Blocks;
     QVector <Coordinate> CoordinateConnection;
