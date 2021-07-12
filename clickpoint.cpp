@@ -18,10 +18,15 @@ QRectF ClickPoint::boundingRect() const
 
 void ClickPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::black);
-    painter->setPen(Qt::black);
+
     for (Connection temp:connection){
-        if (temp.mark == 1){
+        if (temp.mark == true){
+            painter->setBrush(Qt::black);
+            painter->setPen(Qt::black);
+            painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
+        }else{
+            painter->setBrush(Qt::white);
+            painter->setPen(Qt::gray);
             painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
         }
     }
@@ -39,14 +44,38 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     for (int i = 0; i < connection.size(); i++){
         if (click(connection[i].coordinates, point)){
-            connection[i].mark = 1;
-            markConnectons.push_back(i);
+            if (connection[i].mark == false){
+                connection[i].mark = true;
+                markConnectons.push_back(i);
+            }else{
+                connection[i].mark = false;
+                removeEl(i);
+            }
+            qDebug()<<"size = "<<markConnectons.size();
+            qDebug()<<markConnectons;
             emit signal1();
             QGraphicsItem::mousePressEvent(event);
+            break;
 
         }
-    }
+    }    
 
+}
+
+void ClickPoint::removeEl(int var){
+//    for (int i = 0; i < markConnectons.size(); i++){
+//        if (markConnectons[i] == var){
+//            markConnectons.remove(i);
+//            break;
+//        }
+//    }
+
+    QMutableVectorIterator<int> i(markConnectons);
+        while(i.hasNext()) {
+          int currentValue=i.next();
+          if(currentValue == var)
+          i.remove();
+        }
 }
 
 bool ClickPoint::click(Coordinate coordinate, QPointF currentPoint){

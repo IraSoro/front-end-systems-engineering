@@ -34,6 +34,7 @@ private:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
     bool click(Coordinate coordinate, QPointF currentPoint);
+    void removeEl(int var);
 
 };
 

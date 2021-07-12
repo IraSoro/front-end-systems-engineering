@@ -18,20 +18,31 @@ QRectF ClickConnection::boundingRect() const
 }
 
 void ClickConnection::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
+{    
     for (int i = 0; i < system.connection.size(); i++){
-        if (system.connection[i].mark == 1){
+        if (system.connection[i].mark == false){
+            int y = getStartCoordinate(system.connection[i]);
+            painter->setPen(Qt::gray);
+            painter->drawLine(system.connection[i].coordinates.x, system.connection[i].coordinates.y+5, 200, system.connection[i].coordinates.y+5);
+            painter->drawLine(system.connection[i].coordinates.x+5, y+10, 200, y+10);
+            painter->drawLine(system.connection[i].coordinates.x+5, system.connection[i].coordinates.y+5, system.connection[i].coordinates.x+5, y+10);
+
+        }
+    }
+
+    for (int i = 0; i < system.connection.size(); i++){
+        if (system.connection[i].mark == true){
             int y = getStartCoordinate(system.connection[i]);
             painter->setPen(Qt::black);
             painter->drawLine(system.connection[i].coordinates.x, system.connection[i].coordinates.y+5, 200, system.connection[i].coordinates.y+5);
             painter->drawLine(system.connection[i].coordinates.x+5, y+10, 200, y+10);
             painter->drawLine(system.connection[i].coordinates.x+5, system.connection[i].coordinates.y+5, system.connection[i].coordinates.x+5, y+10);
-            painter->setPen(Qt::gray);
+
         }
     }
 
     for (int i = 0; i < system.connection.size(); i++){
-        if (system.connection[i].mark == 1){
+        if (system.connection[i].mark == true){
             painter->setPen(Qt::black);
             painter->setBrush(Qt::black);
         }else{

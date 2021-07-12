@@ -170,13 +170,17 @@ void MainWindow::DrawingSystem(){
 
 void MainWindow::slotFromPoint()
 {
-    for (int temp: point->getMarkConnectons()){
-        system.connection[temp].mark = 1;
+    for (int i = 0; i < system.connection.size(); i++){
+        system.connection[i].mark = false;
     }
+    for (int temp: point->getMarkConnectons()){
+        system.connection[temp].mark = true;
+    }
+
     displayTaggedLinks();
 }
 
-void MainWindow::displayTaggedLinks(){
+void MainWindow::displayTaggedLinks(){    
     ClickConnection *temp = new ClickConnection();
     temp->setPos(0,0);
     temp->setSystem(system);
