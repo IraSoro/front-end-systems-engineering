@@ -13,9 +13,9 @@ QVector <Connection> DrawingConnections::getLastCoordinate(){
 
     for (int i = systemBlocks.blocks.size() - 2; i >= 0; i--){
         height += stepHeight;
-        for (Bus TempBus: systemBlocks.blocks[i].listBuses){
+        for (Bus TempBus: systemBlocks.blocks[i].getListBuses()){
             height += stepHeight;
-            if (TempBus.connectionOnID.size() > 0){
+            if (TempBus.getConnectionOnID().size() > 0){
                 wight -= stepWight;
             }
         }
@@ -23,15 +23,15 @@ QVector <Connection> DrawingConnections::getLastCoordinate(){
 
     height += stepHeight/2;
     int height1 = stepHeight;
-    int SizeBus = systemBlocks.blocks.last().listBuses.size();
+    int SizeBus = systemBlocks.blocks.last().getListBuses().size();
 
     for (int i = 0; i < SizeBus; i++){
         wight -= stepWight;
         height += stepHeight;
-        for (ConnectionBus TempConnection: systemBlocks.blocks.last().listBuses[i].connectionOnID){
+        for (ConnectionBus TempConnection: systemBlocks.blocks.last().getListBuses()[i].getConnectionOnID()){
             height1 += (TempConnection.idBus + 1)*stepHeight;
             for (int j = 0; j < TempConnection.idBlock; j++){
-                height1 += stepHeight + systemBlocks.blocks[j].listBuses.size() * stepHeight;
+                height1 += stepHeight + systemBlocks.blocks[j].getListBuses().size() * stepHeight;
             }
             Coordinate tempCoord;
             tempCoord.x = wight-5;
@@ -68,9 +68,9 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     for (int i = systemBlocks.blocks.size() - 2; i >= 0; i--){
         height += stepHeight;
-        for (Bus TempBus: systemBlocks.blocks[i].listBuses){
+        for (Bus TempBus: systemBlocks.blocks[i].getListBuses()){
             height += stepHeight;
-            if (TempBus.connectionOnID.size() > 0){
+            if (TempBus.getConnectionOnID().size() > 0){
                 wight -= stepWight;
             }
         }
@@ -78,16 +78,16 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     height += stepHeight/2;
     int height1 = stepHeight;
-    int SizeBus = systemBlocks.blocks.last().listBuses.size();
+    int SizeBus = systemBlocks.blocks.last().getListBuses().size();
 
     painter->setPen(Qt::gray);
     for (int i = 0; i < SizeBus; i++){
         wight -= stepWight;
         height += stepHeight;
-        for (ConnectionBus TempConnection: systemBlocks.blocks.last().listBuses[i].connectionOnID){
+        for (ConnectionBus TempConnection: systemBlocks.blocks.last().getListBuses()[i].getConnectionOnID()){
             height1 += (TempConnection.idBus + 1)*stepHeight;
             for (int j = 0; j < TempConnection.idBlock; j++){
-                height1 += stepHeight + systemBlocks.blocks[j].listBuses.size() * stepHeight;
+                height1 += stepHeight + systemBlocks.blocks[j].getListBuses().size() * stepHeight;
             }
             painter->drawLine(wight, height, wight, height1+10);
             painter->drawLine(wight, height, 200, height);

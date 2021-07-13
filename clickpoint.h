@@ -21,6 +21,7 @@ public:
     void addConnection(Connection connect);
     void setConnection(Connection connect);
     QVector <int> getMarkConnectons();
+
     QVector <Connection> connection;
     QVector <int> markConnectons;
 

@@ -43,8 +43,8 @@ void DrawingObjects::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
     height += 20;
     QString Type[3] = {"Type1", "Type2", "Type3"}; //!!!!!!!!!!!!!!!!
     for (Bus VarBus: bus) {
-        painter->drawText( QRectF(wight*0.4 + 15, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, VarBus.nameBus);
-        painter->drawText( QRectF(wight*0.7 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, Type[VarBus.typeBus]);
+        painter->drawText( QRectF(wight*0.4 + 15, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, VarBus.getNameBus());
+        painter->drawText( QRectF(wight*0.7 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, Type[VarBus.getTypeBus()]);
         height += 20;
     }
 

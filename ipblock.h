@@ -9,14 +9,15 @@ class IpBlock
 {
 
 private:
-
+    QString nameBlock = "";
+    QVector <Bus> listBuses;
 public:
     IpBlock();
     IpBlock(QString nameBlock, QVector <Bus> listBuses);
     ~IpBlock();
-    QString nameBlock = nullptr;
-    QVector <Bus> listBuses;
 
+    QString getNameBlock();
+    QVector <Bus> getListBuses();
 };
 
 #endif // IPBLOCK_H

@@ -63,12 +63,12 @@ void MainWindow::on_pushButton_AddBus_clicked()
     int sizeBlock = system.blocks.size();
     if (sizeBlock > 0){
         for (int i = 0; i < sizeBlock; i++){
-            int sizeListBus = system.blocks[i].listBuses.size();
+            int sizeListBus = system.blocks[i].getListBuses().size();
             for (int j = 0; j < sizeListBus; j++){
                 ConnectionBus connection;
                 connection.idBus = j;
                 connection.idBlock = i;
-                addingBus.connectionOnID.push_back(connection);
+                addingBus.addConnection(connection);
             }
         }
     }
@@ -120,8 +120,8 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
-    item->nameBlock = system.blocks[system.blocks.size()-1].nameBlock;
-    item->bus = system.blocks[system.blocks.size()-1].listBuses;
+    item->nameBlock = system.blocks[system.blocks.size()-1].getNameBlock();
+    item->bus = system.blocks[system.blocks.size()-1].getListBuses();
 
     if (system.blocks.size()%2 == 0){
         item->setColor(0);

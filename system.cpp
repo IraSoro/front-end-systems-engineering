@@ -15,14 +15,14 @@ void System::WrittingToFile(){
 
     for (int i = 0; i < blocks.size(); i++){
         QJsonObject addressObjectBlock;
-        addressObjectBlock.insert("Name block", blocks[i].nameBlock);
-        addressObjectBlock.insert("Count bus", blocks[i].listBuses.size());
+        addressObjectBlock.insert("Name block", blocks[i].getNameBlock());
+        addressObjectBlock.insert("Count bus", blocks[i].getListBuses().size());
         QJsonArray phoneNumbersArray;
-        for (int j = 0; j < blocks[i].listBuses.size(); j++){
+        for (int j = 0; j < blocks[i].getListBuses().size(); j++){
             QJsonObject addressObjectBus;
-            addressObjectBus.insert("Name bus", blocks[i].listBuses[j].nameBus);
-            addressObjectBus.insert("Type bus", blocks[i].listBuses[j].typeBus);
-            addressObjectBus.insert("Bitness", blocks[i].listBuses[j].bitness);
+            addressObjectBus.insert("Name bus", blocks[i].getListBuses()[j].getNameBus());
+            addressObjectBus.insert("Type bus", blocks[i].getListBuses()[j].getTypeBus());
+            addressObjectBus.insert("Bitness", blocks[i].getListBuses()[j].getBitness());
             addressObjectBus.insert("id bus", j);
             QJsonArray arrayConnection;
             for (Connection temp: connection){

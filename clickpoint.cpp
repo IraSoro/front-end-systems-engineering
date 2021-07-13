@@ -9,6 +9,7 @@ ClickPoint::ClickPoint(QObject *parent)
 ClickPoint::~ClickPoint()
 {
     markConnectons.clear();
+    connection.clear();
 }
 
 QRectF ClickPoint::boundingRect() const
@@ -18,7 +19,6 @@ QRectF ClickPoint::boundingRect() const
 
 void ClickPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-
     for (Connection temp:connection){
         if (temp.mark == true){
             painter->setBrush(Qt::black);
@@ -51,8 +51,7 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
                 connection[i].mark = false;
                 removeEl(i);
             }
-            qDebug()<<"size = "<<markConnectons.size();
-            qDebug()<<markConnectons;
+
             emit signal1();
             QGraphicsItem::mousePressEvent(event);
             break;
@@ -63,13 +62,6 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 void ClickPoint::removeEl(int var){
-//    for (int i = 0; i < markConnectons.size(); i++){
-//        if (markConnectons[i] == var){
-//            markConnectons.remove(i);
-//            break;
-//        }
-//    }
-
     QMutableVectorIterator<int> i(markConnectons);
         while(i.hasNext()) {
           int currentValue=i.next();

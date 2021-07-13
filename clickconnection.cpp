@@ -1,4 +1,3 @@
-//TODO: сделать диаметр глобальной (?) константной переменной; вместо setSystem сделать конструктор с параметром
 #include "clickconnection.h"
 
 ClickConnection::ClickConnection(QObject *parent)
@@ -63,7 +62,7 @@ int ClickConnection::getStartCoordinate(Connection connect){
 
     for (int i = 0; i < connect.connectionBusStart.idBlock; i++){
         height += step;
-        for (int j = 0; j < system.blocks[i].listBuses.size(); j++){
+        for (int j = 0; j < system.blocks[i].getListBuses().size(); j++){
             height += step;
         }
     }

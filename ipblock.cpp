@@ -2,14 +2,20 @@
 
 IpBlock::IpBlock()
 {
-
+    nameBlock = "";
 }
 
-IpBlock::IpBlock(QString nameBlock, QVector <Bus> listBuses) : nameBlock(nameBlock), listBuses(listBuses){
-
-}
+IpBlock::IpBlock(QString nameBlock, QVector <Bus> listBuses) : nameBlock(nameBlock), listBuses(listBuses){}
 
 IpBlock::~IpBlock()
 {
     listBuses.clear();
+}
+
+QString IpBlock::getNameBlock(){
+    return this->nameBlock;
+}
+
+QVector <Bus> IpBlock::getListBuses(){
+    return this->listBuses;
 }
