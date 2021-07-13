@@ -60,6 +60,3 @@ void System::WrittingToFile(){
     msgBox.exec();
 }
 
-//void System::FindConnectoun(){
-
-//}

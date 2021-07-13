@@ -20,9 +20,9 @@ class DrawingConnections : public QObject, public QGraphicsItem
     Q_INTERFACES(QGraphicsItem)
 
 private:
-    int stepWight = 15;
-    int stepHeight = 20;
-    int diameterConnectionEllipse = 10;
+    int const stepWight = 15;
+    int const stepHeight = 20;
+    int const diameterConnectionEllipse = 10;
 
 public:
     //explicit DrawingConnections(){}

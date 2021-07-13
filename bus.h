@@ -24,7 +24,6 @@ public:
     int id = -1;
     QVector <ConnectionBus> connectionOnID;
 
-
 };
 
 

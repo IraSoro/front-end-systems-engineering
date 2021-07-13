@@ -58,25 +58,19 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
     ui->tableWidget_BusInBlock->update();
 
-    Bus addingBus;
+    Bus addingBus("Name Bus", ui->comboBox_Type->currentIndex(), ui->comboBox_Bitness->currentText().toInt(), counterIdBus);
     //AddingBus.NameShine = ui->lineEdit_NameBus->text();
-    addingBus.nameBus = "Name Bus";
-    addingBus.typeBus = ui->comboBox_Type->currentIndex();
-    addingBus.bitness = ui->comboBox_Bitness->currentText().toInt();
-    addingBus.id = counterIdBus;
     counterIdBus++;
 
-    int SizeBlock = system.blocks.size();
-    if (SizeBlock > 0){
-        for (int i = 0; i < SizeBlock; i++){
+    int sizeBlock = system.blocks.size();
+    if (sizeBlock > 0){
+        for (int i = 0; i < sizeBlock; i++){
             int sizeListBus = system.blocks[i].listBuses.size();
             for (int j = 0; j < sizeListBus; j++){
                 ConnectionBus connection;
                 connection.idBus = j;
                 connection.idBlock = i;
                 addingBus.connectionOnID.push_back(connection);
-//                qDebug()<<"ID Block = "<<Connection.IdBlock;
-//                qDebug()<<"ID Bis = "<<Connection.IdBus;
             }
         }
     }
@@ -108,10 +102,8 @@ void MainWindow::on_pushButton_AddBlock_clicked()
     }
 
 
-    IpBlock block;
+    IpBlock block("Name Block", busInBlock);
     //block.NameBlock = ui->lineEdit_Block->text();
-    block.nameBlock = "Name Block";
-    block.listBuses = busInBlock;
 
     system.blocks.push_back(block);
 
