@@ -44,12 +44,11 @@ private:
     void DrawingConnection();
     void displayTaggedLinks();
 
-    int WIDTH = 500;
-    int HEIGHT = 800;
+    int const WIDTH = 500;
+    int const HEIGHT = 800;
+    int const step = 20;
 
     int heightDrawing = 20;
-    int step = 20;
-
     int counterIdBus = 0;
 
 };

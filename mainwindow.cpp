@@ -1,4 +1,3 @@
-//TODO: вместо изменения методов класса изменять с помощью функции set
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -8,7 +7,6 @@
 #include <QDebug>
 
 #include "drawingobjects.h"
-//#include "drawingconnections.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
