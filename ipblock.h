@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QVector>
-#include "shine.h"
+#include "bus.h"
 
 class IpBlock
 {
@@ -12,10 +12,10 @@ private:
 
 public:
     IpBlock();
-    IpBlock(QString NameBlock, QVector <Shine> ListShines);
+    IpBlock(QString nameBlock, QVector <Bus> listBuses);
     ~IpBlock();
-    QString NameBlock = nullptr;
-    QVector <Shine> ListShines;
+    QString nameBlock = nullptr;
+    QVector <Bus> listBuses;
 
 };
 

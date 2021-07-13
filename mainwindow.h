@@ -34,7 +34,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QVector <Shine> busInBlock;
+    QVector <Bus> busInBlock;
     System system;
     QGraphicsScene *scene;
     ClickPoint *point;

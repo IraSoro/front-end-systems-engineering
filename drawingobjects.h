@@ -11,16 +11,17 @@
 #include <QString>
 #include <QFont>
 
-#include "shine.h"
+#include "bus.h"
 
 class DrawingObjects : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     explicit DrawingObjects(){}
     ~DrawingObjects(){}
 
-    QVector <Shine> bus;
+    QVector <Bus> bus;
     QString nameBlock = "";
     bool color = 0;
 
@@ -57,9 +58,9 @@ public:
         painter->drawText( QRectF(wight*0.4 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, nameBlock);
         height += 20;
         QString Type[3] = {"Type1", "Type2", "Type3"}; //!!!!!!!!!!!!!!!!
-        for (Shine VarBus: bus) {
-            painter->drawText( QRectF(wight*0.4 + 15, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, VarBus.NameShine);
-            painter->drawText( QRectF(wight*0.7 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, Type[VarBus.TypeShine]);
+        for (Bus VarBus: bus) {
+            painter->drawText( QRectF(wight*0.4 + 15, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, VarBus.nameBus);
+            painter->drawText( QRectF(wight*0.7 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, Type[VarBus.typeBus]);
             height += 20;
         }
 

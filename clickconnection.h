@@ -14,6 +14,7 @@
 class ClickConnection: public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     explicit ClickConnection(QObject *parent = nullptr);
     ~ClickConnection();

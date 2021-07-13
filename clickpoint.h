@@ -13,6 +13,7 @@
 class ClickPoint: public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     explicit ClickPoint(QObject *parent = nullptr);
     ~ClickPoint();

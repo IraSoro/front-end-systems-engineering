@@ -13,31 +13,31 @@ System::~System()
 void System::WrittingToFile(){
     QJsonObject recordObject;
 
-    for (int i = 0; i < Blocks.size(); i++){
+    for (int i = 0; i < blocks.size(); i++){
         QJsonObject addressObjectBlock;
-        addressObjectBlock.insert("Name block", Blocks[i].NameBlock);
-        addressObjectBlock.insert("Count bus", Blocks[i].ListShines.size());
+        addressObjectBlock.insert("Name block", blocks[i].nameBlock);
+        addressObjectBlock.insert("Count bus", blocks[i].listBuses.size());
         QJsonArray phoneNumbersArray;
-        for (int j = 0; j < Blocks[i].ListShines.size(); j++){
+        for (int j = 0; j < blocks[i].listBuses.size(); j++){
             QJsonObject addressObjectBus;
-            addressObjectBus.insert("Name bus", Blocks[i].ListShines[j].NameShine);
-            addressObjectBus.insert("Type bus", Blocks[i].ListShines[j].TypeShine);
-            addressObjectBus.insert("Bitness", Blocks[i].ListShines[j].Bitness);
+            addressObjectBus.insert("Name bus", blocks[i].listBuses[j].nameBus);
+            addressObjectBus.insert("Type bus", blocks[i].listBuses[j].typeBus);
+            addressObjectBus.insert("Bitness", blocks[i].listBuses[j].bitness);
             addressObjectBus.insert("id bus", j);
             QJsonArray arrayConnection;
             for (Connection temp: connection){
-                if (temp.connectionBusStart.IdBus == j && temp.connectionBusStart.IdBlock == i && temp.mark == 1){
+                if (temp.connectionBusStart.idBus == j && temp.connectionBusStart.idBlock == i && temp.mark == 1){
                     QJsonObject connectObject;
-                    connectObject.insert("ID Block", temp.connectionBusFinish.IdBlock);
-                    connectObject.insert("ID Bus", temp.connectionBusFinish.IdBus);
+                    connectObject.insert("ID Block", temp.connectionBusFinish.idBlock);
+                    connectObject.insert("ID Bus", temp.connectionBusFinish.idBus);
                     arrayConnection.push_back(connectObject);
                 }
             }
             for (Connection temp: connection){
-                if (temp.connectionBusFinish.IdBus == j && temp.connectionBusFinish.IdBlock == i && temp.mark == 1){
+                if (temp.connectionBusFinish.idBus == j && temp.connectionBusFinish.idBlock == i && temp.mark == 1){
                     QJsonObject connectObject;
-                    connectObject.insert("ID Block", temp.connectionBusStart.IdBlock);
-                    connectObject.insert("ID Bus", temp.connectionBusStart.IdBus);
+                    connectObject.insert("ID Block", temp.connectionBusStart.idBlock);
+                    connectObject.insert("ID Bus", temp.connectionBusStart.idBus);
                     arrayConnection.push_back(connectObject);
                 }
             }

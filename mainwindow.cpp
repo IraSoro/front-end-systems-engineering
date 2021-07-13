@@ -58,23 +58,23 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
     ui->tableWidget_BusInBlock->update();
 
-    Shine addingBus;
+    Bus addingBus;
     //AddingBus.NameShine = ui->lineEdit_NameBus->text();
-    addingBus.NameShine = "Name Bus";
-    addingBus.TypeShine = ui->comboBox_Type->currentIndex();
-    addingBus.Bitness = ui->comboBox_Bitness->currentText().toInt();
-    addingBus.ID = counterIdBus;
+    addingBus.nameBus = "Name Bus";
+    addingBus.typeBus = ui->comboBox_Type->currentIndex();
+    addingBus.bitness = ui->comboBox_Bitness->currentText().toInt();
+    addingBus.id = counterIdBus;
     counterIdBus++;
 
-    int SizeBlock = system.Blocks.size();
+    int SizeBlock = system.blocks.size();
     if (SizeBlock > 0){
         for (int i = 0; i < SizeBlock; i++){
-            int sizeListBus = system.Blocks[i].ListShines.size();
+            int sizeListBus = system.blocks[i].listBuses.size();
             for (int j = 0; j < sizeListBus; j++){
                 ConnectionBus connection;
-                connection.IdBus = j;
-                connection.IdBlock = i;
-                addingBus.ConnectionOnID.push_back(connection);
+                connection.idBus = j;
+                connection.idBlock = i;
+                addingBus.connectionOnID.push_back(connection);
 //                qDebug()<<"ID Block = "<<Connection.IdBlock;
 //                qDebug()<<"ID Bis = "<<Connection.IdBus;
             }
@@ -110,13 +110,13 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 
     IpBlock block;
     //block.NameBlock = ui->lineEdit_Block->text();
-    block.NameBlock = "Name Block";
-    block.ListShines = busInBlock;
+    block.nameBlock = "Name Block";
+    block.listBuses = busInBlock;
 
-    system.Blocks.push_back(block);
+    system.blocks.push_back(block);
 
     DrawingBlock(0, heightDrawing);
-    if (system.Blocks.size() > 1){
+    if (system.blocks.size() > 1){
         DrawingConnection();
     }
 
@@ -130,10 +130,10 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
-    item->nameBlock = system.Blocks[system.Blocks.size()-1].NameBlock;
-    item->bus = system.Blocks[system.Blocks.size()-1].ListShines;
+    item->nameBlock = system.blocks[system.blocks.size()-1].nameBlock;
+    item->bus = system.blocks[system.blocks.size()-1].listBuses;
 
-    if (system.Blocks.size()%2 == 0){
+    if (system.blocks.size()%2 == 0){
         item->setColor(0);
     }else{
         item->setColor(1);

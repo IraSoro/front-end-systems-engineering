@@ -17,6 +17,7 @@
 class DrawingConnections : public QObject, public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 
 private:
     int stepWight = 15;
@@ -40,11 +41,11 @@ public:
         int wight = 180;
         int height = stepHeight;
 
-        for (int i = systemBlocks.Blocks.size() - 2; i >= 0; i--){
+        for (int i = systemBlocks.blocks.size() - 2; i >= 0; i--){
             height += stepHeight;
-            for (Shine TempBus: systemBlocks.Blocks[i].ListShines){
+            for (Bus TempBus: systemBlocks.blocks[i].listBuses){
                 height += stepHeight;
-                if (TempBus.ConnectionOnID.size() > 0){
+                if (TempBus.connectionOnID.size() > 0){
                     wight -= stepWight;
                 }
             }
@@ -52,15 +53,15 @@ public:
 
         height += stepHeight/2;
         int height1 = stepHeight;
-        int SizeBus = systemBlocks.Blocks.last().ListShines.size();
+        int SizeBus = systemBlocks.blocks.last().listBuses.size();
 
         for (int i = 0; i < SizeBus; i++){
             wight -= stepWight;
             height += stepHeight;
-            for (ConnectionBus TempConnection: systemBlocks.Blocks.last().ListShines[i].ConnectionOnID){
-                height1 += (TempConnection.IdBus + 1)*stepHeight;
-                for (int j = 0; j < TempConnection.IdBlock; j++){
-                    height1 += stepHeight + systemBlocks.Blocks[j].ListShines.size() * stepHeight;
+            for (ConnectionBus TempConnection: systemBlocks.blocks.last().listBuses[i].connectionOnID){
+                height1 += (TempConnection.idBus + 1)*stepHeight;
+                for (int j = 0; j < TempConnection.idBlock; j++){
+                    height1 += stepHeight + systemBlocks.blocks[j].listBuses.size() * stepHeight;
                 }
                 Coordinate tempCoord;
                 tempCoord.x = wight-5;
@@ -69,8 +70,8 @@ public:
 
                 Connection tempConn;
                 tempConn.coordinates = tempCoord;
-                tempConn.connectionBusStart.IdBlock = systemBlocks.Blocks.size()-1;
-                tempConn.connectionBusStart.IdBus = i;
+                tempConn.connectionBusStart.idBlock = systemBlocks.blocks.size()-1;
+                tempConn.connectionBusStart.idBus = i;
                 tempConn.connectionBusFinish = TempConnection;
                 connections.push_back(tempConn);
 
@@ -87,7 +88,7 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
 
-        if (systemBlocks.Blocks.size() == 0){
+        if (systemBlocks.blocks.size() == 0){
             return;
         }
 
@@ -95,11 +96,11 @@ public:
         int wight = 180;
         int height = stepHeight;
 
-        for (int i = systemBlocks.Blocks.size() - 2; i >= 0; i--){
+        for (int i = systemBlocks.blocks.size() - 2; i >= 0; i--){
             height += stepHeight;
-            for (Shine TempBus: systemBlocks.Blocks[i].ListShines){
+            for (Bus TempBus: systemBlocks.blocks[i].listBuses){
                 height += stepHeight;
-                if (TempBus.ConnectionOnID.size() > 0){
+                if (TempBus.connectionOnID.size() > 0){
                     wight -= stepWight;
                 }
             }
@@ -107,16 +108,16 @@ public:
 
         height += stepHeight/2;
         int height1 = stepHeight;
-        int SizeBus = systemBlocks.Blocks.last().ListShines.size();
+        int SizeBus = systemBlocks.blocks.last().listBuses.size();
 
         painter->setPen(Qt::gray);
         for (int i = 0; i < SizeBus; i++){
             wight -= stepWight;
             height += stepHeight;
-            for (ConnectionBus TempConnection: systemBlocks.Blocks.last().ListShines[i].ConnectionOnID){
-                height1 += (TempConnection.IdBus + 1)*stepHeight;
-                for (int j = 0; j < TempConnection.IdBlock; j++){
-                    height1 += stepHeight + systemBlocks.Blocks[j].ListShines.size() * stepHeight;
+            for (ConnectionBus TempConnection: systemBlocks.blocks.last().listBuses[i].connectionOnID){
+                height1 += (TempConnection.idBus + 1)*stepHeight;
+                for (int j = 0; j < TempConnection.idBlock; j++){
+                    height1 += stepHeight + systemBlocks.blocks[j].listBuses.size() * stepHeight;
                 }
                 painter->drawLine(wight, height, wight, height1+10);
                 painter->drawLine(wight, height, 200, height);

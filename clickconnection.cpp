@@ -61,13 +61,13 @@ int ClickConnection::getStartCoordinate(Connection connect){
     int height = 0;
     const int step = 20;
 
-    for (int i = 0; i < connect.connectionBusStart.IdBlock; i++){
+    for (int i = 0; i < connect.connectionBusStart.idBlock; i++){
         height += step;
-        for (int j = 0; j < system.Blocks[i].ListShines.size(); j++){
+        for (int j = 0; j < system.blocks[i].listBuses.size(); j++){
             height += step;
         }
     }
-    height += step + step*(connect.connectionBusStart.IdBus+1);
+    height += step + step*(connect.connectionBusStart.idBus+1);
 
     return height;
 }

@@ -31,8 +31,8 @@ public:
     void WrittingToFile();
     void FindConnectoun(int idBlock, int idBus);
 
-    QVector <IpBlock> Blocks;
-    QVector <Coordinate> CoordinateConnection;
+    QVector <IpBlock> blocks;
+    QVector <Coordinate> coordinateConnection;
     QVector <Connection> connection;
 
 private:

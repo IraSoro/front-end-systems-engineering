@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    bus.cpp \
     clickconnection.cpp \
     clickpoint.cpp \
     drawingconnections.cpp \
@@ -23,17 +24,16 @@ SOURCES += \
     ipblock.cpp \
     main.cpp \
     mainwindow.cpp \
-    shine.cpp \
     system.cpp
 
 HEADERS += \
+    bus.h \
     clickconnection.h \
     clickpoint.h \
     drawingconnections.h \
     drawingobjects.h \
     ipblock.h \
     mainwindow.h \
-    shine.h \
     system.h
 
 FORMS += \
