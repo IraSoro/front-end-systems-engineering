@@ -1,4 +1,3 @@
-//TODO: убрать три цикла
 #ifndef DRAWINGCONNECTIONS_H
 #define DRAWINGCONNECTIONS_H
 
