@@ -5,8 +5,13 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 #include <QVector>
+#include <QString>
+#include <QStringList>
+#include <QMessageBox>
+#include <QDebug>
 
 #include "system.h"
+#include "drawingobjects.h"
 #include "drawingconnections.h"
 #include "clickpoint.h"
 #include "clickconnection.h"

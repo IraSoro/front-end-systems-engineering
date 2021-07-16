@@ -7,7 +7,9 @@ System::System()
 
 System::~System()
 {
-
+    blocks.clear();
+    coordinateConnection.clear();
+    connection.clear();
 }
 
 void System::WrittingToFile(){
@@ -21,7 +23,7 @@ void System::WrittingToFile(){
         for (int j = 0; j < blocks[i].getListBuses().size(); j++){
             QJsonObject addressObjectBus;
             addressObjectBus.insert("Name bus", blocks[i].getListBuses()[j].getNameBus());
-            addressObjectBus.insert("Type bus", blocks[i].getListBuses()[j].getTypeBus());
+            addressObjectBus.insert("Type bus", g_typeBus[blocks[i].getListBuses()[j].getTypeBus()]);
             addressObjectBus.insert("Bitness", blocks[i].getListBuses()[j].getBitness());
             addressObjectBus.insert("id bus", j);
             QJsonArray arrayConnection;

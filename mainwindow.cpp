@@ -1,12 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QString>
-#include <QStringList>
-#include <QMessageBox>
-#include <QDebug>
 
-#include "drawingobjects.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

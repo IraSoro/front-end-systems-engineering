@@ -1,7 +1,6 @@
 #ifndef CLICKCONNECTION_H
 #define CLICKCONNECTION_H
 
-
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPainter>

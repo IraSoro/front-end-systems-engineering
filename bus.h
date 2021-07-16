@@ -5,6 +5,7 @@
 #include <QVector>
 
 enum class TypeBus {Type1 = 0, Type2, Type3};
+const QString g_typeBus[3] = {"Type1", "Type2", "Type3"};
 
 struct ConnectionBus{
     int idBlock = -1;

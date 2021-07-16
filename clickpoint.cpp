@@ -40,7 +40,7 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QPointF point;
     point = event->pos();
-    qDebug()<<point;
+//    qDebug()<<point;
 
     for (int i = 0; i < connection.size(); i++){
         if (click(connection[i].coordinates, point)){

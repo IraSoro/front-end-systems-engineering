@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QVector>
+
 #include "bus.h"
 
 class IpBlock
