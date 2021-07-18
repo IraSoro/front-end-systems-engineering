@@ -30,14 +30,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_AddBus_clicked()
 {
-    /*
+
     if (ui->lineEdit_NameBus->text() == ""){
             QMessageBox msgBox;
             msgBox.setText("Вы не ввели название шины.");
             msgBox.exec();
             return;
     }
-    */
+
 
     int CountRowInTable = ui->tableWidget_BusInBlock->rowCount();
     ui->tableWidget_BusInBlock->insertRow( CountRowInTable);
@@ -51,8 +51,7 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
     ui->tableWidget_BusInBlock->update();
 
-    Bus addingBus("Name Bus", ui->comboBox_Type->currentIndex(), ui->comboBox_Bitness->currentText().toInt(), counterIdBus);
-    //AddingBus.NameShine = ui->lineEdit_NameBus->text();
+    Bus addingBus(ui->lineEdit_NameBus->text(), ui->comboBox_Type->currentIndex(), ui->comboBox_Bitness->currentText().toInt(), counterIdBus);
     counterIdBus++;
 
     int sizeBlock = system.blocks.size();
@@ -77,14 +76,14 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
 void MainWindow::on_pushButton_AddBlock_clicked()
 {
-    /*
+
     if (ui->lineEdit_Block->text() == ""){
             QMessageBox msgBox;
             msgBox.setText("Вы не ввели название блока.");
             msgBox.exec();
             return;
     }
-    */
+
 
     while (ui->tableWidget_BusInBlock->rowCount() > 0){
         ui->tableWidget_BusInBlock->removeRow(0);
@@ -95,10 +94,8 @@ void MainWindow::on_pushButton_AddBlock_clicked()
     }
 
 
-    IpBlock block("Name Block", busInBlock);
-    //block.NameBlock = ui->lineEdit_Block->text();
-
-    system.blocks.push_back(block);
+    IpBlock block(ui->lineEdit_Block->text(), busInBlock);
+    system.blocks.push_back(block);//!!!!!!!!!!!!!
 
     DrawingBlock(0, heightDrawing);
     if (system.blocks.size() > 1){

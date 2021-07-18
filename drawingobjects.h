@@ -1,4 +1,3 @@
-//TODO: придумать что-то с типами шин
 #ifndef DRAWINGOBJECTS_H
 #define DRAWINGOBJECTS_H
 

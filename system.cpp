@@ -1,5 +1,8 @@
 #include "system.h"
 
+#include <QFileDialog>
+#include <QCoreApplication>
+
 System::System()
 {
 
@@ -50,10 +53,9 @@ void System::WrittingToFile(){
         recordObject.insert(QString::number(i), addressObjectBlock);
     }
 
-
-    QFile fileJson("C:/Users/User/Desktop/FrontEndSystemsEngineering/first.json");
+    QString str3 = QFileDialog::getSaveFileName(0, "Save File","untitled.json","(*.json)");
+    QFile fileJson(str3);
     fileJson.open(QIODevice::WriteOnly);
-    QVariantMap testMap;
     fileJson.write(QJsonDocument(recordObject).toJson());
     fileJson.close();
 

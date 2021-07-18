@@ -19,18 +19,18 @@ QRectF ClickPoint::boundingRect() const
 
 void ClickPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    for (Connection temp:connection){
-        if (temp.mark == true){
-            painter->setBrush(Qt::black);
-            painter->setPen(Qt::black);
-            painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
-        }else{
-            painter->setBrush(Qt::white);
-            painter->setPen(Qt::gray);
-            painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
-        }
-    }
-
+//    for (Connection temp:connection){
+//        if (temp.mark == true){
+//            painter->setBrush(Qt::black);
+//            painter->setPen(Qt::black);
+//            painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
+//        }else{
+//            painter->setBrush(Qt::white);
+//            painter->setPen(Qt::gray);
+//            painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
+//        }
+//    }
+    Q_UNUSED(painter)
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
