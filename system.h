@@ -32,6 +32,7 @@ public:
     void FindConnectoun(int idBlock, int idBus);
     int getSizeBlocks();
     int getSizeConnections();
+    int getSizeBusInBlock(int indexBlock);
     void addBlock(IpBlock addingBlock);
     void addConnection(Connection addingConnection);
     void setMarkConnection(int index, bool settingMark);
@@ -41,12 +42,15 @@ public:
     bool getMarkConnection(int indexConnection);
     int getXCoordinate(int indexConnection);
     int getYCoordinate(int indexConnection);
+    bool ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus);
+
 
 
 private:    
     QVector <IpBlock> blocks;
-    QVector <Coordinate> coordinateConnection;
     QVector <Connection> connection;
+
+    int getTypeBus(int idBlock, int idBus);
 
 };
 

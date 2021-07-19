@@ -19,6 +19,8 @@ public:
 
     QString getNameBlock();
     QVector <Bus> getListBuses();
+    int getTypeBusOnIndex(int index);
+    int getSizeBus();
 };
 
 #endif // IPBLOCK_H

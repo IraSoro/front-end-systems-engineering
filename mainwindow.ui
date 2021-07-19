@@ -123,17 +123,22 @@
                      <widget class="QComboBox" name="comboBox_Type">
                       <item>
                        <property name="text">
-                        <string>Type1</string>
+                        <string>AVALON</string>
                        </property>
                       </item>
                       <item>
                        <property name="text">
-                        <string>Type2</string>
+                        <string>AXI</string>
                        </property>
                       </item>
                       <item>
                        <property name="text">
-                        <string>Type3</string>
+                        <string>APB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>WISHBONE</string>
                        </property>
                       </item>
                      </widget>

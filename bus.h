@@ -4,8 +4,14 @@
 #include <QString>
 #include <QVector>
 
-enum class TypeBus {Type1 = 0, Type2, Type3};
-const QString g_typeBus[3] = {"Type1", "Type2", "Type3"};
+enum class TypeBus {AVALON = 0, AXI, APB, WISHBONE,     MAX_BUS = 4};
+const QString g_typeBus[4] = {"AVALON", "AXI", "APB", "WISHBONE"};
+const bool g_busMapping[static_cast<int>(TypeBus::MAX_BUS)][static_cast<int>(TypeBus::MAX_BUS)] = {
+    {true, false, false, false},
+    {false, true, false, false},
+    {false, false, true, false},
+    {false, false, false, true}
+};
 
 struct ConnectionBus{
     int idBlock = -1;

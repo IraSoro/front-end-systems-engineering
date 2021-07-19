@@ -19,3 +19,11 @@ QString IpBlock::getNameBlock(){
 QVector <Bus> IpBlock::getListBuses(){
     return this->listBuses;
 }
+
+int IpBlock::getTypeBusOnIndex(int index){
+    return listBuses[index].getTypeBus();
+}
+
+int IpBlock::getSizeBus(){
+    return listBuses.size();
+}

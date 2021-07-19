@@ -1,3 +1,4 @@
+//TODO: сделать id шин последовательным и уникальным, чтобы потом это использовать при отрислвки
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -51,24 +52,31 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
     ui->tableWidget_BusInBlock->update();
 
-    Bus addingBus(ui->lineEdit_NameBus->text(), ui->comboBox_Type->currentIndex(), ui->comboBox_Bitness->currentText().toInt(), counterIdBus);
+    int indexTypeAddingBus = ui->comboBox_Type->currentIndex();
+    Bus addingBus(ui->lineEdit_NameBus->text(), indexTypeAddingBus, ui->comboBox_Bitness->currentText().toInt(), counterIdBus);
     counterIdBus++;
-
+    /*
+     * тут формируются связи
+     * |
+     * V
+    */
     int sizeBlock = system.getSizeBlocks();
     if (sizeBlock > 0){
         for (int i = 0; i < sizeBlock; i++){
-            int sizeListBus = system.getBlock(i).getListBuses().size();//!!!!!!!!!!!!
+            int sizeListBus = system.getSizeBusInBlock(i);
             for (int j = 0; j < sizeListBus; j++){
-                ConnectionBus connection;
-                connection.idBus = j;
-                connection.idBlock = i;
-                addingBus.addConnection(connection);
+                if (system.ruleCheckConnection(i, j, indexTypeAddingBus)){
+                    ConnectionBus connection;
+                    connection.idBus = j;
+                    connection.idBlock = i;
+                    addingBus.addConnection(connection);
+                }
             }
         }
     }
     busInBlock.push_back(addingBus);
 
-    ui->lineEdit_NameBus->clear();
+    //ui->lineEdit_NameBus->clear();
     ui->comboBox_Type->update();
     ui->comboBox_Bitness->update();
 

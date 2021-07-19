@@ -58,7 +58,7 @@ QRectF DrawingConnections::boundingRect() const{
 
 void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
 
-    if (systemBlocks.getSizeBlocks() == 0){
+    if (systemBlocks.getSizeBlocks() < 2){
         return;
     }
 
@@ -70,7 +70,7 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
         height += stepHeight;
         for (Bus TempBus: systemBlocks.getBlock(i).getListBuses()){
             height += stepHeight;
-            if (TempBus.getConnectionOnID().size() > 0){
+            if (TempBus.getConnectionOnID().size() > 0){            //!!!!!!!!!!!!!
                 wight -= stepWight;
             }
         }
@@ -78,10 +78,10 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     height += stepHeight/2;
     int height1 = stepHeight;
-    int SizeBus = systemBlocks.getLastBlock().getListBuses().size();
+    int SizeBusInLastBlock = systemBlocks.getLastBlock().getListBuses().size();//!!!!!!!!!!
 
     painter->setPen(Qt::gray);
-    for (int i = 0; i < SizeBus; i++){
+    for (int i = 0; i < SizeBusInLastBlock; i++){
         wight -= stepWight;
         height += stepHeight;
         for (ConnectionBus TempConnection: systemBlocks.getLastBlock().getListBuses()[i].getConnectionOnID()){
@@ -112,18 +112,6 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
         }
         painter->drawEllipse(systemBlocks.getXCoordinate(i), systemBlocks.getYCoordinate(i), diameterConnectionEllipse, diameterConnectionEllipse);
     }
-
-//    for (Connection tempCoordinate: systemBlocks.connection){
-//        if (tempCoordinate.mark == true){
-//            painter->setBrush(Qt::black);
-//            painter->setPen(Qt::black);
-//        }
-//        else{
-//            painter->setBrush(Qt::white);
-//            painter->setPen(Qt::gray);
-//        }
-//        painter->drawEllipse(tempCoordinate.coordinates.x, tempCoordinate.coordinates.y, diameterConnectionEllipse, diameterConnectionEllipse);
-//    }
 
     painter->setBrush(Qt::white);
     painter->setPen(Qt::gray);

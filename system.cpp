@@ -11,7 +11,6 @@ System::System()
 System::~System()
 {
     blocks.clear();
-    coordinateConnection.clear();
     connection.clear();
 }
 
@@ -21,6 +20,10 @@ int System::getSizeBlocks(){
 
 int System::getSizeConnections(){
     return connection.size();
+}
+
+int System::getSizeBusInBlock(int indexBlock){
+   return blocks[indexBlock].getSizeBus();
 }
 
 IpBlock System::getBlock(int index){
@@ -57,6 +60,18 @@ void System::addConnection(Connection addingConnection){
 
 void System::setMarkConnection(int index, bool settingMark){
     connection[index].mark = settingMark;
+}
+
+int System::getTypeBus(int idBlock, int idBus){
+    return blocks[idBlock].getTypeBusOnIndex(idBus);
+}
+
+bool System::ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus){
+    if (g_busMapping[getTypeBus(idBlockFirst, idBusFirst)][typeSecondBus] == true){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 void System::writtingToFile(){
@@ -97,7 +112,7 @@ void System::writtingToFile(){
         recordObject.insert(QString::number(i), addressObjectBlock);
     }
 
-    QString str3 = QFileDialog::getSaveFileName(0, "Save File","untitled.json","(*.json)");
+    QString str3 = QFileDialog::getSaveFileName(nullptr, "Save File","untitled.json","(*.json)");
     QFile fileJson(str3);
     fileJson.open(QIODevice::WriteOnly);
     fileJson.write(QJsonDocument(recordObject).toJson());
