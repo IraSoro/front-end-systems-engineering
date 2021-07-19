@@ -53,19 +53,20 @@ void MainWindow::on_pushButton_AddBus_clicked()
     ui->tableWidget_BusInBlock->update();
 
     int indexTypeAddingBus = ui->comboBox_Type->currentIndex();
-    Bus addingBus(ui->lineEdit_NameBus->text(), indexTypeAddingBus, ui->comboBox_Bitness->currentText().toInt(), counterIdBus);
+    int bitnessAddingBus = ui->comboBox_Bitness->currentText().toInt();
+    Bus addingBus(ui->lineEdit_NameBus->text(), indexTypeAddingBus, bitnessAddingBus, counterIdBus);
     counterIdBus++;
     /*
      * тут формируются связи
      * |
      * V
     */
-    int sizeBlock = system.getSizeBlocks();
+    int sizeBlock = system.getSizeBlocks();    //это можно сделать в отдельном методе в классе system
     if (sizeBlock > 0){
         for (int i = 0; i < sizeBlock; i++){
             int sizeListBus = system.getSizeBusInBlock(i);
             for (int j = 0; j < sizeListBus; j++){
-                if (system.ruleCheckConnection(i, j, indexTypeAddingBus)){
+                if (system.ruleCheckConnection(i, j, indexTypeAddingBus, bitnessAddingBus)){
                     ConnectionBus connection;
                     connection.idBus = j;
                     connection.idBlock = i;

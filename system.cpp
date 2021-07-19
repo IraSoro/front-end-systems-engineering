@@ -66,12 +66,18 @@ int System::getTypeBus(int idBlock, int idBus){
     return blocks[idBlock].getTypeBusOnIndex(idBus);
 }
 
-bool System::ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus){
+int System::getBitnessBus(int idBlock, int idBus){
+    return blocks[idBlock].getBitnessBusOnIndex(idBus);
+}
+
+bool System::ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus){
     if (g_busMapping[getTypeBus(idBlockFirst, idBusFirst)][typeSecondBus] == true){
         return true;
-    }else{
-        return false;
-    }
+    }else if (bitnessSecondBus == getBitnessBus(idBlockFirst, idBusFirst)){
+              return true;
+          }else{
+              return false;
+          }
 }
 
 void System::writtingToFile(){

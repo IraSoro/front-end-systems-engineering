@@ -35,7 +35,8 @@ void DrawingObjects::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
 
     painter->setPen("#000000");
     painter->drawLine(int(wight*0.4), 0, int(wight*0.4), height);
-    painter->drawLine(int(wight*0.7), 0, int(wight*0.7), height);
+    painter->drawLine(int(wight*0.6), 0, int(wight*0.6), height);
+    painter->drawLine(int(wight*0.8), 0, int(wight*0.8), height);
     height = 0;
 
 
@@ -43,7 +44,8 @@ void DrawingObjects::paint(QPainter *painter, const QStyleOptionGraphicsItem *, 
     height += 20;
     for (Bus VarBus: bus) {
         painter->drawText( QRectF(wight*0.4 + 15, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, VarBus.getNameBus());
-        painter->drawText( QRectF(wight*0.7 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, g_typeBus[VarBus.getTypeBus()]);
+        painter->drawText( QRectF(wight*0.6 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, g_typeBus[VarBus.getTypeBus()]);
+        painter->drawText( QRectF(wight*0.8 + 3, height, 100, 20), Qt::TextWordWrap | Qt::AlignVCenter, QString::number(VarBus.getBitness()));
         height += 20;
     }
 

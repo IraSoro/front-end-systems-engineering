@@ -24,6 +24,10 @@ int IpBlock::getTypeBusOnIndex(int index){
     return listBuses[index].getTypeBus();
 }
 
+int IpBlock::getBitnessBusOnIndex(int index){
+    return listBuses[index].getBitness();
+}
+
 int IpBlock::getSizeBus(){
     return listBuses.size();
 }

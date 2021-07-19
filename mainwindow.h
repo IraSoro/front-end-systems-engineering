@@ -49,7 +49,7 @@ private:
     void DrawingConnection();
     void displayTaggedLinks();
 
-    int const WIDTH = 500;
+    int const WIDTH = 600;
     int const HEIGHT = 800;
     int const step = 20;
 

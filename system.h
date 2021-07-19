@@ -42,7 +42,7 @@ public:
     bool getMarkConnection(int indexConnection);
     int getXCoordinate(int indexConnection);
     int getYCoordinate(int indexConnection);
-    bool ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus);
+    bool ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus);
 
 
 
@@ -51,6 +51,7 @@ private:
     QVector <Connection> connection;
 
     int getTypeBus(int idBlock, int idBus);
+    int getBitnessBus(int idBlock, int idBus);
 
 };
 
