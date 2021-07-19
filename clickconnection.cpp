@@ -18,37 +18,37 @@ QRectF ClickConnection::boundingRect() const
 
 void ClickConnection::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {    
-    for (int i = 0; i < system.connection.size(); i++){
-        if (system.connection[i].mark == false){
-            int y = getStartCoordinate(system.connection[i]);
+    for (int i = 0; i < system.getSizeConnections(); i++){
+        if (system.getMarkConnection(i) == false){
+            int y = getStartCoordinate(system.getConnection(i));
             painter->setPen(Qt::gray);
-            painter->drawLine(system.connection[i].coordinates.x, system.connection[i].coordinates.y+5, 200, system.connection[i].coordinates.y+5);
-            painter->drawLine(system.connection[i].coordinates.x+5, y+10, 200, y+10);
-            painter->drawLine(system.connection[i].coordinates.x+5, system.connection[i].coordinates.y+5, system.connection[i].coordinates.x+5, y+10);
+            painter->drawLine(system.getXCoordinate(i), system.getYCoordinate(i)+5, 200, system.getYCoordinate(i)+5);
+            painter->drawLine(system.getXCoordinate(i)+5, y+10, 200, y+10);
+            painter->drawLine(system.getXCoordinate(i)+5, system.getYCoordinate(i)+5, system.getXCoordinate(i)+5, y+10);
 
         }
     }
 
-    for (int i = 0; i < system.connection.size(); i++){
-        if (system.connection[i].mark == true){
-            int y = getStartCoordinate(system.connection[i]);
+    for (int i = 0; i < system.getSizeConnections(); i++){
+        if (system.getMarkConnection(i) == true){
+            int y = getStartCoordinate(system.getConnection(i));
             painter->setPen(Qt::black);
-            painter->drawLine(system.connection[i].coordinates.x, system.connection[i].coordinates.y+5, 200, system.connection[i].coordinates.y+5);
-            painter->drawLine(system.connection[i].coordinates.x+5, y+10, 200, y+10);
-            painter->drawLine(system.connection[i].coordinates.x+5, system.connection[i].coordinates.y+5, system.connection[i].coordinates.x+5, y+10);
+            painter->drawLine(system.getXCoordinate(i), system.getYCoordinate(i)+5, 200, system.getYCoordinate(i)+5);
+            painter->drawLine(system.getXCoordinate(i)+5, y+10, 200, y+10);
+            painter->drawLine(system.getXCoordinate(i)+5, system.getYCoordinate(i)+5, system.getXCoordinate(i)+5, y+10);
 
         }
     }
 
-    for (int i = 0; i < system.connection.size(); i++){
-        if (system.connection[i].mark == true){
+    for (int i = 0; i < system.getSizeConnections(); i++){
+        if (system.getMarkConnection(i) == true){
             painter->setPen(Qt::black);
             painter->setBrush(Qt::black);
         }else{
             painter->setPen(Qt::gray);
             painter->setBrush(Qt::white);
         }
-        painter->drawEllipse(system.connection[i].coordinates.x, system.connection[i].coordinates.y, 10, 10);
+        painter->drawEllipse(system.getXCoordinate(i), system.getYCoordinate(i), 10, 10);
     }
 
     Q_UNUSED(option)
@@ -62,7 +62,7 @@ int ClickConnection::getStartCoordinate(Connection connect){
 
     for (int i = 0; i < connect.connectionBusStart.idBlock; i++){
         height += step;
-        for (int j = 0; j < system.blocks[i].getListBuses().size(); j++){
+        for (int j = 0; j < system.getBlock(i).getListBuses().size(); j++){
             height += step;
         }
     }

@@ -54,10 +54,10 @@ void MainWindow::on_pushButton_AddBus_clicked()
     Bus addingBus(ui->lineEdit_NameBus->text(), ui->comboBox_Type->currentIndex(), ui->comboBox_Bitness->currentText().toInt(), counterIdBus);
     counterIdBus++;
 
-    int sizeBlock = system.blocks.size();
+    int sizeBlock = system.getSizeBlocks();
     if (sizeBlock > 0){
         for (int i = 0; i < sizeBlock; i++){
-            int sizeListBus = system.blocks[i].getListBuses().size();
+            int sizeListBus = system.getBlock(i).getListBuses().size();//!!!!!!!!!!!!
             for (int j = 0; j < sizeListBus; j++){
                 ConnectionBus connection;
                 connection.idBus = j;
@@ -95,10 +95,10 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 
 
     IpBlock block(ui->lineEdit_Block->text(), busInBlock);
-    system.blocks.push_back(block);//!!!!!!!!!!!!!
+    system.addBlock(block);
 
     DrawingBlock(0, heightDrawing);
-    if (system.blocks.size() > 1){
+    if (system.getSizeBlocks() > 1){
         DrawingConnection();
     }
 
@@ -112,10 +112,10 @@ void MainWindow::on_pushButton_AddBlock_clicked()
 void MainWindow::DrawingBlock(int x, int y){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
-    item->nameBlock = system.blocks[system.blocks.size()-1].getNameBlock();
-    item->bus = system.blocks[system.blocks.size()-1].getListBuses();
+    item->nameBlock = system.getBlock(system.getSizeBlocks()-1).getNameBlock();
+    item->bus = system.getBlock(system.getSizeBlocks()-1).getListBuses();
 
-    if (system.blocks.size()%2 == 0){
+    if (system.getSizeBlocks()%2 == 0){
         item->setColor(0);
     }else{
         item->setColor(1);
@@ -131,7 +131,7 @@ void MainWindow::DrawingConnection(){
     scene->addItem(item);
 
     for (Connection temp: item->getLastCoordinate()){
-        system.connection.push_back(temp);
+        system.addConnection(temp);
         point->addConnection(temp);
     }
 
@@ -152,11 +152,11 @@ void MainWindow::DrawingSystem(){
 
 void MainWindow::slotFromPoint()
 {
-    for (int i = 0; i < system.connection.size(); i++){
-        system.connection[i].mark = false;
+    for (int i = 0; i < system.getSizeConnections(); i++){
+        system.setMarkConnection(i, false);
     }
     for (int temp: point->getMarkConnectons()){
-        system.connection[temp].mark = true;
+        system.setMarkConnection(temp, true);
     }
 
     displayTaggedLinks();
@@ -172,5 +172,5 @@ void MainWindow::displayTaggedLinks(){
 
 void MainWindow::on_action_triggered()
 {
-    system.WrittingToFile();
+    system.writtingToFile();
 }

@@ -15,7 +15,51 @@ System::~System()
     connection.clear();
 }
 
-void System::WrittingToFile(){
+int System::getSizeBlocks(){
+    return blocks.size();
+}
+
+int System::getSizeConnections(){
+    return connection.size();
+}
+
+IpBlock System::getBlock(int index){
+    return blocks[index];
+}
+
+IpBlock System::getLastBlock(){
+    return blocks.last();
+}
+
+bool System::getMarkConnection(int indexConnection){
+    return connection[indexConnection].mark;
+}
+
+int System::getXCoordinate(int indexConnection){
+    return connection[indexConnection].coordinates.x;
+}
+
+int System::getYCoordinate(int indexConnection){
+    return connection[indexConnection].coordinates.y;
+}
+
+Connection System::getConnection(int index){
+    return connection[index];
+}
+
+void System::addBlock(IpBlock addingBlock){
+    blocks.push_back(addingBlock);
+}
+
+void System::addConnection(Connection addingConnection){
+    connection.push_back(addingConnection);
+}
+
+void System::setMarkConnection(int index, bool settingMark){
+    connection[index].mark = settingMark;
+}
+
+void System::writtingToFile(){
     QJsonObject recordObject;
 
     for (int i = 0; i < blocks.size(); i++){
