@@ -19,23 +19,28 @@ public:
     ~ClickPoint();
 
     void addConnection(Connection connect);
+    void addBlock(IpBlock block);
     void setConnection(Connection connect);
     QVector <int> getMarkConnectons();
 
-    QVector <Connection> connection;
+    QVector <Connection> connection;                //сделать private
     QVector <int> markConnectons;
 
 signals:
     void signal1();
+    void signalClickBlock();
 
 protected:
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
+    QVector <IpBlock> blocks;
+
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
     bool click(Coordinate coordinate, QPointF currentPoint);
+    bool clickBlock(Coordinate coordinate, QPointF currentPoint);
     void removeEl(int var);
 
 };

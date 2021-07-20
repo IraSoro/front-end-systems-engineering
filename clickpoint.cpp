@@ -14,22 +14,11 @@ ClickPoint::~ClickPoint()
 
 QRectF ClickPoint::boundingRect() const
 {
-    return QRectF(0,0,int(600*0.4),800);
+    return QRectF(0,0,600,800);
 }
 
 void ClickPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-//    for (Connection temp:connection){
-//        if (temp.mark == true){
-//            painter->setBrush(Qt::black);
-//            painter->setPen(Qt::black);
-//            painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
-//        }else{
-//            painter->setBrush(Qt::white);
-//            painter->setPen(Qt::gray);
-//            painter->drawEllipse(temp.coordinates.x, temp.coordinates.y, 10, 10);
-//        }
-//    }
     Q_UNUSED(painter)
     Q_UNUSED(option)
     Q_UNUSED(widget)
@@ -41,6 +30,14 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
     QPointF point;
     point = event->pos();
 //    qDebug()<<point;
+
+    for (int i = 0; i < blocks.size(); i++){
+        if (clickBlock(blocks[i].getCoordinate(), point)){
+            emit signalClickBlock();
+            QGraphicsItem::mousePressEvent(event);
+            return;
+        }
+    }
 
     for (int i = 0; i < connection.size(); i++){
         if (click(connection[i].coordinates, point)){
@@ -54,7 +51,7 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
             emit signal1();
             QGraphicsItem::mousePressEvent(event);
-            break;
+            return;
 
         }
     }    
@@ -78,8 +75,20 @@ bool ClickPoint::click(Coordinate coordinate, QPointF currentPoint){
     }
 }
 
+bool ClickPoint::clickBlock(Coordinate coordinate, QPointF currentPoint){
+    if (coordinate.y < currentPoint.y() && coordinate.y + 20 > currentPoint.y()){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 void ClickPoint::addConnection(Connection connect){
     this->connection.push_back(connect);
+}
+
+void ClickPoint::addBlock(IpBlock block){
+    this->blocks.push_back(block);
 }
 
 QVector <int> ClickPoint::getMarkConnectons(){

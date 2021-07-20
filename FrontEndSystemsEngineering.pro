@@ -24,6 +24,7 @@ SOURCES += \
     ipblock.cpp \
     main.cpp \
     mainwindow.cpp \
+    mainwindowblock.cpp \
     system.cpp
 
 HEADERS += \
@@ -34,10 +35,12 @@ HEADERS += \
     drawingobjects.h \
     ipblock.h \
     mainwindow.h \
+    mainwindowblock.h \
     system.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    mainwindowblock.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -11,10 +11,6 @@
 
 #include "ipblock.h"
 
-struct Coordinate{
-    int x = 0;
-    int y = 0;
-};
 
 struct Connection{
     Coordinate coordinates;

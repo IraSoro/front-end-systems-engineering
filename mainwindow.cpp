@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     point = new ClickPoint();
     connect(point,SIGNAL(signal1()),this, SLOT(slotFromPoint()));
+    connect(point,SIGNAL(signalClickBlock()),this, SLOT(slotFromBlock()));
     scene->addItem(point);
 }
 
@@ -29,22 +30,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_AddBus_clicked()
-{
+void MainWindow::on_pushButton_AddBus_clicked(){
 
-    if (ui->lineEdit_NameBus->text() == ""){
-            QMessageBox msgBox;
-            msgBox.setText("Вы не ввели название шины.");
-            msgBox.exec();
-            return;
-    }
+//    if (ui->lineEdit_NameBus->text() == ""){
+//            QMessageBox msgBox;
+//            msgBox.setText("Вы не ввели название шины.");
+//            msgBox.exec();
+//            return;
+//    }
 
-    if (ui->lineEdit_StartAddress->text() == "" || ui->lineEdit_FinishAddress->text() == ""){
-            QMessageBox msgBox;
-            msgBox.setText("Вы не ввели адрес шины.");
-            msgBox.exec();
-            return;
-    }
+//    if (ui->lineEdit_StartAddress->text() == "" || ui->lineEdit_FinishAddress->text() == ""){
+//            QMessageBox msgBox;
+//            msgBox.setText("Вы не ввели адрес шины.");
+//            msgBox.exec();
+//            return;
+//    }
 
 
     int CountRowInTable = ui->tableWidget_BusInBlock->rowCount();
@@ -96,15 +96,14 @@ void MainWindow::on_pushButton_AddBus_clicked()
 
 }
 
-void MainWindow::on_pushButton_AddBlock_clicked()
-{
+void MainWindow::on_pushButton_AddBlock_clicked(){
 
-    if (ui->lineEdit_Block->text() == ""){
-            QMessageBox msgBox;
-            msgBox.setText("Вы не ввели название блока.");
-            msgBox.exec();
-            return;
-    }
+//    if (ui->lineEdit_Block->text() == ""){
+//            QMessageBox msgBox;
+//            msgBox.setText("Вы не ввели название блока.");
+//            msgBox.exec();
+//            return;
+//    }
 
 
     while (ui->tableWidget_BusInBlock->rowCount() > 0){
@@ -115,9 +114,12 @@ void MainWindow::on_pushButton_AddBlock_clicked()
         ui->tableWidget_BusInBlock->removeRow(0);
     }
 
-
-    IpBlock block(ui->lineEdit_Block->text(), busInBlock);
+    Coordinate addingBlockCoordinate;
+    addingBlockCoordinate.x = 0;
+    addingBlockCoordinate.y = heightDrawing;
+    IpBlock block(ui->lineEdit_Block->text(), busInBlock, addingBlockCoordinate);
     system.addBlock(block);
+    point->addBlock(block);
 
     DrawingBlock(0, heightDrawing);
     if (system.getSizeBlocks() > 1){
@@ -172,8 +174,7 @@ void MainWindow::DrawingSystem(){
 
 }
 
-void MainWindow::slotFromPoint()
-{
+void MainWindow::slotFromPoint(){
     for (int i = 0; i < system.getSizeConnections(); i++){
         system.setMarkConnection(i, false);
     }
@@ -184,6 +185,12 @@ void MainWindow::slotFromPoint()
     displayTaggedLinks();
 }
 
+void MainWindow::slotFromBlock(){
+    windowBlock = new MainWindowBlock();
+    windowBlock->show();
+
+}
+
 void MainWindow::displayTaggedLinks(){    
     ClickConnection *temp = new ClickConnection();
     temp->setPos(0,0);
@@ -192,7 +199,6 @@ void MainWindow::displayTaggedLinks(){
 }
 
 
-void MainWindow::on_action_triggered()
-{
+void MainWindow::on_action_triggered(){
     system.writtingToFile();
 }

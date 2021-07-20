@@ -15,6 +15,7 @@
 #include "drawingconnections.h"
 #include "clickpoint.h"
 #include "clickconnection.h"
+#include "mainwindowblock.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -34,6 +35,7 @@ private slots:
     void on_pushButton_AddBus_clicked();
 
     void slotFromPoint();
+    void slotFromBlock();
 
     void on_action_triggered();
 
@@ -43,6 +45,7 @@ private:
     System system;
     QGraphicsScene *scene;
     ClickPoint *point;
+    MainWindowBlock *windowBlock;
 
     void DrawingBlock(int x, int y);
     void DrawingSystem();

@@ -5,7 +5,8 @@ IpBlock::IpBlock()
     nameBlock = "";
 }
 
-IpBlock::IpBlock(QString nameBlock, QVector <Bus> listBuses) : nameBlock(nameBlock), listBuses(listBuses){}
+IpBlock::IpBlock(QString nameBlock, QVector <Bus> listBuses, Coordinate coordinate) :
+    nameBlock(nameBlock), listBuses(listBuses), coordinate(coordinate){}
 
 IpBlock::~IpBlock()
 {
@@ -14,6 +15,10 @@ IpBlock::~IpBlock()
 
 QString IpBlock::getNameBlock(){
     return this->nameBlock;
+}
+
+Coordinate IpBlock::getCoordinate(){
+    return this->coordinate;
 }
 
 QVector <Bus> IpBlock::getListBuses(){
