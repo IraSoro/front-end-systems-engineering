@@ -39,6 +39,8 @@ private slots:
 
     void on_action_triggered();
 
+    void on_action_2_triggered();
+
 private:
     Ui::MainWindow *ui;
     QVector <Bus> busInBlock;

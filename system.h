@@ -40,7 +40,9 @@ public:
     int getYCoordinate(int indexConnection);
     bool ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus);
 
-
+    void deleteSystem();
+    void readFile();
+    int setTypeBus(QString typeStr);
 
 private:    
     QVector <IpBlock> blocks;

@@ -202,3 +202,10 @@ void MainWindow::displayTaggedLinks(){
 void MainWindow::on_action_triggered(){
     system.writtingToFile();
 }
+
+void MainWindow::on_action_2_triggered()
+{
+    scene->clear();
+    system.deleteSystem();
+    system.readFile();
+}
