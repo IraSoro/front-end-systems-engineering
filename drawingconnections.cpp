@@ -8,7 +8,7 @@ DrawingConnections::~DrawingConnections(){
 
 QVector <Connection> DrawingConnections::getLastCoordinate(){
     coordinate.clear();
-    int wight = 180;
+    int wight = int(600*0.4) *0.9;
     int height = stepHeight;
 
     for (int i = systemBlocks.getSizeBlocks() - 2; i >= 0; i--){
@@ -53,7 +53,7 @@ QVector <Connection> DrawingConnections::getLastCoordinate(){
 }
 
 QRectF DrawingConnections::boundingRect() const{
-    return QRectF (0,0,200,800);
+    return QRectF (0,0,int(600*0.4),800);
 }
 
 void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
@@ -63,7 +63,7 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
     }
 
     coordinate.clear();
-    int wight = 180;
+    int wight = int(600*0.4) *0.9;
     int height = stepHeight;
 
     for (int i = systemBlocks.getSizeBlocks() - 2; i >= 0; i--){
@@ -90,8 +90,8 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
                 height1 += stepHeight + systemBlocks.getBlock(j).getListBuses().size() * stepHeight;
             }
             painter->drawLine(wight, height, wight, height1+10);
-            painter->drawLine(wight, height, 200, height);
-            painter->drawLine(wight, height1+10, 200, height1+10);
+            painter->drawLine(wight, height, int(600*0.4), height);
+            painter->drawLine(wight, height1+10, int(600*0.4), height1+10);
 
             Coordinate tempCoord;
             tempCoord.x = wight-5;

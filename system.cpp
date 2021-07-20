@@ -89,11 +89,13 @@ void System::writtingToFile(){
         addressObjectBlock.insert("Count bus", blocks[i].getListBuses().size());
         QJsonArray phoneNumbersArray;
         for (int j = 0; j < blocks[i].getListBuses().size(); j++){
-            QJsonObject addressObjectBus;
-            addressObjectBus.insert("Name bus", blocks[i].getListBuses()[j].getNameBus());
-            addressObjectBus.insert("Type bus", g_typeBus[blocks[i].getListBuses()[j].getTypeBus()]);
-            addressObjectBus.insert("Bitness", blocks[i].getListBuses()[j].getBitness());
-            addressObjectBus.insert("id bus", j);
+            QJsonObject objectBus;
+            objectBus.insert("Name bus", blocks[i].getListBuses()[j].getNameBus());
+            objectBus.insert("Address base", blocks[i].getListBuses()[j].getStartAddress());
+            objectBus.insert("Address end", blocks[i].getListBuses()[j].getFinishAddress());
+            objectBus.insert("Type bus", g_typeBus[blocks[i].getListBuses()[j].getTypeBus()]);
+            objectBus.insert("Bitness", blocks[i].getListBuses()[j].getBitness());
+            objectBus.insert("id bus", j);
             QJsonArray arrayConnection;
             for (Connection temp: connection){
                 if (temp.connectionBusStart.idBus == j && temp.connectionBusStart.idBlock == i && temp.mark == 1){
@@ -111,8 +113,8 @@ void System::writtingToFile(){
                     arrayConnection.push_back(connectObject);
                 }
             }
-            addressObjectBus.insert("Connection", arrayConnection);
-            phoneNumbersArray.push_back(addressObjectBus);
+            objectBus.insert("Connection", arrayConnection);
+            phoneNumbersArray.push_back(objectBus);
         }
         addressObjectBlock.insert("Bus", phoneNumbersArray);
         recordObject.insert(QString::number(i), addressObjectBlock);

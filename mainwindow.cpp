@@ -11,9 +11,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
-    ui->tableWidget_BusInBlock->setColumnCount(3);
+    ui->tableWidget_BusInBlock->setColumnCount(5);
     QStringList name_table;
-    name_table << "Название" << "Тип" << "Разрядность";
+    name_table << "Название" << "Тип" << "Разрядность"<<"Начальный адрес"<<"Конечный адрес";
     ui->tableWidget_BusInBlock->setHorizontalHeaderLabels(name_table);
 
     DrawingSystem();
@@ -39,6 +39,13 @@ void MainWindow::on_pushButton_AddBus_clicked()
             return;
     }
 
+    if (ui->lineEdit_StartAddress->text() == "" || ui->lineEdit_FinishAddress->text() == ""){
+            QMessageBox msgBox;
+            msgBox.setText("Вы не ввели адрес шины.");
+            msgBox.exec();
+            return;
+    }
+
 
     int CountRowInTable = ui->tableWidget_BusInBlock->rowCount();
     ui->tableWidget_BusInBlock->insertRow( CountRowInTable);
@@ -49,12 +56,16 @@ void MainWindow::on_pushButton_AddBus_clicked()
     ui->tableWidget_BusInBlock->setItem(CountRowInTable,1,itm1);
     QTableWidgetItem *itm2 = new QTableWidgetItem(ui->comboBox_Bitness->currentText());
     ui->tableWidget_BusInBlock->setItem(CountRowInTable,2,itm2);
+    QTableWidgetItem *itm3 = new QTableWidgetItem(ui->lineEdit_StartAddress->text());
+    ui->tableWidget_BusInBlock->setItem(CountRowInTable,3,itm3);
+    QTableWidgetItem *itm4 = new QTableWidgetItem(ui->lineEdit_FinishAddress->text());
+    ui->tableWidget_BusInBlock->setItem(CountRowInTable,4,itm4);
 
     ui->tableWidget_BusInBlock->update();
 
     int indexTypeAddingBus = ui->comboBox_Type->currentIndex();
     int bitnessAddingBus = ui->comboBox_Bitness->currentText().toInt();
-    Bus addingBus(ui->lineEdit_NameBus->text(), indexTypeAddingBus, bitnessAddingBus, counterIdBus);
+    Bus addingBus(ui->lineEdit_NameBus->text(), indexTypeAddingBus, bitnessAddingBus, counterIdBus, ui->lineEdit_StartAddress->text(), ui->lineEdit_FinishAddress->text());
     counterIdBus++;
     /*
      * тут формируются связи
@@ -78,6 +89,8 @@ void MainWindow::on_pushButton_AddBus_clicked()
     busInBlock.push_back(addingBus);
 
     //ui->lineEdit_NameBus->clear();
+    //ui->lineEdit_StartAddress->clear();
+    //ui->lineEdit_FinishAddress->clear();
     ui->comboBox_Type->update();
     ui->comboBox_Bitness->update();
 

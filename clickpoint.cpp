@@ -14,7 +14,7 @@ ClickPoint::~ClickPoint()
 
 QRectF ClickPoint::boundingRect() const
 {
-    return QRectF(0,0,200,800);
+    return QRectF(0,0,int(600*0.4),800);
 }
 
 void ClickPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

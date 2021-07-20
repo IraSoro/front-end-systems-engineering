@@ -3,13 +3,15 @@
 Bus::Bus()
 {
     nameBus = "";
+    startAddress = "";
+    finishAddress = "";
     typeBus = 0;
     bitness = 0;
     id = -1;
 }
 
-Bus::Bus(QString nameBus, int typeBus, int bitness, int id):
-        nameBus(nameBus), typeBus(typeBus), bitness(bitness), id(id){}
+Bus::Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress):
+        nameBus(nameBus), typeBus(typeBus), bitness(bitness), id(id), startAddress(startAddress), finishAddress(finishAddress){}
 
 Bus::~Bus()
 {
@@ -18,6 +20,14 @@ Bus::~Bus()
 
 QString Bus::getNameBus(){
     return this->nameBus;
+}
+
+QString Bus::getStartAddress(){
+    return this->startAddress;
+}
+
+QString Bus::getFinishAddress(){
+    return this->finishAddress;
 }
 
 int Bus::getTypeBus(){

@@ -22,6 +22,8 @@ class Bus
 {
 private:
     QString nameBus = "";
+    QString startAddress = "";
+    QString finishAddress = "";
     int typeBus = 0;
     int bitness = 0;
     int id = -1;
@@ -30,9 +32,11 @@ private:
 public:    
     Bus();
     ~Bus();
-    Bus(QString nameBus, int typeBus, int bitness, int id);
+    Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress);
 
     QString getNameBus();
+    QString getStartAddress();
+    QString getFinishAddress();
     int getTypeBus();
     int getBitness();
     int getId();

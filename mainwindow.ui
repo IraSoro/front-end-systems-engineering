@@ -71,7 +71,7 @@
               <property name="minimumSize">
                <size>
                 <width>200</width>
-                <height>150</height>
+                <height>200</height>
                </size>
               </property>
               <property name="title">
@@ -83,7 +83,7 @@
                  <x>5</x>
                  <y>20</y>
                  <width>191</width>
-                 <height>121</height>
+                 <height>159</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -109,6 +109,20 @@
                      <widget class="QLabel" name="label_4">
                       <property name="text">
                        <string>Разрядность</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_5">
+                      <property name="text">
+                       <string>Начальный адрес</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_6">
+                      <property name="text">
+                       <string>Конечный адрес</string>
                       </property>
                      </widget>
                     </item>
@@ -181,6 +195,12 @@
                        </property>
                       </item>
                      </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEdit_StartAddress"/>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEdit_FinishAddress"/>
                     </item>
                    </layout>
                   </item>

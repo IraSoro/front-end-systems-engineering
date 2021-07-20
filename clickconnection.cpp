@@ -13,7 +13,7 @@ ClickConnection::~ClickConnection()
 
 QRectF ClickConnection::boundingRect() const
 {
-    return QRectF(0,0,200,800);
+    return QRectF(0,0,int(600*0.4),800);
 }
 
 void ClickConnection::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -22,8 +22,8 @@ void ClickConnection::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         if (system.getMarkConnection(i) == false){
             int y = getStartCoordinate(system.getConnection(i));
             painter->setPen(Qt::gray);
-            painter->drawLine(system.getXCoordinate(i), system.getYCoordinate(i)+5, 200, system.getYCoordinate(i)+5);
-            painter->drawLine(system.getXCoordinate(i)+5, y+10, 200, y+10);
+            painter->drawLine(system.getXCoordinate(i), system.getYCoordinate(i)+5, int(600*0.4), system.getYCoordinate(i)+5);
+            painter->drawLine(system.getXCoordinate(i)+5, y+10, int(600*0.4), y+10);
             painter->drawLine(system.getXCoordinate(i)+5, system.getYCoordinate(i)+5, system.getXCoordinate(i)+5, y+10);
 
         }
@@ -33,8 +33,8 @@ void ClickConnection::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         if (system.getMarkConnection(i) == true){
             int y = getStartCoordinate(system.getConnection(i));
             painter->setPen(Qt::black);
-            painter->drawLine(system.getXCoordinate(i), system.getYCoordinate(i)+5, 200, system.getYCoordinate(i)+5);
-            painter->drawLine(system.getXCoordinate(i)+5, y+10, 200, y+10);
+            painter->drawLine(system.getXCoordinate(i), system.getYCoordinate(i)+5, int(600*0.4), system.getYCoordinate(i)+5);
+            painter->drawLine(system.getXCoordinate(i)+5, y+10, int(600*0.4), y+10);
             painter->drawLine(system.getXCoordinate(i)+5, system.getYCoordinate(i)+5, system.getXCoordinate(i)+5, y+10);
 
         }
