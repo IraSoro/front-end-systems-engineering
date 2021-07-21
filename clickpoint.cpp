@@ -12,6 +12,11 @@ ClickPoint::~ClickPoint()
     connection.clear();
 }
 
+void ClickPoint::clear(){
+    markConnectons.clear();
+    connection.clear();
+}
+
 QRectF ClickPoint::boundingRect() const
 {
     return QRectF(0,0,600,800);
@@ -83,8 +88,22 @@ bool ClickPoint::clickBlock(Coordinate coordinate, QPointF currentPoint){
     }
 }
 
+int ClickPoint::getSizeConnection(){
+    return connection.size();
+}
+
 void ClickPoint::addConnection(Connection connect){
+//    qDebug()<<connect.connectionBusStart.idBlock;
+//    qDebug()<<connect.connectionBusStart.idBus;
+//    qDebug()<<connect.connectionBusFinish.idBlock;
+//    qDebug()<<connect.connectionBusFinish.idBus;
+//    qDebug()<<connect.coordinates.x;
+//    qDebug()<<connect.coordinates.y;
+//    qDebug()<<connect.mark;
+    qDebug()<<"12121212";
+    qDebug()<<"size = "<<connection.size();
     this->connection.push_back(connect);
+    qDebug()<<"3434343434";
 }
 
 void ClickPoint::addBlock(IpBlock block){

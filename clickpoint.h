@@ -25,6 +25,8 @@ public:
 
     QVector <Connection> connection;                //сделать private
     QVector <int> markConnectons;
+    void clear();
+    int getSizeConnection();
 
 signals:
     void signal1();

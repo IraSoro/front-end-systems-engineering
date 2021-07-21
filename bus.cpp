@@ -46,6 +46,10 @@ QVector <ConnectionBus> Bus::getConnectionOnID(){
     return this->connectionOnID;
 }
 
+ConnectionBus Bus::getConnectionOnIndex(int index){
+    return this->connectionOnID[index];
+}
+
 void Bus::addConnection(ConnectionBus connection){
     connectionOnID.push_back(connection);
 }

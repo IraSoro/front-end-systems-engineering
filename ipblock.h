@@ -25,6 +25,7 @@ public:
 
     QString getNameBlock();
     QVector <Bus> getListBuses();
+    Bus getBusOnIndex(int index);
     int getTypeBusOnIndex(int index);
     int getBitnessBusOnIndex(int index);
     int getSizeBus();

@@ -8,7 +8,7 @@ DrawingConnections::~DrawingConnections(){
 
 QVector <Connection> DrawingConnections::getLastCoordinate(){
     coordinate.clear();
-    int wight = int(600*0.4) *0.9;
+    int wight = int(600*0.4 *0.9);
     int height = stepHeight;
 
     for (int i = systemBlocks.getSizeBlocks() - 2; i >= 0; i--){
@@ -56,14 +56,15 @@ QRectF DrawingConnections::boundingRect() const{
     return QRectF (0,0,int(600*0.4),800);
 }
 
+
 void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
+
 
     if (systemBlocks.getSizeBlocks() < 2){
         return;
     }
-
     coordinate.clear();
-    int wight = int(600*0.4) *0.9;
+    int wight = int(600*0.4 * 0.9);
     int height = stepHeight;
 
     for (int i = systemBlocks.getSizeBlocks() - 2; i >= 0; i--){
@@ -76,6 +77,7 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
         }
     }
 
+
     height += stepHeight/2;
     int height1 = stepHeight;
     int SizeBusInLastBlock = systemBlocks.getLastBlock().getListBuses().size();//!!!!!!!!!!
@@ -85,6 +87,8 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
         wight -= stepWight;
         height += stepHeight;
         for (ConnectionBus TempConnection: systemBlocks.getLastBlock().getListBuses()[i].getConnectionOnID()){
+            //qDebug()<<"TempConnection.idBus "<<TempConnection.idBus ;
+            //qDebug()<<"TempConnection.idBlock "<<TempConnection.idBlock ;
             height1 += (TempConnection.idBus + 1)*stepHeight;
             for (int j = 0; j < TempConnection.idBlock; j++){
                 height1 += stepHeight + systemBlocks.getBlock(j).getListBuses().size() * stepHeight;

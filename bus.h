@@ -41,6 +41,7 @@ public:
     int getBitness();
     int getId();
     QVector <ConnectionBus> getConnectionOnID();
+    ConnectionBus getConnectionOnIndex(int index);
     void addConnection(ConnectionBus connection);
 };
 

@@ -111,14 +111,14 @@ void System::writtingToFile(){
                     arrayConnection.push_back(connectObject);
                 }
             }
-            for (Connection temp: connection){
-                if (temp.connectionBusFinish.idBus == j && temp.connectionBusFinish.idBlock == i && temp.mark == 1){
-                    QJsonObject connectObject;
-                    connectObject.insert("ID Block", temp.connectionBusStart.idBlock);
-                    connectObject.insert("ID Bus", temp.connectionBusStart.idBus);
-                    arrayConnection.push_back(connectObject);
-                }
-            }
+//            for (Connection temp: connection){
+//                if (temp.connectionBusFinish.idBus == j && temp.connectionBusFinish.idBlock == i && temp.mark == 1){
+//                    QJsonObject connectObject;
+//                    connectObject.insert("ID Block", temp.connectionBusStart.idBlock);
+//                    connectObject.insert("ID Bus", temp.connectionBusStart.idBus);
+//                    arrayConnection.push_back(connectObject);
+//                }
+//            }
             objectBus.insert("Connection", arrayConnection);
             phoneNumbersArray.push_back(objectBus);
         }
@@ -139,6 +139,7 @@ void System::writtingToFile(){
 
 void System::readFile(){
     deleteSystem();
+//    qDebug()<<"------"<<blocks.size();
     int heightDrawing = 20;
     int const step = 20;
 
@@ -159,7 +160,6 @@ void System::readFile(){
     QJsonDocument doc = QJsonDocument::fromJson(strFile.toUtf8(), &error);
     qDebug() << "Error: " << error.errorString() << error.offset << error.error;
 
-    QVector <IpBlock> blocks;
     if (doc.isArray()){
         QJsonArray arrayBlocks = doc.array();
         //qDebug()<<json.size();
@@ -185,23 +185,45 @@ void System::readFile(){
                     int bitness = objBus["Bitness"].toInt();
                     int id = objBus["id bus"].toInt();
                     Bus addingBus(nameBus, typeBus, bitness, id, startAddress, finishAddress);
-                    listBus.push_back(addingBus);
-                    qDebug()<<"-----------";
-                    qDebug()<<nameBus;
-                    qDebug()<<typeBus;
-                    qDebug()<<bitness;
-                    qDebug()<<id;
-                    qDebug()<<startAddress;
-                    qDebug()<<finishAddress;
-                    qDebug()<<"-----------";
-                    QJsonArray arrayConnectionInBus = objBlock["Connection"].toArray();
+//                    qDebug()<<"-----------";
+//                    qDebug()<<nameBus;
+//                    qDebug()<<typeBus;
+//                    qDebug()<<bitness;
+//                    qDebug()<<id;
+//                    qDebug()<<startAddress;
+//                    qDebug()<<finishAddress;
+//                    qDebug()<<"-----------";
+                    QJsonArray arrayConnectionInBus = objBus["Connection"].toArray();
                     foreach (const QJsonValue & tempConnecton, arrayConnectionInBus){
                        QJsonObject objConnection = tempConnecton.toObject();
                        ConnectionBus addingConnection;
-                       addingConnection.idBlock = objBus["ID Block"].toInt();
-                       addingConnection.idBus = objBus["ID Bus"].toInt();
-                       addingBus.addConnection(addingConnection);
+                       addingConnection.idBlock = objConnection["ID Block"].toInt();
+                       addingConnection.idBus = objConnection["ID Bus"].toInt();
+                       //addingBus.addConnection(addingConnection);
                     }
+
+
+                    int sizeBlock = blocks.size();
+                    //qDebug()<<"-----size = "<<sizeBlock;
+                    if (sizeBlock > 0){
+                        for (int i = 0; i < sizeBlock; i++){
+                            int sizeListBus = blocks[i].getSizeBus();
+                            //qDebug()<<"....size bus "<<sizeListBus;
+                            for (int j = 0; j < sizeListBus; j++){
+                                //qDebug()<<"j = "<<j;
+                                if (ruleCheckConnection(i, j, typeBus, bitness, blocks)){
+                                    //qDebug()<<"yes";
+                                    ConnectionBus tempConnection;
+                                    tempConnection.idBus = j;
+                                    tempConnection.idBlock = i;
+                                    addingBus.addConnection(tempConnection);
+                                }
+                            }
+                        }
+                    }
+
+
+                    listBus.push_back(addingBus);
 
                 }
                 IpBlock addingBlock(nameBlock, listBus, coordinateBlock);
@@ -209,6 +231,42 @@ void System::readFile(){
             }
         }
 
+    }
+
+    //outputSystem(listBlocks);
+    return;
+}
+
+bool System::ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus, QVector <IpBlock> block){
+    if (g_busMapping[block[idBlockFirst].getTypeBusOnIndex(idBusFirst)][typeSecondBus] == true){
+        return true;
+    }else if (bitnessSecondBus == blocks[idBlockFirst].getBitnessBusOnIndex(idBusFirst)){
+              return true;
+          }else{
+              return false;
+          }
+}
+
+void System::outputSystem(QVector <IpBlock> blocksList){
+    for (int i = 0; i < blocksList.size(); i++){
+        qDebug()<<"Block "<<i;
+        qDebug()<<"Name block"<<blocksList[i].getNameBlock();
+        qDebug()<<"Count bus"<<blocksList[i].getSizeBus();
+        qDebug()<<"Bus:";
+        for (int j = 0; j < blocksList[i].getSizeBus(); j++){
+            qDebug()<<" [";
+            qDebug()<<"     ID bus"<<blocksList[i].getBusOnIndex(j).getId();
+            qDebug()<<"     Name bus"<<blocksList[i].getBusOnIndex(j).getNameBus();
+            qDebug()<<"     Connection:";
+            qDebug()<<"         [";
+            for (int k = 0; k < blocksList[i].getBusOnIndex(j).getConnectionOnID().size(); k++){    //убрать size в метод
+                qDebug()<<"         ID con"<<k;
+                qDebug()<<"          ID Block"<<blocksList[i].getBusOnIndex(j).getConnectionOnIndex(k).idBlock;
+                qDebug()<<"          ID Bus"<<blocksList[i].getBusOnIndex(j).getConnectionOnIndex(k).idBus;
+            }
+            qDebug()<<"         ]";
+            qDebug()<<" ]";
+        }
     }
 }
 
@@ -218,5 +276,6 @@ int System::setTypeBus(QString typeStr){
             return i;
         }
     }
+    return -1;
 }
 

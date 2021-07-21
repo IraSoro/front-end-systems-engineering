@@ -38,7 +38,6 @@ private slots:
     void slotFromBlock();
 
     void on_action_triggered();
-
     void on_action_2_triggered();
 
 private:
@@ -49,7 +48,7 @@ private:
     ClickPoint *point;
     MainWindowBlock *windowBlock;
 
-    void DrawingBlock(int x, int y);
+    void DrawingBlock(int x, int y, int index);
     void DrawingSystem();
     void DrawingConnection();
     void displayTaggedLinks();

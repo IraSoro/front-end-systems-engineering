@@ -121,7 +121,7 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
     system.addBlock(block);
     point->addBlock(block);
 
-    DrawingBlock(0, heightDrawing);
+    DrawingBlock(0, heightDrawing, system.getSizeBlocks()-1);
     if (system.getSizeBlocks() > 1){
         DrawingConnection();
     }
@@ -133,23 +133,23 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
     displayTaggedLinks();
 }
 
-void MainWindow::DrawingBlock(int x, int y){
+void MainWindow::DrawingBlock(int x, int y, int index){
     DrawingObjects* item = new DrawingObjects();
     item->setPos(x,y);
     item->nameBlock = system.getBlock(system.getSizeBlocks()-1).getNameBlock();
-    item->bus = system.getBlock(system.getSizeBlocks()-1).getListBuses();
+    item->bus = system.getBlock(index).getListBuses();
 
-    if (system.getSizeBlocks()%2 == 0){
-        item->setColor(0);
-    }else{
+    if (index%2 == 0){
         item->setColor(1);
+    }else{
+        item->setColor(0);
     }
 
     scene->addItem(item);
 
 }
 
-void MainWindow::DrawingConnection(){
+void MainWindow::DrawingConnection(){    
     DrawingConnections* item = new DrawingConnections(system);
     item->setPos(0,0);
     scene->addItem(item);
@@ -205,7 +205,17 @@ void MainWindow::on_action_triggered(){
 
 void MainWindow::on_action_2_triggered()
 {
-    scene->clear();
     system.deleteSystem();
+    scene->clear();
+    point->clear();
     system.readFile();
+    for (int i = 0; i < system.getSizeBlocks(); i++){
+        DrawingBlock(0, system.getBlock(i).getCoordinate().y, i);
+//        if (i > 0){
+//            DrawingConnection();
+//        }
+        //displayTaggedLinks();
+    }
+
+
 }

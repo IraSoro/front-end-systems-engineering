@@ -31,7 +31,6 @@ public:
     QVector <Coordinate> coordinate;
     QVector <Connection> connections;
 
-
     QVector <Connection> getLastCoordinate();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);

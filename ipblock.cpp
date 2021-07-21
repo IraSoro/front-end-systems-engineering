@@ -25,6 +25,10 @@ QVector <Bus> IpBlock::getListBuses(){
     return this->listBuses;
 }
 
+Bus IpBlock::getBusOnIndex(int index){
+    return this->listBuses[index];
+}
+
 int IpBlock::getTypeBusOnIndex(int index){
     return listBuses[index].getTypeBus();
 }
