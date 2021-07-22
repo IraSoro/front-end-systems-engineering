@@ -1,4 +1,3 @@
-//TODO: сделать id шин последовательным и уникальным, чтобы потом это использовать при отрислвки
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -72,7 +71,7 @@ void MainWindow::on_pushButton_AddBus_clicked(){
      * |
      * V
     */
-    int sizeBlock = system.getSizeBlocks();    //это можно сделать в отдельном методе в классе system
+    int sizeBlock = system.getSizeBlocks();
     if (sizeBlock > 0){
         for (int i = 0; i < sizeBlock; i++){
             int sizeListBus = system.getSizeBusInBlock(i);
@@ -123,7 +122,7 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
 
     DrawingBlock(0, heightDrawing, system.getSizeBlocks()-1);
     if (system.getSizeBlocks() > 1){
-        DrawingConnection();
+        DrawingConnection(system.getSizeBlocks()-1);
     }
 
     heightDrawing += step * busInBlock.size() + step;
@@ -149,8 +148,8 @@ void MainWindow::DrawingBlock(int x, int y, int index){
 
 }
 
-void MainWindow::DrawingConnection(){    
-    DrawingConnections* item = new DrawingConnections(system);
+void MainWindow::DrawingConnection(int index){
+    DrawingConnections* item = new DrawingConnections(system, index);
     item->setPos(0,0);
     scene->addItem(item);
 
@@ -205,17 +204,6 @@ void MainWindow::on_action_triggered(){
 
 void MainWindow::on_action_2_triggered()
 {
-    system.deleteSystem();
-    scene->clear();
-    point->clear();
-    system.readFile();
-    for (int i = 0; i < system.getSizeBlocks(); i++){
-        DrawingBlock(0, system.getBlock(i).getCoordinate().y, i);
-//        if (i > 0){
-//            DrawingConnection();
-//        }
-        //displayTaggedLinks();
-    }
 
 
 }

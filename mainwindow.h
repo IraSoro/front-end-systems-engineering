@@ -50,7 +50,7 @@ private:
 
     void DrawingBlock(int x, int y, int index);
     void DrawingSystem();
-    void DrawingConnection();
+    void DrawingConnection(int index);
     void displayTaggedLinks();
 
     int const WIDTH = 600;

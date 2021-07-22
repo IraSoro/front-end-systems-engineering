@@ -85,15 +85,14 @@ bool System::ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecon
 }
 
 void System::writtingToFile(){
-    //QJsonObject recordObject;
     QJsonArray recordObject;
 
     for (int i = 0; i < blocks.size(); i++){
-        QJsonObject addressObjectBlock;
-        addressObjectBlock.insert("ID block", i);
-        addressObjectBlock.insert("Name block", blocks[i].getNameBlock());
-        addressObjectBlock.insert("Count bus", blocks[i].getListBuses().size());
-        QJsonArray phoneNumbersArray;
+        QJsonObject objectBlock;
+        objectBlock.insert("ID block", i);
+        objectBlock.insert("Name block", blocks[i].getNameBlock());
+        objectBlock.insert("Count bus", blocks[i].getListBuses().size());
+        QJsonArray arrayListBus;
         for (int j = 0; j < blocks[i].getListBuses().size(); j++){
             QJsonObject objectBus;
             objectBus.insert("Name bus", blocks[i].getListBuses()[j].getNameBus());
@@ -111,6 +110,7 @@ void System::writtingToFile(){
                     arrayConnection.push_back(connectObject);
                 }
             }
+// этот цикл для более лучшего понимания в файле, чтобы потом парсить - это не нужно
 //            for (Connection temp: connection){
 //                if (temp.connectionBusFinish.idBus == j && temp.connectionBusFinish.idBlock == i && temp.mark == 1){
 //                    QJsonObject connectObject;
@@ -120,10 +120,10 @@ void System::writtingToFile(){
 //                }
 //            }
             objectBus.insert("Connection", arrayConnection);
-            phoneNumbersArray.push_back(objectBus);
+            arrayListBus.push_back(objectBus);
         }
-        addressObjectBlock.insert("Bus", phoneNumbersArray);
-        recordObject.push_back(addressObjectBlock);
+        objectBlock.insert("Bus", arrayListBus);
+        recordObject.push_back(objectBlock);
     }
 
     QString str = QFileDialog::getSaveFileName(nullptr, "Save File","untitled.json","(*.json)");
@@ -139,7 +139,6 @@ void System::writtingToFile(){
 
 void System::readFile(){
     deleteSystem();
-//    qDebug()<<"------"<<blocks.size();
     int heightDrawing = 20;
     int const step = 20;
 
@@ -162,7 +161,6 @@ void System::readFile(){
 
     if (doc.isArray()){
         QJsonArray arrayBlocks = doc.array();
-        //qDebug()<<json.size();
         foreach (const QJsonValue & value, arrayBlocks) {
             if (value.isObject()) {
                 QJsonObject objBlock = value.toObject();
@@ -174,7 +172,6 @@ void System::readFile(){
                 heightDrawing += step * countBus + step;
 
                 QJsonArray arrayBus = objBlock["Bus"].toArray();
-                //qDebug()<<"size bus = "<<arrayBus.size();
                 QVector <Bus> listBus;
                 foreach(const QJsonValue & tempBus, arrayBus){
                     QJsonObject objBus = tempBus.toObject();
@@ -185,34 +182,21 @@ void System::readFile(){
                     int bitness = objBus["Bitness"].toInt();
                     int id = objBus["id bus"].toInt();
                     Bus addingBus(nameBus, typeBus, bitness, id, startAddress, finishAddress);
-//                    qDebug()<<"-----------";
-//                    qDebug()<<nameBus;
-//                    qDebug()<<typeBus;
-//                    qDebug()<<bitness;
-//                    qDebug()<<id;
-//                    qDebug()<<startAddress;
-//                    qDebug()<<finishAddress;
-//                    qDebug()<<"-----------";
                     QJsonArray arrayConnectionInBus = objBus["Connection"].toArray();
                     foreach (const QJsonValue & tempConnecton, arrayConnectionInBus){
                        QJsonObject objConnection = tempConnecton.toObject();
                        ConnectionBus addingConnection;
                        addingConnection.idBlock = objConnection["ID Block"].toInt();
                        addingConnection.idBus = objConnection["ID Bus"].toInt();
-                       //addingBus.addConnection(addingConnection);
+                       //добавить связи в вектор connection
                     }
 
-
                     int sizeBlock = blocks.size();
-                    //qDebug()<<"-----size = "<<sizeBlock;
                     if (sizeBlock > 0){
                         for (int i = 0; i < sizeBlock; i++){
                             int sizeListBus = blocks[i].getSizeBus();
-                            //qDebug()<<"....size bus "<<sizeListBus;
                             for (int j = 0; j < sizeListBus; j++){
-                                //qDebug()<<"j = "<<j;
-                                if (ruleCheckConnection(i, j, typeBus, bitness, blocks)){
-                                    //qDebug()<<"yes";
+                                if (ruleCheckConnection(i, j, typeBus, bitness)){
                                     ConnectionBus tempConnection;
                                     tempConnection.idBus = j;
                                     tempConnection.idBlock = i;
@@ -233,36 +217,25 @@ void System::readFile(){
 
     }
 
-    //outputSystem(listBlocks);
     return;
 }
 
-bool System::ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus, QVector <IpBlock> block){
-    if (g_busMapping[block[idBlockFirst].getTypeBusOnIndex(idBusFirst)][typeSecondBus] == true){
-        return true;
-    }else if (bitnessSecondBus == blocks[idBlockFirst].getBitnessBusOnIndex(idBusFirst)){
-              return true;
-          }else{
-              return false;
-          }
-}
-
-void System::outputSystem(QVector <IpBlock> blocksList){
-    for (int i = 0; i < blocksList.size(); i++){
+void System::outputSystem(){
+    for (int i = 0; i < blocks.size(); i++){
         qDebug()<<"Block "<<i;
-        qDebug()<<"Name block"<<blocksList[i].getNameBlock();
-        qDebug()<<"Count bus"<<blocksList[i].getSizeBus();
+        qDebug()<<"Name block"<<blocks[i].getNameBlock();
+        qDebug()<<"Count bus"<<blocks[i].getSizeBus();
         qDebug()<<"Bus:";
-        for (int j = 0; j < blocksList[i].getSizeBus(); j++){
+        for (int j = 0; j < blocks[i].getSizeBus(); j++){
             qDebug()<<" [";
-            qDebug()<<"     ID bus"<<blocksList[i].getBusOnIndex(j).getId();
-            qDebug()<<"     Name bus"<<blocksList[i].getBusOnIndex(j).getNameBus();
+            qDebug()<<"     ID bus"<<blocks[i].getBusOnIndex(j).getId();
+            qDebug()<<"     Name bus"<<blocks[i].getBusOnIndex(j).getNameBus();
             qDebug()<<"     Connection:";
             qDebug()<<"         [";
-            for (int k = 0; k < blocksList[i].getBusOnIndex(j).getConnectionOnID().size(); k++){    //убрать size в метод
+            for (int k = 0; k < blocks[i].getBusOnIndex(j).getConnectionOnID().size(); k++){    //убрать size в метод
                 qDebug()<<"         ID con"<<k;
-                qDebug()<<"          ID Block"<<blocksList[i].getBusOnIndex(j).getConnectionOnIndex(k).idBlock;
-                qDebug()<<"          ID Bus"<<blocksList[i].getBusOnIndex(j).getConnectionOnIndex(k).idBus;
+                qDebug()<<"          ID Block"<<blocks[i].getBusOnIndex(j).getConnectionOnIndex(k).idBlock;
+                qDebug()<<"          ID Bus"<<blocks[i].getBusOnIndex(j).getConnectionOnIndex(k).idBus;
             }
             qDebug()<<"         ]";
             qDebug()<<" ]";

@@ -3,11 +3,11 @@
 Bus::Bus()
 {
     nameBus = "";
-    startAddress = "";
-    finishAddress = "";
     typeBus = 0;
     bitness = 0;
     id = -1;
+    startAddress = "";
+    finishAddress = "";
 }
 
 Bus::Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress):

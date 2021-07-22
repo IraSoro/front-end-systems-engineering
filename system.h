@@ -43,7 +43,7 @@ public:
     void deleteSystem();
     void readFile();
     int setTypeBus(QString typeStr);
-    void outputSystem(QVector <IpBlock> );
+    void outputSystem();
 
 
 
@@ -51,7 +51,6 @@ private:
     QVector <IpBlock> blocks;
     QVector <Connection> connection;
 
-    bool ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus, QVector <IpBlock> block);
     int getTypeBus(int idBlock, int idBus);
     int getBitnessBus(int idBlock, int idBus);
 

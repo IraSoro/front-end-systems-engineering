@@ -24,12 +24,13 @@ private:
     int const diameterConnectionEllipse = 10;
 
 public:
-    explicit DrawingConnections(System systemBlock);
+    explicit DrawingConnections(System systemBlock, int index);
     ~DrawingConnections();
 
     System systemBlocks;
     QVector <Coordinate> coordinate;
     QVector <Connection> connections;
+    int indexBlock = 0;
 
     QVector <Connection> getLastCoordinate();
     QRectF boundingRect() const;

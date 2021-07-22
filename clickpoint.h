@@ -27,6 +27,7 @@ public:
     QVector <int> markConnectons;
     void clear();
     int getSizeConnection();
+    int getSizeBlocks();
 
 signals:
     void signal1();
