@@ -9,16 +9,16 @@
 #include <QVector>
 
 #include "system.h"
-
+/*!
+ * \brief класс, который перерисовывает связи после нажатия на помеченные или непомеченные элипсы
+ */
 class ClickConnection: public QObject, public QGraphicsItem
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 public:
-    explicit ClickConnection(QObject *parent = nullptr);
+    explicit ClickConnection(System system, QObject *parent = nullptr);
     ~ClickConnection();
-
-    void setSystem(System system);
 
 private:
     System system;

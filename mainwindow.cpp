@@ -133,19 +133,11 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
 }
 
 void MainWindow::DrawingBlock(int x, int y, int index){
-    DrawingObjects* item = new DrawingObjects();
+    QString nameBlock = system.getBlock(system.getSizeBlocks()-1).getNameBlock();
+    DrawingObjects* item = new DrawingObjects(nameBlock, system.getBlock(index).getListBuses(), index);
     item->setPos(x,y);
-    item->nameBlock = system.getBlock(system.getSizeBlocks()-1).getNameBlock();
-    item->bus = system.getBlock(index).getListBuses();
-
-    if (index%2 == 0){
-        item->setColor(1);
-    }else{
-        item->setColor(0);
-    }
 
     scene->addItem(item);
-
 }
 
 void MainWindow::DrawingConnection(int index){
@@ -191,9 +183,8 @@ void MainWindow::slotFromBlock(){
 }
 
 void MainWindow::displayTaggedLinks(){    
-    ClickConnection *temp = new ClickConnection();
+    ClickConnection *temp = new ClickConnection(system);
     temp->setPos(0,0);
-    temp->setSystem(system);
     scene->addItem(temp);
 }
 

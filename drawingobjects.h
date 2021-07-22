@@ -12,20 +12,38 @@
 
 #include "bus.h"
 
+/*!
+ * \brief класс, который отрисовывает один блок
+ * \details выделяет блок цветом, отображает характеристики блока и характеристики всех шин, из которых блок состоит
+ */
 class DrawingObjects : public QObject, public QGraphicsItem
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
-public:
-    explicit DrawingObjects();
-    ~DrawingObjects();
-
+private:
     QVector <Bus> bus;
     QString nameBlock = "";
     bool color = 0;
 
-    void setColor(bool color);
+public:
+    /*!
+     * \brief конструктор с параметрами
+     * \param nameBlock название блока
+     * \param bus вектор шин
+     * \param index идентификатор блока: по него вычисляет каким цветом будет изображен блок
+     */
+    explicit DrawingObjects(QString nameBlock, QVector <Bus> bus, int index);
+    ~DrawingObjects();
+
+    /*!
+     * \brief переопределенная функция базового класса QGraphicsItem
+     * \details определяет внешние границы элемента в виде прямоугольника; всё рисование должно быть ограничено внутри этого прямоугольника
+     */
     QRectF boundingRect() const;
+    /*!
+     * \brief переопределенная функция базового класса QGraphicsItem
+     * \details отрисовывает содержимое элементов в локальных координатах
+     */
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *);
 
 };

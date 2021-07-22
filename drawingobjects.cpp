@@ -1,16 +1,15 @@
 #include "drawingobjects.h"
 
-DrawingObjects::DrawingObjects(){
-    nameBlock = "";
-    color = 0;
+DrawingObjects::DrawingObjects(QString nameBlock, QVector <Bus> bus, int index): bus(bus), nameBlock(nameBlock){
+    if (index%2 == 0){
+        color = true;
+    }else{
+        color = false;
+    }
 }
 
 DrawingObjects::~DrawingObjects(){
     bus.clear();
-}
-
-void DrawingObjects::setColor(bool color){
-    this->color = color;
 }
 
 QRectF DrawingObjects::boundingRect() const{

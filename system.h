@@ -24,25 +24,113 @@ class System
 public:
     System();
     ~System();
+    /*!
+     * \brief записывает систему в json-файл и сохраняет файл
+     */
     void writtingToFile();
-    void FindConnectoun(int idBlock, int idBus);
-    int getSizeBlocks();
-    int getSizeConnections();
-    int getSizeBusInBlock(int indexBlock);
-    void addBlock(IpBlock addingBlock);
-    void addConnection(Connection addingConnection);
-    void setMarkConnection(int index, bool settingMark);
-    IpBlock getBlock(int index);
-    IpBlock getLastBlock();
-    Connection getConnection(int index);
-    bool getMarkConnection(int indexConnection);
-    int getXCoordinate(int indexConnection);
-    int getYCoordinate(int indexConnection);
-    bool ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus);
 
+    /*!
+     * \brief возвращает количество блоков в системе
+     * \return целое число - количество блоков в системе
+     */
+    int getSizeBlocks();
+
+    /*!
+     * \brief возвращает количество связей в системе
+     * \return целое число - количество связей в системе
+     */
+    int getSizeConnections();
+
+    /*!
+     * \brief возвращает количество шин в одном блоке
+     * \param indexBlock - индекс блока
+     * \return целое число - количество шин в блоке
+     */
+    int getSizeBusInBlock(int indexBlock);
+
+    /*!
+     * \brief добавление блока в систему
+     * \param addingBlock элемент типа IpBlock
+     */
+    void addBlock(IpBlock addingBlock);
+
+    /*!
+     * \brief добавление связи в систему
+     * \param addingBlock элемент типа Connection
+     */
+    void addConnection(Connection addingConnection);
+
+    /*!
+     * \brief устанавливает метку связи: помеченная или непомеченная
+     * \param index индекс связи
+     * \param settingMark true или false - в зависимости от того, сделать ли связь помеченной или нет
+     */
+    void setMarkConnection(int index, bool settingMark);
+
+    /*!
+     * \brief возврат блока системы по индекту
+     * \param индекс блока
+     * \return элемент типа IpBlock
+     */
+    IpBlock getBlock(int index);
+
+    /*!
+     * \brief возврат связи по индексу
+     * \param index индекс связи
+     * \return возврат элемента типа Connection
+     */
+    Connection getConnection(int index);
+
+    /*!
+     * \brief получение информации о том, отмечена ли связь
+     * \param индекс связи
+     * \return true - если помечена, false - если нет
+     */
+    bool getMarkConnection(int indexConnection);
+
+    /*!
+     * \brief получение x-координаты выбранной связи
+     * \param indexConnection индекст связи
+     * \return целое число - x-координата
+     */
+    int getXCoordinate(int indexConnection);
+
+    /*!
+     * \brief получение y-координаты выбранной связи
+     * \param indexConnection индекст связи
+     * \return целое число - y-координата
+     */
+    int getYCoordinate(int indexConnection);
+
+    /*!
+     * \brief правила, по которым определяется, могут ли быть соединены шины
+     * \param idBlockFirst индекс блока предполагаемого элемента
+     * \param idBusFirst индекс шины в блоке предполагаемого элемента
+     * \param typeSecondBus тип шины с которой может быть соединен предполагаемый элемент
+     * \param bitnessSecondBus разрядность шины с которой может быть соединен предполагаемый элемент
+     * \return true - могут,false - нет
+     */
+    bool ruleCheckConnection(int idBlockFirst, int idBusFirst, int typeSecondBus, int bitnessSecondBus);
+    /*!
+     * \brief удаление системы
+     */
     void deleteSystem();
+
+    /*!
+     * \brief парсер выбранного json-файла
+     */
     void readFile();
+
+    /*!
+     * \brief возврат индекса типа шины по названию шины
+     * \param название типа шины
+     * \return индекс типа шины
+     */
     int setTypeBus(QString typeStr);
+
+    /*!
+     * \brief вывод системы в консоль
+     */
     void outputSystem();
 
 

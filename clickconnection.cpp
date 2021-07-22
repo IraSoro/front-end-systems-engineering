@@ -1,7 +1,7 @@
 #include "clickconnection.h"
 
-ClickConnection::ClickConnection(QObject *parent)
-    : QObject(parent), QGraphicsItem()
+ClickConnection::ClickConnection(System system, QObject *parent)
+    : QObject(parent), QGraphicsItem(), system(system)
 {
 
 }
@@ -71,7 +71,4 @@ int ClickConnection::getStartCoordinate(Connection connect){
     return height;
 }
 
-void ClickConnection::setSystem(System system){
-    this->system = system;
-}
 

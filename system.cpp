@@ -34,10 +34,6 @@ IpBlock System::getBlock(int index){
     return blocks[index];
 }
 
-IpBlock System::getLastBlock(){
-    return blocks.last();
-}
-
 bool System::getMarkConnection(int indexConnection){
     return connection[indexConnection].mark;
 }
