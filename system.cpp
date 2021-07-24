@@ -189,8 +189,8 @@ void System::readFile(){
                        finishBus.idBlock = objConnection["ID Block"].toInt();
                        finishBus.idBus = objConnection["ID Bus"].toInt();
                        Connection addingTempConnect;
-                       addingTempConnect.connectionBusStart = finishBus;
-                       addingTempConnect.connectionBusFinish = startBus;
+                       addingTempConnect.connectionBusStart = startBus;
+                       addingTempConnect.connectionBusFinish = finishBus;
                        this->tempConnection.push_back(addingTempConnect);
                     }
 
@@ -225,9 +225,12 @@ void System::readFile(){
 
 void System::markToFile(){ //не забыть потом сделать проверку на возможность пользоваться этой функцией
     qDebug()<<"size = "<<tempConnection.size();
+    if (tempConnection.size() == 0){
+        return;
+    }
     for (int i = 0; i < connection.size(); i++){
         for (int j = 0; j < tempConnection.size(); j++){
-            if (connection[i].connectionBusStart.idBus == tempConnection[j].connectionBusStart.idBus && //тут что-то не работает
+            if (connection[i].connectionBusStart.idBus == tempConnection[j].connectionBusStart.idBus &&
                 connection[i].connectionBusStart.idBlock == tempConnection[j].connectionBusStart.idBlock &&
                 connection[i].connectionBusFinish.idBus == tempConnection[j].connectionBusFinish.idBus &&
                 connection[i].connectionBusFinish.idBlock == tempConnection[j].connectionBusFinish.idBlock){
@@ -235,6 +238,7 @@ void System::markToFile(){ //не забыть потом сделать про�
                 qDebug()<<"yes";
                 connection[i].mark = true;
             }
+
         }
     }
 }

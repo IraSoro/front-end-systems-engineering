@@ -40,7 +40,7 @@ QVector <Connection> DrawingConnections::getLastCoordinate(){
 
             Connection tempConn;
             tempConn.coordinates = tempCoord;
-            tempConn.connectionBusStart.idBlock = systemBlocks.getSizeBlocks()-1;
+            tempConn.connectionBusStart.idBlock = indexBlock;
             tempConn.connectionBusStart.idBus = i;
             tempConn.connectionBusFinish = TempConnection;
             connections.push_back(tempConn);
