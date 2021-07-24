@@ -219,12 +219,17 @@ void System::readFile(){
         }
 
     }
+    heightDrawingReadFile = heightDrawing;
 
     return;
 }
 
+int System::getHeightDrawingReadFile(){ //не забыть потом сделать проверку на возможность пользоваться этой функцией
+    qDebug()<<"1111 = "<<heightDrawingReadFile;
+   return this->heightDrawingReadFile;
+}
+
 void System::markToFile(){ //не забыть потом сделать проверку на возможность пользоваться этой функцией
-    qDebug()<<"size = "<<tempConnection.size();
     if (tempConnection.size() == 0){
         return;
     }

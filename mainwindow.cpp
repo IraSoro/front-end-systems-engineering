@@ -1,3 +1,5 @@
+//TODO: ТЕКУЩЕЕ РАСПОЛОЖЕНИЕ БЛОКА (КООРДИНАТА Y) СДЕЛАТЬ ПОЛЕМ КЛАССА SYSTEM
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -195,7 +197,6 @@ void MainWindow::on_action_triggered(){
 
 void MainWindow::on_action_2_triggered()
 {
-
     system.readFile();
     for (int i = 0; i < system.getSizeBlocks(); i++){
         point->addBlock(system.getBlock(i));
@@ -203,10 +204,13 @@ void MainWindow::on_action_2_triggered()
         if (i > 0){
             DrawingConnection(i);
         }
-        //displayTaggedLinks();
     }
-
     system.markToFile();
+    for (int i = 0; i < system.getSizeConnections(); i++){
+        if (system.getConnection(i).mark == true){
+            point->addMarkConnection(i);
+        }
+    }
     displayTaggedLinks();
-
+    heightDrawing = system.getHeightDrawingReadFile();
 }

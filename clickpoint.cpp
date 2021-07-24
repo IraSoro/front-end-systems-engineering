@@ -108,3 +108,7 @@ QVector <int> ClickPoint::getMarkConnectons(){
     return markConnectons;
 }
 
+void ClickPoint::addMarkConnection(int readMarkConnection){
+    markConnectons.push_back(readMarkConnection);
+}
+

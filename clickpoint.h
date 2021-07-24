@@ -53,6 +53,8 @@ public:
      */
     int getSizeBlocks();
 
+    void addMarkConnection(int readMarkConnection);
+
 signals:
     /*!
      * \brief сиглал, возникающий после нажатия на элипс - связь блоков

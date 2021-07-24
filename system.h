@@ -135,12 +135,14 @@ public:
 
     void markToFile();
 
-
+    int getHeightDrawingReadFile();
 
 private:    
     QVector <IpBlock> blocks;
     QVector <Connection> connection;
     QVector <Connection> tempConnection;
+
+    int heightDrawingReadFile = 0;
 
     int getTypeBus(int idBlock, int idBus);
     int getBitnessBus(int idBlock, int idBus);
