@@ -16,6 +16,8 @@ System::~System()
 void System::deleteSystem(){
     blocks.clear();
     connection.clear();
+    tempConnection.clear();
+    heightDrawingReadFile = 0;
 }
 
 int System::getSizeBlocks(){
@@ -134,7 +136,6 @@ void System::writtingToFile(){
 }
 
 void System::readFile(){
-    deleteSystem();
     int heightDrawing = 20;
     int const step = 20;
 
@@ -225,7 +226,6 @@ void System::readFile(){
 }
 
 int System::getHeightDrawingReadFile(){ //не забыть потом сделать проверку на возможность пользоваться этой функцией
-    qDebug()<<"1111 = "<<heightDrawingReadFile;
    return this->heightDrawingReadFile;
 }
 
@@ -240,7 +240,6 @@ void System::markToFile(){ //не забыть потом сделать про�
                 connection[i].connectionBusFinish.idBus == tempConnection[j].connectionBusFinish.idBus &&
                 connection[i].connectionBusFinish.idBlock == tempConnection[j].connectionBusFinish.idBlock){
 
-                qDebug()<<"yes";
                 connection[i].mark = true;
             }
 

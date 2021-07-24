@@ -72,6 +72,8 @@ private:
      */
     void displayTaggedLinks();
 
+    void deleteSystem();
+
     int const WIDTH = 600;
     int const HEIGHT = 800;
     int const step = 20;

@@ -27,8 +27,17 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    busInBlock.clear();
     delete ui;
+}
+
+void MainWindow::deleteSystem(){
+    heightDrawing = 20;
+    counterIdBus = 0;
+    busInBlock.clear();
+    system.deleteSystem();
+    point->clearPoint();
+    ui->graphicsView->items().clear();
+
 }
 
 void MainWindow::on_pushButton_AddBus_clicked(){
@@ -152,6 +161,7 @@ void MainWindow::DrawingConnection(int index){
         point->addConnection(temp);
     }
 
+    item->clearDrawingConnection();
 
 }
 
@@ -197,6 +207,7 @@ void MainWindow::on_action_triggered(){
 
 void MainWindow::on_action_2_triggered()
 {
+    deleteSystem();
     system.readFile();
     for (int i = 0; i < system.getSizeBlocks(); i++){
         point->addBlock(system.getBlock(i));

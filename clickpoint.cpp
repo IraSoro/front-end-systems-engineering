@@ -12,9 +12,10 @@ ClickPoint::~ClickPoint()
     connection.clear();
 }
 
-void ClickPoint::clear(){
+void ClickPoint::clearPoint(){
     markConnectons.clear();
     connection.clear();
+    blocks.clear();
 }
 
 QRectF ClickPoint::boundingRect() const

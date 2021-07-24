@@ -3,8 +3,15 @@
 DrawingConnections::DrawingConnections(System systemBlock, int index): systemBlocks(systemBlock), indexBlock(index){}
 
 DrawingConnections::~DrawingConnections(){
-        coordinate.clear();
+        clearDrawingConnection();
     }
+
+void DrawingConnections::clearDrawingConnection(){
+    systemBlocks.deleteSystem();
+    coordinate.clear();
+    connections.clear();
+    indexBlock = 0;
+}
 
 QVector <Connection> DrawingConnections::getLastCoordinate(){
     coordinate.clear();
