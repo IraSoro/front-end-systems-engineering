@@ -61,14 +61,14 @@ public:
     void addConnection(Connection addingConnection);
 
     /*!
-     * \brief устанавливает метку связи: помеченная или непомеченная
+     * \brief устанавливает метку связи: связана или разъединена
      * \param index индекс связи
      * \param settingMark true или false - в зависимости от того, сделать ли связь помеченной или нет
      */
     void setMarkConnection(int index, bool settingMark);
 
     /*!
-     * \brief возврат блока системы по индекту
+     * \brief возврат блока системы по индексу
      * \param индекс блока
      * \return элемент типа IpBlock
      */
@@ -89,21 +89,21 @@ public:
     bool getMarkConnection(int indexConnection);
 
     /*!
-     * \brief получение x-координаты выбранной связи
+     * \brief получение x-координаты выбранного соединения
      * \param indexConnection индекст связи
      * \return целое число - x-координата
      */
     int getXCoordinate(int indexConnection);
 
     /*!
-     * \brief получение y-координаты выбранной связи
+     * \brief получение y-координаты выбранного соединения
      * \param indexConnection индекст связи
      * \return целое число - y-координата
      */
     int getYCoordinate(int indexConnection);
 
     /*!
-     * \brief правила, по которым определяется, могут ли быть соединены шины
+     * \brief проверка, по правилам которым определяется, могут ли быть соединены шины
      * \param idBlockFirst индекс блока предполагаемого элемента
      * \param idBusFirst индекс шины в блоке предполагаемого элемента
      * \param typeSecondBus тип шины с которой может быть соединен предполагаемый элемент
@@ -133,11 +133,14 @@ public:
      */
     void outputSystem();
 
+    void markToFile();
+
 
 
 private:    
     QVector <IpBlock> blocks;
     QVector <Connection> connection;
+    QVector <Connection> tempConnection;
 
     int getTypeBus(int idBlock, int idBus);
     int getBitnessBus(int idBlock, int idBus);

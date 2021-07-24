@@ -161,6 +161,7 @@ void System::readFile(){
             if (value.isObject()) {
                 QJsonObject objBlock = value.toObject();
                 QString nameBlock = objBlock["Name block"].toString();
+                int IdBlock = objBlock["ID block"].toInt();
                 int countBus = objBlock["Count bus"].toInt();
                 Coordinate coordinateBlock;
                 coordinateBlock.x = 0;
@@ -177,14 +178,20 @@ void System::readFile(){
                     int typeBus = setTypeBus(objBus["Type bus"].toString());
                     int bitness = objBus["Bitness"].toInt();
                     int id = objBus["id bus"].toInt();
+                    ConnectionBus startBus;
+                    startBus.idBus = id;
+                    startBus.idBlock = IdBlock;
                     Bus addingBus(nameBus, typeBus, bitness, id, startAddress, finishAddress);
                     QJsonArray arrayConnectionInBus = objBus["Connection"].toArray();
                     foreach (const QJsonValue & tempConnecton, arrayConnectionInBus){
                        QJsonObject objConnection = tempConnecton.toObject();
-                       ConnectionBus addingConnection;
-                       addingConnection.idBlock = objConnection["ID Block"].toInt();
-                       addingConnection.idBus = objConnection["ID Bus"].toInt();
-                       //добавить связи в вектор connection
+                       ConnectionBus finishBus;
+                       finishBus.idBlock = objConnection["ID Block"].toInt();
+                       finishBus.idBus = objConnection["ID Bus"].toInt();
+                       Connection addingTempConnect;
+                       addingTempConnect.connectionBusStart = finishBus;
+                       addingTempConnect.connectionBusFinish = startBus;
+                       this->tempConnection.push_back(addingTempConnect);
                     }
 
                     int sizeBlock = blocks.size();
@@ -214,6 +221,22 @@ void System::readFile(){
     }
 
     return;
+}
+
+void System::markToFile(){ //не забыть потом сделать проверку на возможность пользоваться этой функцией
+    qDebug()<<"size = "<<tempConnection.size();
+    for (int i = 0; i < connection.size(); i++){
+        for (int j = 0; j < tempConnection.size(); j++){
+            if (connection[i].connectionBusStart.idBus == tempConnection[j].connectionBusStart.idBus && //тут что-то не работает
+                connection[i].connectionBusStart.idBlock == tempConnection[j].connectionBusStart.idBlock &&
+                connection[i].connectionBusFinish.idBus == tempConnection[j].connectionBusFinish.idBus &&
+                connection[i].connectionBusFinish.idBlock == tempConnection[j].connectionBusFinish.idBlock){
+
+                qDebug()<<"yes";
+                connection[i].mark = true;
+            }
+        }
+    }
 }
 
 void System::outputSystem(){

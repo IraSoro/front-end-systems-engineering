@@ -196,5 +196,17 @@ void MainWindow::on_action_triggered(){
 void MainWindow::on_action_2_triggered()
 {
 
+    system.readFile();
+    for (int i = 0; i < system.getSizeBlocks(); i++){
+        //point->addBlock(system.getBlock(i));
+        DrawingBlock(0, system.getBlock(i).getCoordinate().y, i);
+        if (i > 0){
+            DrawingConnection(i);
+        }
+        //displayTaggedLinks();
+    }
+
+    system.markToFile();
+    displayTaggedLinks();
 
 }

@@ -60,7 +60,7 @@ public:
     QString getFinishAddress();
 
     /*!
-     * \brief возвращает тип строки
+     * \brief возвращает тип шины
      * \return число - идентификатор типа шин
      */
     int getTypeBus();
@@ -78,20 +78,20 @@ public:
     int getId();
 
     /*!
-     * \brief возвращает все возможные связи данной шины с другими шинами
+     * \brief возвращает все возможные соединения данной шины с другими шинами
      * \return вектор из объектов типа ConnectionBus
      */
     QVector <ConnectionBus> getConnectionOnID();
 
     /*!
-     * \brief возвращает один элемент типа Connection(связь данной шины с одной другой шиной)
+     * \brief возвращает один элемент типа Connection(соединение данной шины с одной другой шиной)
      * \param index индекс элемента, который нужно получить
      * \return один элемент из вектора connection
      */
     ConnectionBus getConnectionOnIndex(int index);
 
     /*!
-     * \brief добавляет новую связь шины в вектор имеющихся
+     * \brief добавляет новое возможное соединение шины в вектор имеющихся
      * \param connection элемент типа ConnectionBus
      */
     void addConnection(ConnectionBus connection);

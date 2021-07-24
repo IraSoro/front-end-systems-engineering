@@ -11,7 +11,7 @@
 #include "system.h"
 
 /*!
- * \brief класс, обрабатывает события нажатия мыши
+ * \brief класс обрабатывает события нажатия мыши на сцене
  */
 class ClickPoint: public QObject, public QGraphicsItem
 {
@@ -21,7 +21,7 @@ public:
     explicit ClickPoint(QObject *parent = nullptr);
     ~ClickPoint();
     /*!
-     * \brief добавление новой связи
+     * \brief добавление нового соединения
      * \param connect - элемент типа Connection
      */
     void addConnection(Connection connect);
@@ -48,7 +48,7 @@ public:
     int getSizeConnection();
 
     /*!
-     * \brief возвращает количесво блоков
+     * \brief возвращает количество блоков
      * \return целое число - количество блоков
      */
     int getSizeBlocks();
