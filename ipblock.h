@@ -71,8 +71,17 @@ public:
      */
     Coordinate getCoordinate();
 
+    /*!
+     * \brief установить данные координаты текущему блоку
+     * \param coord - объект типа Coordinate - координата для текущего блока
+     */
     void setCoordinate(Coordinate coord);
 
+    /*!
+     * \brief получение количества связей в шине с индексом indexBus
+     * \param indexBus индекс шины в векторе шин
+     * \return
+     */
     int getSizeConnectionInBus(int indexBus);
 
 };

@@ -41,8 +41,14 @@ private:
     int const WIDTH = 600;
     int const HEIGHT = 800;
 
-
+    /*!
+     * \brief инициализация сцены
+     */
     void drawingSystem();
+
+    /*!
+     * \brief очистка системы
+     */
     void deleteSystem();
 
 };

@@ -38,8 +38,21 @@ public:
     GraphicsScene();
     ~GraphicsScene();
 
-
+    /*!
+     * \brief addBus добавление шины в систему
+     * \param nameBus название шины
+     * \param typeBus тип шины
+     * \param bitness разрядность шины
+     * \param startAddress начальный адрес шины
+     * \param finishAddress конечный адрес шины
+     */
     void addBus(QString nameBus, int typeBus, int bitness, QString startAddress, QString finishAddress);
+
+    /*!
+     * \brief добавление блока с систему
+     * \details во время вызова это функции все добавленные до ее вызова шины будут входить в этот блок
+     * \param nameBlock название блока
+     */
     void addBlock(QString nameBlock);
 
     /*!
@@ -61,10 +74,19 @@ public:
      */
     void displayTaggedLinks();
 
+    /*!
+     * \brief очищение сцены и всей системы
+     */
     void deleteSystem();
 
+    /*!
+     * \brief записывает и сохраняет спроектированную схему в выбранный файл
+     */
     void writtingToFile();
 
+    /*!
+     * \brief считывает из выбранного файла систему и отображает ее на сцене
+     */
     void readingFile();
 
     int const WIDTH = 600;

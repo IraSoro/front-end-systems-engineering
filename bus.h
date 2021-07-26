@@ -97,6 +97,10 @@ public:
      */
     void addConnection(ConnectionBus connection);
 
+    /*!
+     * \brief получение количество возможных соединений с другими шинами
+     * \return целое число - количество возможных связей
+     */
     int getSizeConnection();
 };
 

@@ -34,6 +34,11 @@ public:
      * \param index идентификатор блока: по него вычисляет каким цветом будет изображен блок
      */
     explicit DrawingObjects(QString nameBlock, QVector <Bus> bus, int index);
+
+    /*!
+     * \brief конструктор для отображения "шапки"
+     * \param flagTitle
+     */
     explicit DrawingObjects(bool flagTitle);
     ~DrawingObjects();
 
