@@ -9,8 +9,18 @@ GraphicsScene::GraphicsScene()
     QObject::connect(point,SIGNAL(signal1()),this, SLOT(slotFromPoint()));
     QObject::connect(point,SIGNAL(signalClickBlock()),this, SLOT(slotFromBlock()));
     scene->addItem(point);
+
+    DrawingObjects* item = new DrawingObjects(true);
+    item->setPos(0,0);
+    scene->addItem(item);
 }
 
+GraphicsScene::~GraphicsScene(){
+    counterIdBus = 0;
+    busInBlock.clear();
+    system.deleteSystem();
+    point->clearPoint();
+}
 
 void GraphicsScene::deleteSystem(){
     counterIdBus = 0;
@@ -23,7 +33,9 @@ void GraphicsScene::deleteSystem(){
     QObject::connect(point,SIGNAL(signalClickBlock()),this, SLOT(slotFromBlock()));
     scene->addItem(point);
 
-
+    DrawingObjects* item = new DrawingObjects(true);
+    item->setPos(0,0);
+    scene->addItem(item);
 }
 
 void GraphicsScene::addBus(QString nameBus, int typeBus, int bitness, QString startAddress, QString finishAddress){
@@ -77,10 +89,6 @@ void GraphicsScene::DrawingConnection(int index){
 
 }
 
-void GraphicsScene::DrawingSystem(){
-
-}
-
 void GraphicsScene::displayTaggedLinks(){
     ClickConnection *temp = new ClickConnection(system);
     temp->setPos(0,0);
@@ -100,7 +108,6 @@ void GraphicsScene::slotFromPoint(){
 void GraphicsScene::slotFromBlock(){
     windowBlock = new MainWindowBlock();
     windowBlock->show();
-
 }
 
 

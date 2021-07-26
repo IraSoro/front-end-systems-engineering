@@ -24,6 +24,7 @@ private:
     QVector <Bus> bus;
     QString nameBlock = "";
     bool color = 0;
+    bool flagTitle = false;
 
 public:
     /*!
@@ -33,6 +34,7 @@ public:
      * \param index идентификатор блока: по него вычисляет каким цветом будет изображен блок
      */
     explicit DrawingObjects(QString nameBlock, QVector <Bus> bus, int index);
+    explicit DrawingObjects(bool flagTitle);
     ~DrawingObjects();
 
     /*!

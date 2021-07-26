@@ -18,7 +18,7 @@ void System::deleteSystem(){
     connection.clear();
     tempConnection.clear();
     heightDrawingReadFile = 0;
-    heightBlockForDrawing = 20;
+    heightBlockForDrawing = startHeightBlockForDrawing;
 }
 
 int System::getSizeBlocks(){
@@ -130,7 +130,7 @@ void System::writtingToFile(){
 }
 
 void System::readFile(){
-    int heightDrawing = 20;
+    int heightDrawing = startHeightBlockForDrawing;
     int const step = 20;
 
     QString filePath = QFileDialog::getOpenFileName(nullptr, "Open file", "", "*.json");

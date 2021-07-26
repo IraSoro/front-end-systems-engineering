@@ -36,6 +36,7 @@ private slots:
 public:
     QGraphicsScene *scene;          ///<указатель на сцену
     GraphicsScene();
+    ~GraphicsScene();
 
 
     void addBus(QString nameBus, int typeBus, int bitness, QString startAddress, QString finishAddress);
@@ -48,11 +49,6 @@ public:
      * \param index - индекс добавляемого блока
      */
     void DrawingBlock(int x, int y, int index);
-
-    /*!
-     * \brief инициализация объектов приложения
-     */
-    void DrawingSystem();
 
     /*!
      * \brief отображает возможные соединения шин нового блока с имеющимися

@@ -15,9 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     name_table << "Название" << "Тип" << "Разрядность"<<"Начальный адрес"<<"Конечный адрес";
     ui->tableWidget_BusInBlock->setHorizontalHeaderLabels(name_table);
 
-
     drawingSystem();
-
 }
 
 MainWindow::~MainWindow()
@@ -31,8 +29,6 @@ void MainWindow::deleteSystem(){
 }
 
 void MainWindow::drawingSystem(){
-//    graphScene.scene = new QGraphicsScene(this);
-//    graphScene.scene->setItemIndexMethod(QGraphicsScene::NoIndex);
     ui->graphicsView->resize(WIDTH,HEIGHT);
     ui->graphicsView->setScene(graphScene.scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
@@ -110,6 +106,7 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
 }
 
 void MainWindow::on_action_triggered(){
+    deleteSystem();
     graphScene.writtingToFile();
 }
 
