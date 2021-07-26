@@ -142,6 +142,8 @@ public:
     void updateHeightBlockForDrawing();
     int getHeightBlockForDrawing();
 
+    QVector <ConnectionBus> installAllConnection(int indexTypeAddingBus, int bitnessAddingBus);
+
 private:    
     QVector <IpBlock> blocks;
     QVector <Connection> connection;

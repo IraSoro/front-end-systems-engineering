@@ -73,6 +73,8 @@ public:
 
     void setCoordinate(Coordinate coord);
 
+    int getSizeConnectionInBus(int indexBus);
+
 };
 
 #endif // IPBLOCK_H

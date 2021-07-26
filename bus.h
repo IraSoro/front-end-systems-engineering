@@ -41,6 +41,7 @@ public:
     Bus();
     ~Bus();
     Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress);
+    Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress, QVector <ConnectionBus> connectionOnID);
     /*!
      * \brief возвращает название шина
      * \return строку с названием шины
@@ -95,6 +96,8 @@ public:
      * \param connection элемент типа ConnectionBus
      */
     void addConnection(ConnectionBus connection);
+
+    int getSizeConnection();
 };
 
 

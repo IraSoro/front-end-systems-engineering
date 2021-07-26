@@ -13,6 +13,9 @@ Bus::Bus()
 Bus::Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress):
         nameBus(nameBus), startAddress(startAddress), finishAddress(finishAddress), typeBus(typeBus), bitness(bitness), id(id) {}
 
+Bus::Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress, QVector <ConnectionBus> connectionOnID):
+        nameBus(nameBus), startAddress(startAddress), finishAddress(finishAddress), typeBus(typeBus), bitness(bitness), id(id), connectionOnID(connectionOnID) {}
+
 Bus::~Bus()
 {
     connectionOnID.clear();
@@ -52,5 +55,9 @@ ConnectionBus Bus::getConnectionOnIndex(int index){
 
 void Bus::addConnection(ConnectionBus connection){
     connectionOnID.push_back(connection);
+}
+
+int Bus::getSizeConnection(){
+    return connectionOnID.size();
 }
 

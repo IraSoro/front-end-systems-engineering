@@ -55,17 +55,8 @@ Connection System::getConnection(int index){
 
 void System::addBlock(IpBlock addingBlock){
     int const step = 20;
-//    heightBlockForDrawing = heightNextBlock;
-//    heightNextBlock += step * addingBlock.getSizeBus() + step;
-
-//    Coordinate coord(0, heightBlockForDrawing);
-//    addingBlock.setCoordinate(coord);
-
-        heightBlockForDrawing += step * addingBlock.getSizeBus() + step;
-
+    heightBlockForDrawing += step * addingBlock.getSizeBus() + step;
     blocks.push_back(addingBlock);
-
-
 }
 
 void System::addConnection(Connection addingConnection){
@@ -277,7 +268,7 @@ void System::outputSystem(){
             qDebug()<<"     Name bus"<<blocks[i].getBusOnIndex(j).getNameBus();
             qDebug()<<"     Connection:";
             qDebug()<<"         [";
-            for (int k = 0; k < blocks[i].getBusOnIndex(j).getConnectionOnID().size(); k++){    //убрать size в метод
+            for (int k = 0; k < blocks[i].getSizeConnectionInBus(j); k++){
                 qDebug()<<"         ID con"<<k;
                 qDebug()<<"          ID Block"<<blocks[i].getBusOnIndex(j).getConnectionOnIndex(k).idBlock;
                 qDebug()<<"          ID Bus"<<blocks[i].getBusOnIndex(j).getConnectionOnIndex(k).idBus;
@@ -295,5 +286,25 @@ int System::setTypeBus(QString typeStr){
         }
     }
     return -1;
+}
+
+QVector <ConnectionBus> System::installAllConnection(int indexTypeAddingBus, int bitnessAddingBus){
+    QVector <ConnectionBus> connect;
+
+    int sizeBlock = getSizeBlocks();
+    if (sizeBlock > 0){
+        for (int i = 0; i < sizeBlock; i++){
+            int sizeListBus = getSizeBusInBlock(i);
+            for (int j = 0; j < sizeListBus; j++){
+                if (ruleCheckConnection(i, j, indexTypeAddingBus, bitnessAddingBus)){
+                    ConnectionBus connection;
+                    connection.idBus = j;
+                    connection.idBlock = i;
+                    connect.push_back(connection);
+                }
+            }
+        }
+    }
+    return connect;
 }
 

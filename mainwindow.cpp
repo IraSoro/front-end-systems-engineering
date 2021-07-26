@@ -1,5 +1,3 @@
-//TODO: ТЕКУЩЕЕ РАСПОЛОЖЕНИЕ БЛОКА (КООРДИНАТА Y) СДЕЛАТЬ ПОЛЕМ КЛАССА SYSTEM
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -17,12 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
     name_table << "Название" << "Тип" << "Разрядность"<<"Начальный адрес"<<"Конечный адрес";
     ui->tableWidget_BusInBlock->setHorizontalHeaderLabels(name_table);
 
-    DrawingSystem();
 
-    point = new ClickPoint();
-    connect(point,SIGNAL(signal1()),this, SLOT(slotFromPoint()));
-    connect(point,SIGNAL(signalClickBlock()),this, SLOT(slotFromBlock()));
-    scene->addItem(point);
+    drawingSystem();
+
 }
 
 MainWindow::~MainWindow()
@@ -31,19 +26,19 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::deleteSystem(){
-    counterIdBus = 0;
-    busInBlock.clear();
-    system.deleteSystem();
-    point->clearPoint();
     ui->graphicsView->scene()->clear();
+    graphScene.deleteSystem();
+}
 
-
-    point = new ClickPoint();
-    connect(point,SIGNAL(signal1()),this, SLOT(slotFromPoint()));
-    connect(point,SIGNAL(signalClickBlock()),this, SLOT(slotFromBlock()));
-    scene->addItem(point);
-
-
+void MainWindow::drawingSystem(){
+//    graphScene.scene = new QGraphicsScene(this);
+//    graphScene.scene->setItemIndexMethod(QGraphicsScene::NoIndex);
+    ui->graphicsView->resize(WIDTH,HEIGHT);
+    ui->graphicsView->setScene(graphScene.scene);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+    ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
+    ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    graphScene.scene->setSceneRect(0,0,WIDTH,HEIGHT);
 }
 
 void MainWindow::on_pushButton_AddBus_clicked(){
@@ -81,28 +76,8 @@ void MainWindow::on_pushButton_AddBus_clicked(){
 
     int indexTypeAddingBus = ui->comboBox_Type->currentIndex();
     int bitnessAddingBus = ui->comboBox_Bitness->currentText().toInt();
-    Bus addingBus(ui->lineEdit_NameBus->text(), indexTypeAddingBus, bitnessAddingBus, counterIdBus, ui->lineEdit_StartAddress->text(), ui->lineEdit_FinishAddress->text());
-    counterIdBus++;
-    /*
-     * тут формируются связи
-     * |
-     * V
-    */
-    int sizeBlock = system.getSizeBlocks();
-    if (sizeBlock > 0){
-        for (int i = 0; i < sizeBlock; i++){
-            int sizeListBus = system.getSizeBusInBlock(i);
-            for (int j = 0; j < sizeListBus; j++){
-                if (system.ruleCheckConnection(i, j, indexTypeAddingBus, bitnessAddingBus)){
-                    ConnectionBus connection;
-                    connection.idBus = j;
-                    connection.idBlock = i;
-                    addingBus.addConnection(connection);
-                }
-            }
-        }
-    }
-    busInBlock.push_back(addingBus);
+    graphScene.addBus(ui->lineEdit_NameBus->text(), indexTypeAddingBus, bitnessAddingBus, ui->lineEdit_StartAddress->text(), ui->lineEdit_FinishAddress->text());
+
 
     //ui->lineEdit_NameBus->clear();
     //ui->lineEdit_StartAddress->clear();
@@ -130,107 +105,18 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
         ui->tableWidget_BusInBlock->removeRow(0);
     }
 
-    Coordinate addingBlockCoordinate;
-    addingBlockCoordinate.x = 0;
-    addingBlockCoordinate.y = system.getHeightBlockForDrawing();
-    qDebug()<<"x = "<<addingBlockCoordinate.x;
-    qDebug()<<"y = "<<addingBlockCoordinate.y;
-    IpBlock block(ui->lineEdit_Block->text(), busInBlock, addingBlockCoordinate);
-    system.addBlock(block);
-    point->addBlock(block);
-
-    DrawingBlock(addingBlockCoordinate.x, addingBlockCoordinate.y, system.getSizeBlocks()-1);
-    if (system.getSizeBlocks() > 1){
-        DrawingConnection(system.getSizeBlocks()-1);
-    }
-
-    counterIdBus = 0;
-    busInBlock.clear();
-
-    displayTaggedLinks();
-}
-
-void MainWindow::DrawingBlock(int x, int y, int index){
-    QString nameBlock = system.getBlock(system.getSizeBlocks()-1).getNameBlock();
-    DrawingObjects* item = new DrawingObjects(nameBlock, system.getBlock(index).getListBuses(), index);
-    item->setPos(x,y);
-
-    scene->addItem(item);
-}
-
-void MainWindow::DrawingConnection(int index){
-    DrawingConnections* item = new DrawingConnections(system, index);
-    item->setPos(0,0);
-    scene->addItem(item);
-
-    for (Connection temp: item->getLastCoordinate()){
-        system.addConnection(temp);
-        point->addConnection(temp);
-    }
-
-    item->clearDrawingConnection();
+    graphScene.addBlock(ui->lineEdit_Block->text());
 
 }
-
-void MainWindow::DrawingSystem(){
-    scene = new QGraphicsScene(this);
-    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
-    ui->graphicsView->resize(WIDTH,HEIGHT);
-    ui->graphicsView->setScene(scene);
-    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-    ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
-    ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-    scene->setSceneRect(0,0,WIDTH,HEIGHT);
-
-}
-
-void MainWindow::slotFromPoint(){
-    for (int i = 0; i < system.getSizeConnections(); i++){
-        system.setMarkConnection(i, false);
-    }
-    for (int temp: point->getMarkConnectons()){
-        system.setMarkConnection(temp, true);
-    }
-
-    displayTaggedLinks();
-}
-
-void MainWindow::slotFromBlock(){
-    windowBlock = new MainWindowBlock();
-    windowBlock->show();
-
-}
-
-void MainWindow::displayTaggedLinks(){    
-    ClickConnection *temp = new ClickConnection(system);
-    temp->setPos(0,0);
-    scene->addItem(temp);
-}
-
 
 void MainWindow::on_action_triggered(){
-    system.writtingToFile();
+    graphScene.writtingToFile();
 }
 
 void MainWindow::on_action_2_triggered()
 {
     deleteSystem();
-    system.readFile();
-    for (int i = 0; i < system.getSizeBlocks(); i++){
-        point->addBlock(system.getBlock(i));
-        DrawingBlock(0, system.getBlock(i).getCoordinate().y, i);
-        if (i > 0){
-            DrawingConnection(i);
-        }
-    }
-    system.markToFile();
-    for (int i = 0; i < system.getSizeConnections(); i++){
-        if (system.getConnection(i).mark == true){
-            point->addMarkConnection(i);
-        }
-    }
-    displayTaggedLinks();
-    system.updateHeightBlockForDrawing();
+    graphScene.readingFile();
 }
 
 void MainWindow::on_action_4_triggered()

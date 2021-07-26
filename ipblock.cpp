@@ -47,3 +47,7 @@ int IpBlock::getSizeBus(){
 void IpBlock::setCoordinate(Coordinate coord){
     this->coordinate = coord;
 }
+
+int IpBlock::getSizeConnectionInBus(int indexBus){
+    return listBuses[indexBus].getSizeConnection();
+}

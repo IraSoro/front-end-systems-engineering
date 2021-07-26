@@ -21,6 +21,7 @@ SOURCES += \
     clickpoint.cpp \
     drawingconnections.cpp \
     drawingobjects.cpp \
+    graphicsscene.cpp \
     ipblock.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     clickpoint.h \
     drawingconnections.h \
     drawingobjects.h \
+    graphicsscene.h \
     ipblock.h \
     mainwindow.h \
     mainwindowblock.h \
