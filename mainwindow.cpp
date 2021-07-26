@@ -36,7 +36,15 @@ void MainWindow::deleteSystem(){
     busInBlock.clear();
     system.deleteSystem();
     point->clearPoint();
-    ui->graphicsView->items().clear();
+    //ui->graphicsView->items().clear();
+    ui->graphicsView->scene()->clear();
+
+
+    point = new ClickPoint();
+    connect(point,SIGNAL(signal1()),this, SLOT(slotFromPoint()));
+    connect(point,SIGNAL(signalClickBlock()),this, SLOT(slotFromBlock()));
+    scene->addItem(point);
+
 
 }
 
@@ -224,4 +232,9 @@ void MainWindow::on_action_2_triggered()
     }
     displayTaggedLinks();
     heightDrawing = system.getHeightDrawingReadFile();
+}
+
+void MainWindow::on_action_4_triggered()
+{
+    deleteSystem();
 }

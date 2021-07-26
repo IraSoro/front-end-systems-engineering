@@ -40,6 +40,8 @@ private slots:
     void on_action_triggered();
     void on_action_2_triggered();
 
+    void on_action_4_triggered();
+
 private:
     Ui::MainWindow *ui;
     QVector <Bus> busInBlock;       ///<временный вектор шин, который добавится в блок, после добавления блока в систему

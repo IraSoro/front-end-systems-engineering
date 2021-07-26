@@ -250,7 +250,14 @@
     <addaction name="action"/>
     <addaction name="action_2"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Очистить</string>
+    </property>
+    <addaction name="action_4"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action">
@@ -261,6 +268,16 @@
   <action name="action_2">
    <property name="text">
     <string>Открыть</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Очистить</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>Очистить сцену</string>
    </property>
   </action>
  </widget>
