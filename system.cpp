@@ -18,6 +18,7 @@ void System::deleteSystem(){
     connection.clear();
     tempConnection.clear();
     heightDrawingReadFile = 0;
+    heightBlockForDrawing = 20;
 }
 
 int System::getSizeBlocks(){

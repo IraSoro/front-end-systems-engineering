@@ -149,7 +149,6 @@ private:
 
     int heightBlockForDrawing = 20;
     int heightDrawingReadFile = 0;
-    //int heightNextBlock = 20;
 
     int getTypeBus(int idBlock, int idBus);
     int getBitnessBus(int idBlock, int idBus);
