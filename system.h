@@ -139,19 +139,17 @@ public:
      * \brief проходит вектор connection и помечает параметр mark = true в тех элементов, которые в файле указаны как соединенные
      */
     void markToFile();
-    /*!
-     * \brief возвращает координату y - координата для следующего добавленного элемента
-     * \details используется после прочтения файла и отображение его содержимого на сцене
-     * \return элемент типа int - координата y
-     */
-    int getHeightDrawingReadFile();
+    void updateHeightBlockForDrawing();
+    int getHeightBlockForDrawing();
 
 private:    
     QVector <IpBlock> blocks;
     QVector <Connection> connection;
     QVector <Connection> tempConnection;
 
+    int heightBlockForDrawing = 20;
     int heightDrawingReadFile = 0;
+    //int heightNextBlock = 20;
 
     int getTypeBus(int idBlock, int idBus);
     int getBitnessBus(int idBlock, int idBus);

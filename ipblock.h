@@ -9,6 +9,8 @@
  * \brief структура, которая хранит начальные координаты расположения блока на сцене
  */
 struct Coordinate{
+    Coordinate(){}
+    Coordinate(int x, int y): x(x), y(y){}
     int x = 0;
     int y = 0;
 };
@@ -24,6 +26,7 @@ private:
     Coordinate coordinate;
 public:
     IpBlock();
+    IpBlock(QString nameBlock, QVector <Bus> listBuses);
     IpBlock(QString nameBlock, QVector <Bus> listBuses, Coordinate coordinate);
     ~IpBlock();
     /*!
@@ -67,6 +70,8 @@ public:
      * \return элемент типа Coordinate - координату расположения блока
      */
     Coordinate getCoordinate();
+
+    void setCoordinate(Coordinate coord);
 
 };
 

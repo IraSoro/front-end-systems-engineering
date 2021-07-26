@@ -53,7 +53,18 @@ Connection System::getConnection(int index){
 }
 
 void System::addBlock(IpBlock addingBlock){
+    int const step = 20;
+//    heightBlockForDrawing = heightNextBlock;
+//    heightNextBlock += step * addingBlock.getSizeBus() + step;
+
+//    Coordinate coord(0, heightBlockForDrawing);
+//    addingBlock.setCoordinate(coord);
+
+        heightBlockForDrawing += step * addingBlock.getSizeBus() + step;
+
     blocks.push_back(addingBlock);
+
+
 }
 
 void System::addConnection(Connection addingConnection){
@@ -216,20 +227,21 @@ void System::readFile(){
     return;
 }
 
-int System::getHeightDrawingReadFile(){
+int System::getHeightBlockForDrawing(){
+    return heightBlockForDrawing;
+}
 
+void System::updateHeightBlockForDrawing(){
     try
     {
         if (tempConnection.size() == 0){
             throw "You cannot use System::getHeightDrawingReadFile function";
         }
-
-        return this->heightDrawingReadFile;
+        heightBlockForDrawing = heightDrawingReadFile;
     }
     catch (const char* exception)
     {
         std::cerr << "Error: " << exception << '\n';
-        return 0;
     }
 
 }

@@ -11,7 +11,7 @@ Bus::Bus()
 }
 
 Bus::Bus(QString nameBus, int typeBus, int bitness, int id, QString startAddress, QString finishAddress):
-        nameBus(nameBus), typeBus(typeBus), bitness(bitness), id(id), startAddress(startAddress), finishAddress(finishAddress){}
+        nameBus(nameBus), startAddress(startAddress), finishAddress(finishAddress), typeBus(typeBus), bitness(bitness), id(id) {}
 
 Bus::~Bus()
 {

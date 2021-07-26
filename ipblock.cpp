@@ -5,6 +5,9 @@ IpBlock::IpBlock()
     nameBlock = "";
 }
 
+IpBlock::IpBlock(QString nameBlock, QVector <Bus> listBuses) :
+    nameBlock(nameBlock), listBuses(listBuses){}
+
 IpBlock::IpBlock(QString nameBlock, QVector <Bus> listBuses, Coordinate coordinate) :
     nameBlock(nameBlock), listBuses(listBuses), coordinate(coordinate){}
 
@@ -39,4 +42,8 @@ int IpBlock::getBitnessBusOnIndex(int index){
 
 int IpBlock::getSizeBus(){
     return listBuses.size();
+}
+
+void IpBlock::setCoordinate(Coordinate coord){
+    this->coordinate = coord;
 }

@@ -60,7 +60,7 @@ int ClickConnection::getStartCoordinate(Connection connect){
     int height = 0;
     const int step = 20;
 
-    for (int i = 0; i < connect.connectionBusStart.idBlock; i++){
+    for (int i = 0; i < connect.connectionBusStart.idBlock; i++){  //!!!!!!!!!!!!!!1
         height += step;
         for (int j = 0; j < system.getBlock(i).getListBuses().size(); j++){
             height += step;

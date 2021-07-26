@@ -20,7 +20,7 @@ QVector <Connection> DrawingConnections::getLastCoordinate(){
 
     for (int i = indexBlock - 1; i >= 0; i--){
         height += stepHeight;
-        for (Bus TempBus: systemBlocks.getBlock(i).getListBuses()){
+        for (Bus TempBus: systemBlocks.getBlock(i).getListBuses()){         //!!!!!!!!!!!1
             height += stepHeight;
             if (TempBus.getConnectionOnID().size() > 0){
                 wight -= stepWight;
@@ -35,10 +35,10 @@ QVector <Connection> DrawingConnections::getLastCoordinate(){
     for (int i = 0; i < SizeBus; i++){
         wight -= stepWight;
         height += stepHeight;
-        for (ConnectionBus TempConnection: systemBlocks.getBlock(indexBlock).getListBuses()[i].getConnectionOnID()){
+        for (ConnectionBus TempConnection: systemBlocks.getBlock(indexBlock).getListBuses()[i].getConnectionOnID()){ //!!!!!!
             height1 += (TempConnection.idBus + 1)*stepHeight;
             for (int j = 0; j < TempConnection.idBlock; j++){
-                height1 += stepHeight + systemBlocks.getBlock(j).getListBuses().size() * stepHeight;
+                height1 += stepHeight + systemBlocks.getBlock(j).getListBuses().size() * stepHeight;  //!!!!!!!!!!!!!!
             }
             Coordinate tempCoord;
             tempCoord.x = wight-5;
@@ -87,13 +87,13 @@ void DrawingConnections::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     height += stepHeight/2;
     int height1 = stepHeight;
-    int SizeBusInLastBlock = systemBlocks.getBlock(indexBlock).getListBuses().size();//!!!!!!!!!!
+    int SizeBusInLastBlock = systemBlocks.getBlock(indexBlock).getListBuses().size();                       //!!!!!!!!!!
 
     painter->setPen(Qt::gray);
     for (int i = 0; i < SizeBusInLastBlock; i++){
         wight -= stepWight;
         height += stepHeight;
-        for (ConnectionBus TempConnection: systemBlocks.getBlock(indexBlock).getListBuses()[i].getConnectionOnID()){
+        for (ConnectionBus TempConnection: systemBlocks.getBlock(indexBlock).getListBuses()[i].getConnectionOnID()){ //!!!!!!
             height1 += (TempConnection.idBus + 1)*stepHeight;
             for (int j = 0; j < TempConnection.idBlock; j++){
                 height1 += stepHeight + systemBlocks.getBlock(j).getListBuses().size() * stepHeight;

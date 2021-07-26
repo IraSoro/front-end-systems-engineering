@@ -80,7 +80,7 @@ private:
     int const HEIGHT = 800;
     int const step = 20;
 
-    int heightDrawing = 20;
+    //int heightDrawing = 20;
     int counterIdBus = 0;
 
 };

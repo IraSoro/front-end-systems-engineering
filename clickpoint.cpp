@@ -35,7 +35,6 @@ void ClickPoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QPointF point;
     point = event->pos();
-//    qDebug()<<point;
 
     for (int i = 0; i < blocks.size(); i++){
         if (clickBlock(blocks[i].getCoordinate(), point)){

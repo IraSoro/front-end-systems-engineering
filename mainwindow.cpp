@@ -31,7 +31,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::deleteSystem(){
-    heightDrawing = 20;
     counterIdBus = 0;
     busInBlock.clear();
     system.deleteSystem();
@@ -133,17 +132,18 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
 
     Coordinate addingBlockCoordinate;
     addingBlockCoordinate.x = 0;
-    addingBlockCoordinate.y = heightDrawing;
+    addingBlockCoordinate.y = system.getHeightBlockForDrawing();
+    qDebug()<<"x = "<<addingBlockCoordinate.x;
+    qDebug()<<"y = "<<addingBlockCoordinate.y;
     IpBlock block(ui->lineEdit_Block->text(), busInBlock, addingBlockCoordinate);
     system.addBlock(block);
     point->addBlock(block);
 
-    DrawingBlock(0, heightDrawing, system.getSizeBlocks()-1);
+    DrawingBlock(addingBlockCoordinate.x, addingBlockCoordinate.y, system.getSizeBlocks()-1);
     if (system.getSizeBlocks() > 1){
         DrawingConnection(system.getSizeBlocks()-1);
     }
 
-    heightDrawing += step * busInBlock.size() + step;
     counterIdBus = 0;
     busInBlock.clear();
 
@@ -230,7 +230,7 @@ void MainWindow::on_action_2_triggered()
         }
     }
     displayTaggedLinks();
-    heightDrawing = system.getHeightDrawingReadFile();
+    system.updateHeightBlockForDrawing();
 }
 
 void MainWindow::on_action_4_triggered()
