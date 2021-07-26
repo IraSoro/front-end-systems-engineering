@@ -36,7 +36,6 @@ void MainWindow::deleteSystem(){
     busInBlock.clear();
     system.deleteSystem();
     point->clearPoint();
-    //ui->graphicsView->items().clear();
     ui->graphicsView->scene()->clear();
 
 

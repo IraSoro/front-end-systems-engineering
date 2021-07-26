@@ -1,6 +1,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include "iostream"
+
 #include <QVector>
 #include <QDebug>
 #include <QJsonObject>
@@ -133,8 +135,15 @@ public:
      */
     void outputSystem();
 
+    /*!
+     * \brief проходит вектор connection и помечает параметр mark = true в тех элементов, которые в файле указаны как соединенные
+     */
     void markToFile();
-
+    /*!
+     * \brief возвращает координату y - координата для следующего добавленного элемента
+     * \details используется после прочтения файла и отображение его содержимого на сцене
+     * \return элемент типа int - координата y
+     */
     int getHeightDrawingReadFile();
 
 private:    

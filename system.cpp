@@ -108,15 +108,6 @@ void System::writtingToFile(){
                     arrayConnection.push_back(connectObject);
                 }
             }
-// этот цикл для более лучшего понимания в файле, чтобы потом парсить - это не нужно
-//            for (Connection temp: connection){
-//                if (temp.connectionBusFinish.idBus == j && temp.connectionBusFinish.idBlock == i && temp.mark == 1){
-//                    QJsonObject connectObject;
-//                    connectObject.insert("ID Block", temp.connectionBusStart.idBlock);
-//                    connectObject.insert("ID Bus", temp.connectionBusStart.idBus);
-//                    arrayConnection.push_back(connectObject);
-//                }
-//            }
             objectBus.insert("Connection", arrayConnection);
             arrayListBus.push_back(objectBus);
         }
@@ -225,11 +216,25 @@ void System::readFile(){
     return;
 }
 
-int System::getHeightDrawingReadFile(){ //не забыть потом сделать проверку на возможность пользоваться этой функцией
-   return this->heightDrawingReadFile;
+int System::getHeightDrawingReadFile(){
+
+    try
+    {
+        if (tempConnection.size() == 0){
+            throw "You cannot use System::getHeightDrawingReadFile function";
+        }
+
+        return this->heightDrawingReadFile;
+    }
+    catch (const char* exception)
+    {
+        std::cerr << "Error: " << exception << '\n';
+        return 0;
+    }
+
 }
 
-void System::markToFile(){ //не забыть потом сделать проверку на возможность пользоваться этой функцией
+void System::markToFile(){
     if (tempConnection.size() == 0){
         return;
     }
