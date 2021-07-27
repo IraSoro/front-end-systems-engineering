@@ -106,7 +106,6 @@ void MainWindow::on_pushButton_AddBlock_clicked(){
 }
 
 void MainWindow::on_action_triggered(){
-    deleteSystem();
     graphScene.writtingToFile();
 }
 
