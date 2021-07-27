@@ -2,13 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsScene>
-#include <QGraphicsTextItem>
-#include <QVector>
 #include <QString>
 #include <QStringList>
 #include <QMessageBox>
-#include <QDebug>
 
 #include "graphicsscene.h"
 
