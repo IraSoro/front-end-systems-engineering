@@ -26,7 +26,7 @@ void GraphicsScene::deleteSystem(){
     counterIdBus = 0;
     busInBlock.clear();
     system.deleteSystem();
-    point->clearPoint();
+    //point->clearPoint();
 
     point = new ClickPoint();
     QObject::connect(point,SIGNAL(signal1()),this, SLOT(slotFromPoint()));

@@ -39,19 +39,19 @@ void MainWindow::drawingSystem(){
 
 void MainWindow::on_pushButton_AddBus_clicked(){
 
-    if (ui->lineEdit_NameBus->text() == ""){
-            QMessageBox msgBox;
-            msgBox.setText("Вы не ввели название шины.");
-            msgBox.exec();
-            return;
-    }
+//    if (ui->lineEdit_NameBus->text() == ""){
+//            QMessageBox msgBox;
+//            msgBox.setText("Вы не ввели название шины.");
+//            msgBox.exec();
+//            return;
+//    }
 
-    if (ui->lineEdit_StartAddress->text() == "" || ui->lineEdit_FinishAddress->text() == ""){
-            QMessageBox msgBox;
-            msgBox.setText("Вы не ввели адрес шины.");
-            msgBox.exec();
-            return;
-    }
+//    if (ui->lineEdit_StartAddress->text() == "" || ui->lineEdit_FinishAddress->text() == ""){
+//            QMessageBox msgBox;
+//            msgBox.setText("Вы не ввели адрес шины.");
+//            msgBox.exec();
+//            return;
+//    }
 
 
     int CountRowInTable = ui->tableWidget_BusInBlock->rowCount();
@@ -85,12 +85,12 @@ void MainWindow::on_pushButton_AddBus_clicked(){
 
 void MainWindow::on_pushButton_AddBlock_clicked(){
 
-    if (ui->lineEdit_Block->text() == ""){
-            QMessageBox msgBox;
-            msgBox.setText("Вы не ввели название блока.");
-            msgBox.exec();
-            return;
-    }
+//    if (ui->lineEdit_Block->text() == ""){
+//            QMessageBox msgBox;
+//            msgBox.setText("Вы не ввели название блока.");
+//            msgBox.exec();
+//            return;
+//    }
 
 
     while (ui->tableWidget_BusInBlock->rowCount() > 0){
@@ -111,6 +111,9 @@ void MainWindow::on_action_triggered(){
 
 void MainWindow::on_action_2_triggered()
 {
+//    graphScene.addBus("", 0, 0, "", "");
+//    graphScene.addBlock("");
+
     deleteSystem();
     graphScene.readingFile();
 }
